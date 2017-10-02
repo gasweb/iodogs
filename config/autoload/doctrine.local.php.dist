@@ -5,13 +5,12 @@ return array(
  'orm_default' => array(
  'driverClass' =>'Doctrine\DBAL\Driver\PDOMySql\Driver',
  'params' => array(
- 'host' => 'localhost',
+ 'host' => '__DB_HOST__',
  'port' => '3306',
- 'user' => 'gas',
- 'password' => '0410',
+ 'user' => '__DB_USER__',
+ 'password' => '__DB_PASSWORD__',
  'driverOptions' => array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'),
- 'dbname' => 'gb_iodogs_dev',
-// 'dbname' => 'gb_iodogs',
+ 'dbname' => '__DB_DATABASE_NAME__',
  )
  )
  ),
