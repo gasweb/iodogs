@@ -33,6 +33,7 @@
         "neilime/zf2-twb-bundle": "*@stable",
         "imagine/imagine": "^0.6.3",
         "evandotpro/edp-module-layouts": "^1.0",
+        "zendframework/zend-permissions-acl": "*@stable",
         "zendframework/zend-mvc-console": "^1.1"
     },
     "require-dev": {
