@@ -19,7 +19,7 @@ namespace IodogsCatalog\Controller\Factory;
          $ProductService = $container->get('ProductServiceFactory');
 
 
-         return new CatalogController($CatalogService, $ProductService, $realServiceLocator);
+         return new CatalogController($CatalogService, $ProductService, $container);
      }
 
 

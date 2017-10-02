@@ -4,7 +4,7 @@ $pageTitle = (!empty($breed['info_block']['title'])) ? $breed['info_block']['tit
 $pageDescription = (!empty($breed['info_block']['snippet'])) ? $breed['info_block']['snippet'] : "На данной странице вы сможете подобрать косметику для породы ".$breed['rus_title'];
 $this->headTitle($pageTitle);
 $this->headMeta($pageDescription, "description");
-$this->headMeta($page['keywords'], "keywords");
+$this->headMeta($this->page['keywords'], "keywords");
 
 ?>
 <div class="row">

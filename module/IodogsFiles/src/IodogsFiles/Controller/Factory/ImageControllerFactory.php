@@ -16,7 +16,7 @@ class ImageControllerFactory implements FactoryInterface
     {
         $ImageService = $container->get("ImageServiceFactory");
         $om = $container->get("Doctrine\ORM\EntityManager");
-        return new ImageController ($ImageService, $realServiceLocator, $om);
+        return new ImageController ($ImageService, $container, $om);
     }
 
 
