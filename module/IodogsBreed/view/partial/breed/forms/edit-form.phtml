@@ -1,0 +1,21 @@
+<?php
+$editForm->prepare();
+echo $this->form()->openTag($editForm);
+?>
+    <h1 class="center">
+        <?php
+        if(!empty($viewArray))
+            echo $this->escapeHtml("Редактировать ".$viewArray['rus_title']);
+        else echo "Добавить породу";
+    ?>
+    </h1>
+<?php
+
+
+echo $this->formRow($editForm->get('eng_title'));
+echo $this->formRow($editForm->get('rus_title'));
+echo $this->formRow($editForm->get('slug'));
+echo $this->formRow($editForm->get('info_block'));
+echo $this->formSubmit($editForm->get('submit'));
+?>
+<?php  echo $this->form()->closeTag(); ?>

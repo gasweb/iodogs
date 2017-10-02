@@ -1,0 +1,20 @@
+<?php 
+$this->ButtonHelper()->showAddButton($this->url('app/admin-line/add'), "Добавить серию");
+?>
+<h1 class="center">Список серий</h1>
+<?php
+
+if(is_array($lines))
+{			
+	?><ul><?php
+	foreach ($lines as $line){
+		?><li class="crud-li">
+			<a class="col-md-3 btn" href="<?=$this->url('app/admin-line/admin-line-id', array('lineId' => $line->getId())); ?>">
+				<?=$line->getTitle() ?>
+			</a>
+			<a class="btn btn-danger col-md-1 col-md-offset-1" href="<?=$this->url('app/admin-line/admin-line-id/admin-line-delete', array('lineId' => $line->getId())) ?>">Удалить</a>
+			<a class="btn btn-info col-md-2" style="margin-left: 10px;" href="<?=$this->url('app/admin-line/admin-line-id', array('lineId' => $line->getId())) ?>">Редактировать</a>
+		</li><?php
+	}
+	?></ul><?php
+}

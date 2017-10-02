@@ -1,0 +1,41 @@
+<?php
+$this->headTitle('Видео');
+?>
+<h1 class="center">Видео</h1>
+<?php
+    echo $this->partial('partial/sidebar/left-sidebar');
+?>
+<div class="col-md-9 video_block">
+        <?php
+        echo $this->partial('partial/site/youtube', array(
+            'title' => 'Серия Кутюр',
+            'youtubeId' => 'wKdI_wF2n0M',
+            'description' => '<b>Серия Кутюр</b> - это визитная карточка компании Isle Of Dogs. Профессиональная серия для собак любой породы, с любым типом шерсти. Для домашнего и выставочного ухода за разумную стоимость. Все шампуни и кондиционеры концентрированы. Обзор по серии Вы можете посмотреть на видео.'
+        ));
+
+        echo $this->partial('partial/site/youtube', array(
+            'title' => 'Линия средств для укладки Isle Of Dogs',
+            'youtubeId' => 'O6cqjN-01Hk',
+            'description' => 'Isle Hold, Isle Thicken, Isle Repair, Isle Lift, Isle Straighten, Isle Strengthen. Эти средства для укладки помогают в подготовке собак к выставке. О каждом из них пойдет речь в этом видео.'
+        ));
+
+        echo $this->partial('partial/site/youtube', array(
+            'title' => 'Серии Натуральная Роскошь и Салонная',
+            'youtubeId' => 'O70ZPmflSKU',
+            'description' => '<b>Натуральная Роскошь</b> - это серия основанная на профессиональной косметике для людей. Самый лучший продукт для собак всех времен.<br>
+                <b>Салонная серия</b> - это профессиональная серия косметики для салонов и курпных питомников собак. Для людей, которые ценят свое время и деньги, но любят пол'
+        ));
+
+        echo $this->partial('partial/site/youtube', array(
+            'title' => 'Мастер Класс по Хаски От Моники Реар',
+            'youtubeId' => 'U4_Xk1xuwP8'
+        ));
+
+        echo $this->partial('partial/site/youtube', array(
+            'title' => 'Демонстрирация Everyday серии (Английский)',
+            'youtubeId' => 'CvklxFW5Hts'
+        ));
+
+
+        ?>
+</div>

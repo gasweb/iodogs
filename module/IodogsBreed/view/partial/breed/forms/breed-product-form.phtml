@@ -1,0 +1,36 @@
+<?php
+$breedProductForm->setAttribute('action', $this->url('app/admin-breed/admin-breed-id/breed-product', array('breedId' => $viewArray['id'])));
+$breedProductForm->prepare();
+echo $this->form()->openTag($breedProductForm);
+?>
+    <h1 class="center">
+        <?php echo $this->escapeHtml("Редактировать ".$viewArray['eng_title']); ?>
+    </h1>
+<?php
+echo $this->formRow($breedProductForm->get('product'));
+echo $this->formSubmit($breedProductForm->get('submit'));
+?>
+<?php  echo $this->form()->closeTag(); ?>
+    <script type="text/javascript">
+        function add_category() {
+            var currentCount = $('fieldset > fieldset').length;
+            console.log("Current count is "+currentCount);
+            var template = $('fieldset > span').data('template');
+            console.log("Current template is "+template);
+            template = template.replace(/__index__/g, currentCount);
+
+            $('.product-set').append(template);
+
+            return false;
+        }
+    </script>
+    <button onclick="return add_category()"
+            class="btn btn-primary">Add new element</button>
+<?php
+//$products = $this->breed->getProduct();
+//echo "ВСЕГО ".count($products);
+/*foreach($products AS $product)
+{
+	echo $product->getRusTitle()." <br>";
+}*/
+?>

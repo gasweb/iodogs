@@ -1,0 +1,36 @@
+<?php 
+$this->ButtonHelper()->showAddButton($this->url('app/admin-content-add'), "Добавить материал");
+?>
+<h1 class="center">Список материалов</h1>
+<?php
+if(is_array($content))
+{			
+	?>
+<table class="table-hover table-stripted table">
+<thead>
+	<tr class="bold">
+		<td>Ссылка</td>
+		<td>Заголовок материала</td>
+		<td>Сниппет</td>
+		<td>Активность</td>
+		<td colspan="2">Администрирование</td>
+	</tr>
+</thead>
+	<?php foreach ($content as $material){ ?>
+	<tr>
+		<td>
+			<a href="<?=$this->url('app/content', array('slug' => $material->getHref())) ?>" target="_blank">
+				<?=$material->getHref() ?>
+			</a>
+		</td>
+		<td><?=$material->getHeader() ?></td>
+		<td><?=$material->getSnippet() ?></td>
+		<td><?=$material->getActive() ?></td>
+		<td><a class="btn btn-success" href="<?=$this->url('app/admin-content/admin-content-id', array('id' => $material->getId())); ?>">Редактировать</a></td>
+		<td><a class="btn btn-danger" href="<?=$this->url('app/admin-content/admin-content-id/admin-content-delete', array('id' => $material->getId())); ?>">Удалить</a></td>
+	</tr>
+	<?php } ?>
+	
+</table>
+<?php
+}

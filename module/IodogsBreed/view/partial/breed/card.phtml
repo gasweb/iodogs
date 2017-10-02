@@ -1,0 +1,11 @@
+<li class="col-md-3 thumbnail breed_list__li_item hidden-xs">
+	<a href="<?=$this->url("app/breed/breed-slug", array('slug'=>$this->slug))?>">
+		<img src="<?=$this->file_path?>" alt="" class="img-responsive breed_list__img">
+	</a>
+		<div class="caption">
+			<a href="<?=$this->url("app/breed/breed-slug", array('slug'=>$this->slug))?>"><?=$this->rus_title?></a>
+		</div>
+</li>
+<li class="visible-xs">
+	<a href="<?=$this->url("app/breed/breed-slug", array('slug'=>$this->slug))?>"><?=$this->rus_title?></a>
+</li>

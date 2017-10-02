@@ -1,0 +1,7 @@
+<div class="row-fluid">
+    <h1 class="center"><?php echo $this->escapeHtml("Редактировать материал инфоблока"); ?></h1>
+    <?php
+    $infoBlockForm->setAttribute('action', $this->url('app/admin-info-block/edit', array('id' => $infoBlock->getId())));
+    echo $this->partial('partial/forms/admin-forms/info-block');
+    ?>
+</div>

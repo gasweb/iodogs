@@ -1,0 +1,29 @@
+<?php 
+  $classString = "col-md-4 thumbnail product product-line line-".$this->line." product-category category-".$this->category;
+?>
+<div style="position: relative; margin: 15px auto; border: 0px dashed; height: 300px;" class="<?=$classString?>">
+
+<a href="<?php echo $this->url('app/product', array('slug' =>$this->slug)); ?>">
+<img class="img-responsive" style="margin:auto;>" src="<?php echo $this->images[0]['src_small'] ?>" alt="<?=$this->eng_title ?>" class="img-responsive">
+</a>
+<div class="product-card-container">
+<a style="color: #000;" href="<?php echo $this->url('app/product', array('slug' => $this->slug)); ?>">
+<?=$this->rus_title ?>
+</a>
+</div>
+
+</div>
+
+<style>
+.product-card-container{
+	    position: absolute;
+    padding: 15px 10px;
+    background: rgba(242, 242, 242, 0.6);
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+}
+</style>

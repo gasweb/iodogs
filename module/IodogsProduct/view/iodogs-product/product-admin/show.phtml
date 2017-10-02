@@ -1,0 +1,51 @@
+<?php 
+$this->ButtonHelper()->showAddButton($this->url('app/admin-product/add'), "Добавить продукт");
+?>
+<h1 class="center">Список продуктов</h1>
+<?php
+//$this->AdminProductHelper()->showList($this->products);
+
+if(is_array($products))
+{			
+	?>
+	<table class="table table-striped table-hover">
+	<thead class="panel-body">
+		<tr>
+			<td>Опубликовано</td>
+			<td>Название рус.</td>
+			<td>Название англ.</td>
+			<td>Сортировка</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php
+	foreach ($products as $product){
+		?>
+		<tr>
+			<td><?=$product->getActive()?></td>
+			<td><?=$product->getRusTitle()?></td>
+			<td><?=$product->getEngTitle()?></td>			
+			<td><?=$product->getSortOrder()?></td>
+			<td>
+				<a href="<?=$this->url('app/admin-product/id', array('id' => $product->getId())); ?>">
+					Редактировать
+				</a>
+			</td>
+			<td>
+				<a href="<?=$this->url('app/admin-product/id/delete', array('id' => $product->getId())); ?>">
+					Удалить
+				</a>
+			</td>		
+			<td>
+					<a href="<?=$this->url('app/admin-product/id/image', array('id' => $product->getId())); ?>">
+						Добавить изображение
+					</a>
+			</td>		
+			</tr>
+	<?php
+	}
+	?></tbody></table><?php
+}

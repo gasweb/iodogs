@@ -1,0 +1,395 @@
+<?php
+
+namespace IodogsDoctrine\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Distributor
+ *
+ * @ORM\Table(name="distributor", indexes={@ORM\Index(name="city", columns={"city"})})
+ * @ORM\Entity
+ */
+class Distributor
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=50, nullable=false)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=150, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="company", type="string", length=150, nullable=true)
+     */
+    private $company;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=300, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=25, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone2", type="string", length=25, nullable=true)
+     */
+    private $phone2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cell", type="string", length=25, nullable=true)
+     */
+    private $cell;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="shop_phone", type="string", length=25, nullable=true)
+     */
+    private $shopPhone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="site", type="string", length=100, nullable=true)
+     */
+    private $site;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=true)
+     */
+    private $active;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Distributor
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Distributor
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set company
+     *
+     * @param string $company
+     * @return Distributor
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return string 
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Distributor
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Distributor
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set phone2
+     *
+     * @param string $phone2
+     * @return Distributor
+     */
+    public function setPhone2($phone2)
+    {
+        $this->phone2 = $phone2;
+
+        return $this;
+    }
+
+    /**
+     * Get phone2
+     *
+     * @return string 
+     */
+    public function getPhone2()
+    {
+        return $this->phone2;
+    }
+
+    /**
+     * Set cell
+     *
+     * @param string $cell
+     * @return Distributor
+     */
+    public function setCell($cell)
+    {
+        $this->cell = $cell;
+
+        return $this;
+    }
+
+    /**
+     * Get cell
+     *
+     * @return string 
+     */
+    public function getCell()
+    {
+        return $this->cell;
+    }
+
+    /**
+     * Set shopPhone
+     *
+     * @param string $shopPhone
+     * @return Distributor
+     */
+    public function setShopPhone($shopPhone)
+    {
+        $this->shopPhone = $shopPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get shopPhone
+     *
+     * @return string 
+     */
+    public function getShopPhone()
+    {
+        return $this->shopPhone;
+    }
+
+    /**
+     * Set site
+     *
+     * @param string $site
+     * @return Distributor
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return string 
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Distributor
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Distributor
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Distributor
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+}

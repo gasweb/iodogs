@@ -1,0 +1,48 @@
+<?php //print_r($this->breed) ?>
+<ul class="list-unstyled hidden" style="">
+          <li class="review-content thumbnail" style="border: 0px solid green; overflow: hidden">                     
+                    <div class="col-md-10 col-md-offset-1" style="background: url(/breeds/<?=$this->breed['file_name']?>.jpg) no-repeat right center; background-size: 50px 50px;
+    padding-right: 85px;">
+                    <p class="bold"><?=$this->name ?> (<?=$this->city ?>)</p>
+                    <?=$this->review ?>                              
+                    </div>
+                    <div class="col-md-11 col-md-offset-1">
+                    <?php foreach ($this->products as $product) { ?>
+                    <a href="<?=$this->url('product', array('id' => 
+                    $product->getId())) ?>">#<?=$product->getTag()?></a> <?php
+     } ?>
+     <a href="/breed<?=$breedId?>" class="pull-right">
+          <?=$this->breed['rus_title'] ?>
+     </a>
+     </div>
+          </li>          
+     </ul>
+
+     <ul class="list-unstyled" style="">
+          <li class="review-content thumbnail" style="border: 0px solid green; overflow: hidden">
+                    <div class="row">
+                    <div class="col-md-8 col-md-offset-1">
+                         <p class="bold"><?=$this->name ?> (<?=$this->city ?>)</p>
+                         <?=$this->review ?>
+                    </div>
+                    <?php if(!empty($this->breed['file_name'])){ ?>
+                    <div class="col-md-2 center">
+                         <img src="/breeds/<?=$this->breed['file_name']?>.jpg" alt="" class="img-responsive img-thumbnail"> 
+                        <a href="/breed<?=$this->breed['id']?>" class="">
+                              <?=$this->breed['rus_title'] ?>
+                         </a>                      
+                    </div>
+                    <?php } ?>
+                    </div>                     
+                    <div class="col-md-11 col-md-offset-1">                    
+                    <?php foreach ($this->products as $product) { ?>
+                    <a href="<?=$this->url('product', array('id' => 
+                    $product->getId())) ?>">#<?=$product->getTag()?></a> <?php
+                    } ?>                    
+
+     
+     </div>
+          </li>          
+     </ul>
+
+     

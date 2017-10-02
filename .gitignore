@@ -1,0 +1,17 @@
+/http/upload
+/http/node_modules
+/data/cache
+/data/DoctrineORMModule
+.idea/*
+.vagrant/
+vendor/
+config/development.config.php
+http/node_modules/
+http/dist/*
+http/dist/css/
+http/dist/js/
+http/fonts/
+composer.phar
+composer.lock
+phpunit.xml
+http/package-lock.json

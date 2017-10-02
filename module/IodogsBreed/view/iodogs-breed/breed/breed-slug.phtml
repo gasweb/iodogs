@@ -1,0 +1,69 @@
+<?php
+//print_r($breed);
+$pageTitle = (!empty($breed['info_block']['title'])) ? $breed['info_block']['title'] : $breed['rus_title'];
+$pageDescription = (!empty($breed['info_block']['snippet'])) ? $breed['info_block']['snippet'] : "На данной странице вы сможете подобрать косметику для породы ".$breed['rus_title'];
+$this->headTitle($pageTitle);
+$this->headMeta($pageDescription, "description");
+$this->headMeta($page['keywords'], "keywords");
+
+?>
+<div class="row">
+    <div class="sidebar col-md-3">
+        <img src="/img/logo.jpg" alt="Isle Of Dogs" class="img-responsive" id="sidebar-logo">
+        <figure class="center ">
+            <img src="<?=$breed['file_path']?>" alt="" class="img-responsive img-thumbnail">
+            <figcaption class=""><?=$breed['rus_title']?></figcaption>
+        </figure>
+        <?php
+        echo $this->partial('partial/site/share.phtml');
+        ?>
+    </div>
+    <div class="col-md-9">
+        <ul class="nav nav-tabs">
+            <li role="products" class="active"><a data-toggle="tab" href="#products">Продукция</a></li>
+            <?php
+            if($this->reviews) {
+                ?>
+                <li role="review"><a data-toggle="tab" href="#reviews">Отзывы</a></li>
+                <?php
+            }
+            ?>
+            <?php
+            if($breed['info_block']) {
+                ?>
+                <li role="info"><a data-toggle="tab" href="#info">Описание</a></li>
+                <?php
+            }
+            ?>
+
+        </ul>
+        <div class="tab-content">
+            <div id="products" class="tab-pane fade in active">
+                <?php
+                $this->partialLoop()->setObjectKey('product');
+                echo $this->partialLoop('partial/product/card_horizontal.phtml', $products);
+                ?>
+            </div>
+            <?php
+            if($this->reviews) {
+                ?>
+                <div id="reviews" class="tab-pane fade in">
+                    <?php
+                    $this->partialLoop()->setObjectKey('review');
+                    echo $this->partialLoop("partial/review/horizont.phtml", $this->reviews);
+                    ?>
+                </div>
+                <?php
+            }
+            ?>
+            <?php
+            if($breed['info_block']) {
+                ?>
+                <div id="info" class="tab-pane fade in">
+                    <?=$breed['info_block']['content']?>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+    </div>

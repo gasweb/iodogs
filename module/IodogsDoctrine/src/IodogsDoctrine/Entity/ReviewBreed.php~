@@ -1,0 +1,84 @@
+<?php
+
+namespace IodogsDoctrine\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ReviewBreed
+ *
+ * @ORM\Table(name="review_breed", indexes={@ORM\Index(name="fk_review_breed_breed_id", columns={"breed_id"})})
+ * @ORM\Entity
+ */
+class ReviewBreed
+{
+    /**
+     * @var \IodogsDoctrine\Entity\Breed
+     *
+     * @ORM\ManyToOne(targetEntity="IodogsDoctrine\Entity\Breed")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="breed_id", referencedColumnName="id")
+     * })
+     */
+    private $breed;
+
+    /**
+     * @var \IodogsDoctrine\Entity\Review
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="IodogsDoctrine\Entity\Review")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="review_id", referencedColumnName="id")
+     * })
+     */
+    private $review;
+
+
+
+    /**
+     * Set breed
+     *
+     * @param \IodogsDoctrine\Entity\Breed $breed
+     * @return ReviewBreed
+     */
+    public function setBreed(\IodogsDoctrine\Entity\Breed $breed = null)
+    {
+        $this->breed = $breed;
+
+        return $this;
+    }
+
+    /**
+     * Get breed
+     *
+     * @return \IodogsDoctrine\Entity\Breed 
+     */
+    public function getBreed()
+    {
+        return $this->breed;
+    }
+
+    /**
+     * Set review
+     *
+     * @param \IodogsDoctrine\Entity\Review $review
+     * @return ReviewBreed
+     */
+    public function setReview(\IodogsDoctrine\Entity\Review $review)
+    {
+        $this->review = $review;
+
+        return $this;
+    }
+
+    /**
+     * Get review
+     *
+     * @return \IodogsDoctrine\Entity\Review 
+     */
+    public function getReview()
+    {
+        return $this->review;
+    }
+}

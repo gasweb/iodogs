@@ -1,0 +1,10 @@
+<label for="input-category-<?=$category->id?>" class="radio-inline">
+<input type="radio" id="input-category-<?=$category->id?>" name="category" class="category" value="<?=$category->id?>"> <?=$category['title']?>
+</label>
+
+<div class="<?=$inputContainerClasses?>">
+<input type="radio" id="input-category-<?=$category->id?>" name="category" class="category" value="<?=$category->id?>">
+<label for="input-category-<?=$category->id?>">
+     <?=$category->title?>
+</label>
+</div>

@@ -1,0 +1,9 @@
+return [
+    'aws' => [
+        'credentials' => [
+            'key'    => 'aws_key',
+            'secret' => 'aws_secret',
+        ]
+        'region' => 'Frankfurt'
+    ]
+];

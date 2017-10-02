@@ -1,0 +1,31 @@
+<div class="row">
+<div class="sidebar col-md-3">
+<img src="/img/logo.jpg" alt="Isle Of Dogs" class="img-responsive" id="sidebar-logo">
+<figure class="center ">
+  <img src="<?=$breed['file_path']?>" alt="" class="img-responsive img-thumbnail">
+  <figcaption class=""><?=$breed['rus_title']?></figcaption>
+</figure>
+<?php 
+echo $this->partial('partial/site/share.phtml');
+?>
+</div>
+<div class="col-md-9">
+    <ul class="nav nav-tabs">
+        <li role="products" class="active"><a data-toggle="tab" href="#products">Продукция</a></li>
+        <li role="review"><a data-toggle="tab" href="#reviews">Отзывы</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="products" class="tab-pane fade in active">
+            <?php
+            $this->partialLoop()->setObjectKey('product');
+            echo $this->partialLoop('partial/product/card.phtml', $products);
+            ?>
+        </div>
+        <div id="reviews" class="tab-pane fade in">
+            <?php
+            $this->partialLoop()->setObjectKey('review');
+            echo $this->partialLoop("partial/review/horizont.phtml", $this->reviews);
+            ?>
+        </div>
+    </div>
+</div>

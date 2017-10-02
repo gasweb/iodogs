@@ -1,0 +1,22 @@
+<div class="">
+<?php
+echo $this->navigation('product-nav')->breadcrumbs()->setPartial('/partial/breadcrumbs');
+
+$share = $this->partial('partial/site/share.phtml');
+echo $this->partial('partial/product/detail.phtml', array("product" => $product, "share" => $share));
+	if(!empty($this->reviews)) {
+		?>
+		<div class="container product_review">
+			<h3 class="center product_review__title">Отзывы</h3>
+			<div class="col-md-10 col-md-offset-1">
+				<?php
+				$this->partialLoop()->setObjectKey('review');
+				echo $this->partialLoop("partial/review/horizont.phtml", $this->reviews);
+				?>
+			</div>
+		</div>
+		<?php
+	}
+	//echo $this->partial('partial/site/subscribe.phtml'); 
+?>
+</div>

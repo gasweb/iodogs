@@ -1,0 +1,20 @@
+<div class="container">
+<?php
+$this->headTitle($category->getTitle());
+echo "<h1 class='center'>" . $this->category->getTitle() . "</h1>";
+echo $this->navigation('application-nav')->breadcrumbs()->setPartial('/partial/breadcrumbs');
+$this->partialLoop()->setObjectKey('product');
+
+echo $this->partialLoop('partial/product/card_horizontal.phtml', $products);
+?>
+</div>
+    <?php
+if(!empty($view['info_block']))
+{
+    ?>
+    <div class="container clearfix">
+        <?=$view['info_block']['content']?>
+    </div>
+    <?php
+}
+

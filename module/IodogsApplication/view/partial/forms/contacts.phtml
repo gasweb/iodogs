@@ -1,0 +1,18 @@
+<?php
+$this->form->setAttribute('action', $this->url('app/contacts'));
+$this->form->setAttribute('method', 'POST');
+$this->form->prepare();
+echo $this->form()->openTag($this->form);
+//echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_INLINE)->openTag($form);
+echo $this->formRow($this->form->get('name'));
+echo $this->formRow($this->form->get('email'));
+echo $this->formRow($this->form->get('phone'));
+echo $this->formRow($this->form->get('header'));
+echo $this->formRow($this->form->get('message'));
+echo $this->formRow($this->form->get('csrf'));
+?>
+<div class="form-group center">
+<?=$this->formElement($this->form->get('submit'));?>
+</div>
+<?php
+echo $this->form()->closeTag();

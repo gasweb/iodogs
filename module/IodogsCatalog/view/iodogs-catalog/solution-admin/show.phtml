@@ -1,0 +1,23 @@
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Title</td>
+        <td>Slug</td>
+    </tr>
+<?php
+foreach ($this->solutions AS $solution)
+{
+    ?>
+    <tr>
+        <td>
+            <a href="<?=$this->url('app/admin-solution/edit', array('id' => $solution->getId()))?>">
+                <?=$solution->getTitle()?>
+            </a>
+        </td>
+        <td>
+            <?=$solution->getSlug()?>
+        </td>
+    </tr>
+    <?php
+}
+?>
+</table>

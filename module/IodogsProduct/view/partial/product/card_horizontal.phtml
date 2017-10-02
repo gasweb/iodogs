@@ -1,0 +1,18 @@
+<?php
+$classString = "col-md-12 thumbnail product product-line line-".$this->line." product-category category-".$this->category;
+?>
+<div class="<?=$classString?>">
+<div class="col-md-3">
+    <a href="<?php echo $this->url('app/product', array('slug' => $this->slug)); ?>">
+        <img class="img-responsive" style="margin:auto;>" src="<?php echo $this->images[0]['src_small'] ?>" alt="<?=$this->eng_title ?>" class="img-responsive">
+    </a>
+</div>
+    <div class="col-md-9">
+        <a class="bold" href="<?php echo $this->url('app/product', array('slug' => $this->slug)); ?>">
+            <?=$this->rus_title ?>
+        </a>
+        <p>
+            <?=$this->preview?>
+        </p>
+    </div>
+</div>

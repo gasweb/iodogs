@@ -1,0 +1,89 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap.icon-large.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/script.js'), 'text/javascript')
+            ->prependFile($this->basePath('js/bootstrap.file-input.js'))
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))           
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+
+        ; ?>
+        <style type="text/css">
+            ul
+            {
+                list-style-type: none;
+            }
+            .crud-li
+            {
+                clear:both;
+                margin: 20px auto;
+                border: 0px solid green;
+                height: 36px;
+                line-height: 36px;
+            }
+            .crud-li a
+            {
+                margin: 0 10px;
+            }
+            .center{
+                text-align: center;
+            }
+            .right
+            {
+                text-align: right;
+                margin: 10px 15px;
+            }
+        </style>
+        <script type="text/javascript">
+        $(function(){
+            $('input[type=file]').bootstrapFileInput();
+            $('.file-inputs').bootstrapFileInput();
+        });           
+        </script>
+    </head>
+    <body>
+        <nav style="/*display:none;*/" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>       
+                </div>
+                <div class="collapse navbar-collapse">                                    
+    <?=$this->navigation('admin-nav')->menu()->setUlClass('nav navbar-nav')->setPartial('partial/navigation.phtml');?>
+                </div><!--/.nav-collapse -->       
+            </div>
+        </nav>
+        <div class="container-fluid">       
+        <div id="content">        
+            <?php echo $this->content; ?>
+        </div>
+            <hr style="clear: both;">
+            <footer class="navbar-fixed-bottom">
+                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

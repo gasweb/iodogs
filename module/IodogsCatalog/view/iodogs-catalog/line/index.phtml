@@ -1,0 +1,26 @@
+<?php
+$this->headTitle($line['title']);
+?>
+<h1 class="center"><?=$line['title']?></h1>
+<?=$this->navigation('application-nav')->breadcrumbs()->setPartial('/partial/breadcrumbs');?>
+<?php
+    if($line['img_path']){
+    ?>
+        <div class="center hidden">
+            <img class="img-responsive center" src="<?=$line['img_path']?>" alt="<?=$line['title']?>">
+        </div>
+        <?php
+    }
+    if($line['info_block'])
+    {
+        ?>
+        <div class="jumbotron">
+            <p>
+                <?=$line['info_block']['decription'];?>
+            </p>
+        </div>
+        <?php
+    }
+?>
+<?php
+echo $this->partialLoop('partial/product/card_horizontal.phtml', $products);

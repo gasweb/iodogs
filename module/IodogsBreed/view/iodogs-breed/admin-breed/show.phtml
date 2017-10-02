@@ -1,0 +1,38 @@
+<?php 
+$this->ButtonHelper()->showAddButton($this->url('app/admin-breed/add'), "Добавить породу");
+?>
+<?php
+if(is_array($this->breeds))
+{
+	?><h1>Список пород</h1><table class="table table-hover"><?php
+		foreach ($this->breeds as $breed) {
+			//echo $breed->getRusTitle()." - ".$breed->getEngTitle()."<br>";
+			?>
+			<tr>
+			<td>
+				<a href="<?=$this->url('app/admin-breed/admin-breed-id', array('breedId' =>
+				$breed->getId())) ?>">
+					<?=$breed->getEngTitle() ?>
+				</a>
+			</td>
+			<td>
+				<?=$breed->getRusTitle() ?>
+			</td>
+			<td>
+				<a href="<?=$this->url('app/admin-breed/admin-breed-id', array('breedId' =>
+				$breed->getId())) ?>">
+					Редактировать
+				</a>
+			<td>
+				<a href="<?=$this->url('app/admin-breed/admin-breed-id/admin-breed-delete', array('breedId' =>
+				$breed->getId())) ?>">
+					Удалить
+				</a>
+			</td>
+			</tr>
+			<?php
+		}
+	?></table>
+	<?php
+}
+?>

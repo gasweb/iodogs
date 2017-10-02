@@ -1,0 +1,17 @@
+<div class="center">
+    <h1>Редактировать изображение для породы <?=$viewArray['rus_title']?></h1>
+    <img src="<?=$viewArray['file_path']?>" alt="">
+    <?php
+    $uploadForm->setAttribute('action', $this->url("app/admin-breed/admin-breed-id/admin-breed-image", array("breedId"=>$viewArray['id'])));
+    $uploadForm->prepare();
+    ?>
+    <?php echo $this->form()->openTag($uploadForm); ?>
+    <div class="form-element" style="text-align: center; padding: 15px; margin: 20px auto; border: 1px dotted gray;">
+        <?php $fileElement = $uploadForm->get('image-file-single'); ?>
+        <span class="glyphicon glyphicon-picture"></span>
+        <?php echo $this->formFile($fileElement); ?>
+        <?php echo $this->formElementErrors($fileElement); ?>
+        <?php  echo $this->formSubmit($uploadForm->get('submit')); ?>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

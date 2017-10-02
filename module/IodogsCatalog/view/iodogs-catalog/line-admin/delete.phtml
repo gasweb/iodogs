@@ -1,0 +1,13 @@
+<div class="col-md-10 col-md-offset-1">
+ <?php 
+$form->setAttribute('action', $this->url('app/admin-line/admin-line-id/admin-line-delete', array('lineId' => $this->line->getId())));
+ $form->prepare();
+ echo $this->form()->openTag($form);
+ ?>
+  <h1 style="text-align:center;"><?php echo $this->escapeHtml("Удалить ".$this->line->getTitle()); ?></h1>
+  <?php 
+ 		echo $this->formSubmit($form->get('confirm-no'));
+		echo $this->formSubmit($form->get('confirm-yes'));
+  ?>
+ <?php  echo $this->form()->closeTag(); ?>
+ </div>

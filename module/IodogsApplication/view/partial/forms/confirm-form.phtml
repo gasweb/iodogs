@@ -1,0 +1,7 @@
+<?php
+$form->prepare();
+echo $this->form()->openTag($form);
+echo $this->formSubmit($form->get('confirm-no'));
+echo $this->formSubmit($form->get('confirm-yes'));
+echo $this->form()->closeTag();
+?>

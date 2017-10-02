@@ -1,0 +1,19 @@
+<?php 
+  $classString = "col-md-4 product product-line line-".$this->line." product-category category-".$this->category;
+?>
+<div class="row thumbnail" style="padding:10px;">
+<div class="col-md-8">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus necessitatibus consectetur quis quia delectus, quisquam, quaerat ipsum iste atque, alias neque! Autem similique animi aliquam ducimus ullam molestiae magnam, asperiores.</p>
+</div> 
+<div class="<?=$classString?>">
+<a href="/product<?=$this->id ?>">
+<img class="img-responsive" style="margin:auto;>" src="<?php echo $this->images['cover']['small_file_path'] ?>" alt="<?=$this->eng_title ?>" class="img-responsive">
+</a>
+<div class="product-card-container">
+<a style="color: #000;" href="/product<?=$this->id ?>">
+<?=$this->rus_title?>
+</a>
+</div>
+
+</div>                             
+</div>

@@ -1,0 +1,28 @@
+<div class="col-md-3 col-md-offset-0 content_sidebar" id="sidebar">
+    <a href="<?=$this->url('app/home')?>">
+    <img src="<?php echo $this->basePath('img/logo.jpg') ?>" alt="Isle Of Dogs" class="mauto img-responsive" id="sidebar-logo">
+    </a>
+    <?php
+//    application-nav
+    ?>
+	<?php if(date('Y')==2017 && date('n') == 3 && date('j') <= 19){
+	?>
+	<div style="padding: 10px 5px">
+	<a href="http://www.isleofdogs.ru/eurasia2017">
+	<img class="img-responsive mauto" src="http://rkf.org.ru/upload/images/eurasia/2017/E17_online.jpg" />
+</a>
+</div>
+	<?php
+}
+?>
+    <div class="content_sidebar__menu">
+    <?php
+    echo $this->navigation('application-nav')
+        ->menu()
+        ->renderSubMenu(null, 'nav nav-pills nav-stacked', 8);
+    ?>
+    </div>
+<?php
+    echo $this->partial('partial/social/vk');
+?>
+</div>

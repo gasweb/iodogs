@@ -1,0 +1,94 @@
+<?php echo $this->doctype(); ?>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle()->setSeparator(' , ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+<link href='https://fonts.googleapis.com/css?family=Arimo&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => 'https://s3.eu-central-1.amazonaws.com/iodogs/src/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap.icon-large.css'))
+//                        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+                        ->prependStylesheet($this->basePath('css/rrssb.css'))
+                        ->prependStylesheet($this->basePath('js/jquery-typeahead-master/dist/jquery.typeahead.min.css'))
+                        ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/social-likes/3.0.15/social-likes_flat.css')
+                        ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css')
+                        ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.0/flexslider.min.css')
+                     
+                        ?>
+
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile("https://cdnjs.cloudflare.com/ajax/libs/social-likes/3.0.15/social-likes.min.js")
+            ->prependFile("https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.0/jquery.flexslider-min.js")
+            ->prependFile($this->basePath('js/rrssb.min.js'))
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+//            ->prependFile($this->basePath('js/typeahead.js-master/dist/typeahead.jquery.min.js'))
+//            ->prependFile($this->basePath('js/typeahead.js-master/dist/bloodhound.min.js'))
+            ->prependFile($this->basePath('js/jquery-typeahead-master/dist/jquery.typeahead.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+        <?php
+        $this->inlineScript()->captureStart();
+        echo <<<JS
+        (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter165864 = new Ya.Metrika({ id:165864, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+JS;
+        $this->inlineScript()->captureEnd();
+        ?>
+    </head>
+    <body>
+    <div id="iodogs-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('app/home') ?>"><img src="https://s3.eu-central-1.amazonaws.com/iodogs/src/favicon.ico" alt="Iodogs heart"/></a>
+                    <div class="hidden-sm hidden-lg hidden-md navbar--mobile-phone">
+                        <a href="tel:+79037926112">
+                            <span class="glyphicon glyphicon-phone-alt"></span> +7(903)792-6112
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse">           
+                     <?php echo $this->
+        navigation('application-nav')
+        ->menu()
+        ->setUlClass('nav navbar-nav')
+        ->setPartial('/partial/navigation.phtml');
+    ?>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="<?=$this->url('app/buy')?>"><span class="glyphicon glyphicon-shopping-cart"><span class="nav-li-span hidden-sm">Купить</span></span> </a></li>
+        <li><a href="<?=$this->url('app/contacts')?>"><span class="glyphicon glyphicon-map-marker"></span> <span class="nav-li-span hidden-sm">Контакты</span></a></li>
+        <li><a href="tel:+74957926112"><span class="glyphicon glyphicon-phone-alt"></span> <span class="nav-li-span hidden-sm ">+7(495)792-6112</span></a></li>
+          
+      </ul>
+                </div><!--/.nav-collapse -->       
+            </div>
+        </nav>
+        <div class="container">
+        <div id="content">
+            <?php echo $this->content; ?>
+        </div>
+
+            <footer>
+                <span>&copy; <?php echo date('Y') ?> by isleofdogs.ru </span>
+            </footer>
+        </div> <!-- /container -->
+    </div>
+        <?php echo $this->inlineScript() ?>
+    <noscript><div><img src="https://mc.yandex.ru/watch/165864" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    </body>
+</html>

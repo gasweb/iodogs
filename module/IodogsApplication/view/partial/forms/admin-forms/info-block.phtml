@@ -1,0 +1,28 @@
+<?php
+$infoBlockForm->prepare();
+echo $this->form()->openTag($infoBlockForm);
+?>
+    <div class="col-md-6 col-md-offset-1">
+        <?php
+        //echo $this->formHidden($form->get('id'));
+        echo $this->formRow($infoBlockForm->get('header'));
+        echo $this->formRow($infoBlockForm->get('content'));
+        echo $this->formRow($infoBlockForm->get('description'));
+
+        ?>
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+        <div class="left-edit-menu" style="">
+            <?php
+            echo $this->formRow($infoBlockForm->get('title'));
+            echo $this->formRow($infoBlockForm->get('snippet'));
+            echo $this->formRow($infoBlockForm->get('keywords'));
+            ?>
+            <div class="submit">
+                <?php
+                echo $this->formSubmit($infoBlockForm->get('submit'));
+                ?>
+            </div>
+        </div>
+    </div>
+<?php  echo $this->form()->closeTag(); ?>

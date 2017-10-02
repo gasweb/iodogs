@@ -1,0 +1,19 @@
+ <?php
+ $title = 'Редактировать продукт';
+ $this->headTitle($title);
+ ?>
+ <div class="row-fluid">
+ <?php 
+ $form->setAttribute('action', "product".$this->id);
+ $form->prepare();
+ echo $this->form()->openTag($form);
+ ?>
+  <h1 style="text-align:center;"><?php echo $this->escapeHtml($title); ?></h1>
+<div class="col-md-6 col-md-offset-1">
+ <?php 
+ echo $this->formRow($form->get('breed'));
+  echo $this->formSubmit($form->get('submit'));
+  ?>
+ </div>
+ <?php  echo $this->form()->closeTag(); ?>
+ </div>

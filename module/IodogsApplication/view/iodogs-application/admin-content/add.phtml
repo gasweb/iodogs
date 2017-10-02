@@ -1,0 +1,35 @@
+<div class="row-fluid">
+ <?php 
+ //$form->setAttribute('action', "content".$this->id);
+ $form->setAttribute('action', $this->url('app/admin-content-add'));
+ $form->prepare();
+ echo $this->form()->openTag($form);
+ ?>
+  <h1 style="text-align:center;"><?php echo $this->escapeHtml("Добавить материал"); ?></h1>
+<div class="col-md-6 col-md-offset-1">
+ <?php
+ //echo $this->formHidden($form->get('id')); 
+ echo $this->formRow($form->get('header'));
+ echo $this->formRow($form->get('content'));
+ echo $this->formRow($form->get('description'));
+
+ ?>
+ </div>
+ <div class="col-md-3 col-md-offset-1">
+ <div class="left-edit-menu" style="">
+ <?php
+ echo $this->formRow($form->get('href'));
+ echo $this->formRow($form->get('title'));
+ echo $this->formRow($form->get('snippet'));
+ echo $this->formRow($form->get('keywords'));
+ echo $this->formRow($form->get('active'));
+ ?>
+ <div class="submit">
+ <?php
+ echo $this->formSubmit($form->get('submit'));
+ ?>
+ </div>
+ </div>
+ </div>
+ <?php  echo $this->form()->closeTag(); ?>
+ </div>

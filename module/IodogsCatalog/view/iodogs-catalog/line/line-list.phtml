@@ -1,0 +1,12 @@
+<?php
+$this->headTitle('Список серий Isle of Dogs');
+foreach ($lines as $line)
+{
+    ?>
+    <div>
+        <a href="<?=$this->url('app/line/slug', array('slug' => $line['slug']))?>">
+        <img src="<?=$line['img_path']?>" alt="" class="img-responsive">
+        </a>
+    </div>
+    <?php
+}

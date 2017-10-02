@@ -1,0 +1,133 @@
+<?php
+$product = $this->product;
+$this->headTitle($product['rus_title']);
+$this->headMeta($product['preview'], "description");
+?>
+ <div class="container product_detail">            
+   <div class="col-md-6 col-md-offset-1 product_detail__info">
+       <div style="text-align: right;" class="product_detail__info--flags">
+           <?php
+           if($product['in_stock']==1){
+               ?>
+               <span class="label label-success">Доставка по России</span>
+               <span class="label label-primary">В наличии <span class="glyphicon glyphicon-thumbs-up"></span></span>
+               <?php
+           }
+           else{
+               ?>
+               <span class="label label-warning">Нет в наличии</span>
+               <?php
+           }
+           ?>
+
+       </div>
+       <h1><?=$product['rus_title']?></h1>
+       <div id="info" class="product_detail__info--tab-pane ">
+           <?=$product['card_text']?>
+       </div>
+       <?php if(!empty($product['application_text'])){ ?>
+       <div class="bs-callout bs-callout-info">
+
+           <h4>Применение</h4>
+           <div id="application" class="tab-pane fade in product_detail__application">
+               <?=$product['application_text']?>
+           </div>
+
+       </div>
+       <?php } ?>
+   </div>
+
+  <div class="col-md-4 col-md-offset-0 product_detail__photo_block">
+<div class="flexslider">
+  <ul class="slides">
+  <?php 
+  foreach($product['images'] AS $image){ ?>
+     <li data-thumb="<?=$image['src_small'] ?>">
+          <img class="img-responsive" src="<?=$image['src'] ?>" alt="">
+     </li>
+     <?php } ?>    
+  </ul>
+</div>
+      <?php
+      if($product['in_stock']==1) {
+          ?>
+          <div class="center">
+              <a href="<?= $this->url('app/buy') ?>" class="btn btn-sm btn-success product__buy_button">
+                  <span class="glyphicon glyphicon-shopping-cart"></span> Купить с доставкой</span>
+              </a>
+          </div>
+          <?php
+      }
+      ?>
+      <div class="product_detail__photo_block--share">
+          <?=$this->share?>
+      </div>
+<script>
+     $(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+</script>
+
+
+               </div>
+ </div>
+<style>
+    .product_detail
+    {
+        background: #fbfbfb url() 0 0 no-repeat;
+
+    }
+    .product_detail__photo_block
+    {
+        margin: 40px auto;
+        text-align: center;
+        background: #fff url() 0 0 no-repeat;
+    }
+  .product_detail__photo_block--share
+  {
+      border-top: 1px solid #fbfbfb;
+  }
+    .product_detail__info--navtabs
+    {
+        margin-top: 20px;
+    }
+  .product_detail__info--tab-content
+  {
+      padding: 5px 10px;
+  }
+    .product_review__title
+    {
+        text-align: center;
+        border-top: 1px solid #fbfbfb;
+    }
+</style>
+
+ <div id="modal-<?=$product['id']?>" class="modal fade">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h4 class="modal-title"><?php echo $product['rus_title'] ?></h4>
+             </div>
+             <div class="modal-body">
+                 <?php echo $this->partial('partial/site/content/buy');?>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+             </div>
+         </div>
+     </div>
+ </div>
+ <script type="text/javascript">
+     $(document).ready(function(){
+         $(".product__buy_button").on("click", function (event) {
+             event.preventDefault();
+
+             var dataId = $(this).attr("data-id");
+             $('.modal').modal('show');
+         })
+     });
+ </script>
+               

@@ -1,0 +1,136 @@
+<?php
+$this->headTitle('Косметика Isle of Dogs для пород собак');
+?>
+<div class="input-group col-md-6 col-md-offset-3" style="margin: 20px auto;">
+<form id="form-user_v1" name="form-user_v1">
+    <div class="typeahead__container">
+        <div class="typeahead__field">
+
+            <span class="typeahead__query">
+                <input class="typeahead__breed" name="user_v1[query]" type="search" placeholder="Начните вводить название породы" autocomplete="off">
+            </span>
+
+        </div>
+    </div>
+</form>
+</div>
+<ul class="list-unstyled list-inline breed-list">
+<?php echo $this->partialLoop('partial/breed/card.phtml', $breed); ?>
+</ul>
+
+<script type="text/javascript">
+    $(function () {
+        $.typeahead({
+            input: '.typeahead__breed',
+            minLength: 1,
+            order: "asc",
+            dynamic: true,
+            delay: 500,
+            backdrop: {
+                "background-color": "#000"
+            },
+            template: function (query, item) {
+
+                console.log(item);
+
+                return '<span class="row">' +
+                    '<span class="avatar">' +
+                    '<img src="{{file_path}}" class="img-search">' +
+                    "</span>" +
+                    '<span class="breed-search-title">{{rus_title}} </span>'
+            },
+            emptyTemplate: "нет результатов для {{query}}",
+            source: {
+                user: {
+                    display: "rus_title",
+                    href: "/breed/{{slug}}",
+                    ajax: function (query) {
+                        return {
+                            type: "GET",
+                            url: "/search",
+                            path: "data.breed",
+                            data: {
+                                q: "{{query}}"
+                            },
+                        }
+                    }
+
+                },
+            },
+            callback: {
+                onClick: function (node, a, item, event) {
+
+                    // You can do a simple window.location of the item.href
+//                    alert(JSON.stringify(item));
+
+                },
+                onSendRequest: function (node, query) {
+//                    console.log('request is sent')
+                },
+                onReceiveRequest: function (node, query) {
+//                    console.log('request is received')
+                }
+            },
+            debug: false
+        });
+    });
+</script>
+
+<style type="text/css">
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .row {
+        display: table-row;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .row  > * {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .username {
+        padding: 0 10px;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .id {
+        font-size: 12px;
+        color: #777;
+        font-variant: small-caps;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .avatar img {
+        height: 26px;
+        width: 26px;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .project-logo {
+        display: inline-block;
+        height: 100px;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .project-logo img {
+        height: 100%;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .project-information {
+        display: inline-block;
+        vertical-align: top;
+        padding: 20px 0 0 20px;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .project-information > span {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result > ul > li > a small {
+        padding-left: 0px;
+        color: #999;
+    }
+
+    .project-jquerytypeahead.page-demo #form-user_v1 .typeahead__result .project-information li {
+        font-size: 12px;
+    }
+    .img-search
+    {
+        width: 30px;
+    }
+</style>
