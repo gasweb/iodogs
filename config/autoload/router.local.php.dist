@@ -5,7 +5,7 @@ return array(
             'region-subdomain' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => '[:sub].isleofdogs.ru',
+                    'route' => '[:sub].__SITE_HOST_NAME__',
                     'constraint' => array(
                         'sub' => '([a-zA-Z0-9-]+)',
                     ),
@@ -30,7 +30,7 @@ return array(
             'app' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'www.isleofdogs.ru',
+                    'route' => '__SITE_HOST_NAME__',
                 ),
 //                'child_routes' => array(),
             ),
