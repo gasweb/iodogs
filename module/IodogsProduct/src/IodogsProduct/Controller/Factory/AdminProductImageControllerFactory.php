@@ -1,26 +1,25 @@
 <?php
 namespace IodogsProduct\Controller\Factory;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use IodogsProduct\Controller\AdminProductImageController;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AdminProductImageControllerFactory implements FactoryInterface
 {
-    /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $realServiceLocator = $serviceLocator->getServiceLocator();
-        $objectManager = $realServiceLocator->get('Doctrine\ORM\EntityManager');
-        $imageUploadService = $realServiceLocator->get('ImageUploadServiceFactory');
-        $productService = $realServiceLocator->get('ProductServiceFactory');
+        $objectManager = $container->get('Doctrine\ORM\EntityManager');
+        $imageUploadService = $container->get('ImageUploadServiceFactory');
+        $productService = $container->get('ProductServiceFactory');
 
         return new AdminProductImageController($objectManager, $imageUploadService, $productService);
     }
+
+
 }

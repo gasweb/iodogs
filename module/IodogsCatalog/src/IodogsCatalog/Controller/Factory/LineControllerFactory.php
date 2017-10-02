@@ -1,26 +1,25 @@
 <?php
 namespace IodogsCatalog\Controller\Factory;
 
- use IodogsCatalog\Controller\LineController; 
- use Zend\ServiceManager\FactoryInterface;
+ use Interop\Container\ContainerInterface;
+ use Interop\Container\Exception\ContainerException;
+ use IodogsCatalog\Controller\LineController;
+ use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+ use Zend\ServiceManager\Exception\ServiceNotFoundException;
+ use Zend\ServiceManager\Factory\FactoryInterface;
  use Zend\ServiceManager\ServiceLocatorInterface;
 
  class LineControllerFactory implements FactoryInterface
  {
-     /**
-      * Create service
-      *
-      * @param ServiceLocatorInterface $serviceLocator
-      *
-      * @return mixed
-      */
-     public function createService(ServiceLocatorInterface $serviceLocator)
+
+     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
      {
-        $realServiceLocator = $serviceLocator->getServiceLocator();
-        $ProductService = $realServiceLocator->get('ProductServiceFactory');
-        $LineService = $realServiceLocator->get('LineServiceFactory');
+         $ProductService = $container->get('ProductServiceFactory');
+         $LineService = $container->get('LineServiceFactory');
 
 
          return new LineController($ProductService, $LineService);
      }
+
+
  }

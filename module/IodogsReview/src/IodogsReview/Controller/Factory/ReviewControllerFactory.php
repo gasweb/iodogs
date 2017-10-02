@@ -1,18 +1,22 @@
 <?php
 namespace IodogsReview\Controller\Factory;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use IodogsReview\Controller\ReviewController;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ReviewControllerFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $sl = $serviceLocator->getServiceLocator();
-        $om = $sl->get('Doctrine\ORM\EntityManager');
-        $reviewService = $sl->get('ReviewServiceFactory');
+        $om = $container->get('Doctrine\ORM\EntityManager');
+        $reviewService = $container->get('ReviewServiceFactory');
         return new ReviewController($om, $reviewService);
     }
+
 
 }

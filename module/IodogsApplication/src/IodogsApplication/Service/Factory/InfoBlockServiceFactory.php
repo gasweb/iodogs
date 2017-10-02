@@ -1,22 +1,21 @@
 <?php
 namespace IodogsApplication\Service\Factory;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use IodogsApplication\Service\InfoBlockService;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class InfoBlockServiceFactory implements FactoryInterface
 {
-    /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $objectManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
+        $objectManager = $container->get('Doctrine\ORM\EntityManager');
         return new InfoBlockService($objectManager);
     }
+
+
 }

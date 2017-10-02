@@ -1,19 +1,24 @@
 <?php
 namespace IodogsBreed\Controller\Factory;
 
-use \Zend\ServiceManager\FactoryInterface,
-    \Zend\ServiceManager\ServiceLocatorInterface,
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface,
     IodogsBreed\Controller\AdminBreedController;
 
 class AdminBreedControllerFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $sl)
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $realServiceLocator = $sl->getServiceLocator();
-        $breedService = $realServiceLocator->get("BreedServiceFactory");
-        $imageUploadService = $realServiceLocator->get("ImageUploadServiceFactory");
-        $om = $realServiceLocator->get('Doctrine\ORM\EntityManager');
+        $breedService = $container->get("BreedServiceFactory");
+        $imageUploadService = $container->get("ImageUploadServiceFactory");
+        $om = $container->get('Doctrine\ORM\EntityManager');
 
         return new AdminBreedController($om, $breedService, $imageUploadService);
     }
+
+
 }

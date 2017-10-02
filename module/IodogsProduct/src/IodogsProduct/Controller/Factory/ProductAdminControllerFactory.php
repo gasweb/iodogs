@@ -1,24 +1,22 @@
 <?php
 namespace IodogsProduct\Controller\Factory;
 
+ use Interop\Container\ContainerInterface;
+ use Interop\Container\Exception\ContainerException;
  use IodogsProduct\Controller\ProductAdminController;
- use Zend\ServiceManager\FactoryInterface;
+ use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+ use Zend\ServiceManager\Exception\ServiceNotFoundException;
+ use Zend\ServiceManager\Factory\FactoryInterface;
  use Zend\ServiceManager\ServiceLocatorInterface;
 
  class ProductAdminControllerFactory implements FactoryInterface
  {
-     /**
-      * Create service
-      *
-      * @param ServiceLocatorInterface $serviceLocator
-      *
-      * @return mixed
-      */
-     public function createService(ServiceLocatorInterface $serviceLocator)
-     {                
-        $realServiceLocator = $serviceLocator->getServiceLocator();
-        $objectManager = $realServiceLocator->get('Doctrine\ORM\EntityManager');
-        $productService = $realServiceLocator->get('ProductServiceFactory');
-        return new ProductAdminController($objectManager, $productService);
+     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+     {
+         $objectManager = $container->get('Doctrine\ORM\EntityManager');
+         $productService = $container->get('ProductServiceFactory');
+         return new ProductAdminController($objectManager, $productService);
      }
+
+
  }

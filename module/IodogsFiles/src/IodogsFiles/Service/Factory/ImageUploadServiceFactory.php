@@ -2,7 +2,7 @@
 namespace IodogsFiles\Service\Factory;
 
 use IodogsFiles\Service\ImageUploadService;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ImageUploadServiceFactory implements FactoryInterface

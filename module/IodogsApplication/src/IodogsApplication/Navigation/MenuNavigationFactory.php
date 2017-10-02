@@ -1,7 +1,7 @@
 <?php
 namespace IodogsApplication\Navigation;
  
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
  
 class MenuNavigationFactory implements FactoryInterface

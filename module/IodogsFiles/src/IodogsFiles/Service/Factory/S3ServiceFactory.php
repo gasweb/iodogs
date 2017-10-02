@@ -1,16 +1,23 @@
 <?php
 namespace IodogsFiles\Service\Factory;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use IodogsFiles\Service\S3Service,
-    Zend\ServiceManager\FactoryInterface,
+    Zend\ServiceManager\Factory\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    Aws\S3\S3Client;;
+    Aws\S3\S3Client;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+
+;
 
 class S3ServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('config');
+        $config = $container->get('config');
         if($config['aws'])
         {
             $S3Client = new S3Client($config['aws']);
@@ -18,4 +25,6 @@ class S3ServiceFactory implements FactoryInterface
 
         return new S3Service($S3Client);
     }
+
+
 }
