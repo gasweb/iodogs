@@ -1,7 +1,7 @@
 <?php
 namespace IodogsApplication\Navigation;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 
 class ProductNavigation extends DefaultNavigationFactory
@@ -11,7 +11,7 @@ class ProductNavigation extends DefaultNavigationFactory
         return 'product-nav';
     }
 
-    protected function getCatalog(ServiceLocatorInterface $serviceLocator)
+    protected function getCatalog(ContainerInterface $container)
     {
         /*
         Собираем массив каталога для меню и хлебных крошек
@@ -23,7 +23,7 @@ class ProductNavigation extends DefaultNavigationFactory
         */
         $catalog = array();
         $categoryMenuItem = array();
-        $objectManager = $serviceLocator
+        $objectManager = $container
             ->get('Doctrine\ORM\EntityManager');
         $categories = $objectManager->
         getRepository('IodogsDoctrine\Entity\Category')->
@@ -74,10 +74,10 @@ class ProductNavigation extends DefaultNavigationFactory
 
     }
 
-    protected function getPages(ServiceLocatorInterface $serviceLocator)
+    protected function getPages(ContainerInterface $container)
     {
         if (null === $this->pages){
-            $catalog = $this->getCatalog($serviceLocator);
+            $catalog = $this->getCatalog($container);
             $configuration['navigation'][$this->getName()] = $catalog;
 
             if (!isset($configuration['navigation'])) {
@@ -90,7 +90,7 @@ class ProductNavigation extends DefaultNavigationFactory
                 ));
             }
 
-            $application = $serviceLocator->get('Application');
+            $application = $container->get('Application');
             $routeMatch  = $application->getMvcEvent()->getRouteMatch();
             $router      = $application->getMvcEvent()->getRouter();
             $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
