@@ -67,15 +67,19 @@ class Module
     {
         $key = null;
         $routeMatch = $event->getRouteMatch();
-        $params = $routeMatch->getParams();
-        $routeName = $routeMatch->getMatchedRouteName();
-        if(strpos($routeName, 'old') || strpos($routeName, 'admin')  || strpos($routeName, 'login')  || strpos($routeName, 'contacts'))
-            return $key;
+        if ($routeMatch)
+        {
+            $params = $routeMatch->getParams();
+            $routeName = $routeMatch->getMatchedRouteName();
+            if(strpos($routeName, 'old') || strpos($routeName, 'admin')  || strpos($routeName, 'login')  || strpos($routeName, 'contacts'))
+                return $key;
 
-        $key   = 'route-cache-' . $routeName;
-        $key = str_replace('/', '-', $key);
-        if(!empty($params['slug']))
-            $key .= '-'.$params['slug'];
+            $key   = 'route-cache-' . $routeName;
+            $key = str_replace('/', '-', $key);
+            if(!empty($params['slug']))
+                $key .= '-'.$params['slug'];
+        }
+
         return $key;
     }
 
