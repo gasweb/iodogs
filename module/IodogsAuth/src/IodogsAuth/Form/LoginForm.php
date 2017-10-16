@@ -1,6 +1,10 @@
 <?php
 namespace IodogsAuth\Form;
 
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Password;
+use Zend\Form\Element\Submit;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
 class LoginForm extends Form
@@ -8,78 +12,53 @@ class LoginForm extends Form
     public function __construct()
     {
         parent::__construct('login-form');
+        $this->init();
+    }
 
-        $this->add(array(
+    public function init()
+    {
+        $this->add([
             'name' => 'user_name',
-            'type' => 'Text',
-            'options' => array(
+            'type' => Text::class,
+            'options' => [
                 'label' => 'Имя пользователя'
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'placeholder' => 'Введите имя пользователя',
                 'autocomplete' => 'off'
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'password',
-            'type' => 'Password',
-            'options' => array(
-                'label' => 'Пароль'
-            ),
-            'attributes' => array(
-                'placeholder' => 'Введите пароль',
-                'autocomplete' => 'off'
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'password',
-            'type' => 'Password',
-            'options' => array(
-                'label' => 'Пароль'
-            ),
-            'attributes' => array(
-                'placeholder' => 'Введите пароль',
-                'autocomplete' => 'off'
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'csrf',
-            'type' => 'Csrf',
-            'options' => array(
-                'csrf_options' => array(
-                    'timeout' => 60
-                )
-            )
-        ));
-
-
-        $this->add([
-            'type' => 'Captcha',
-            'name' => 'captcha',
-            'options' => [
-                'label' => 'Введите символы: ',
-                'captcha' => [
-                    'class'   => 'Dumb',
-                    'options' => [
-                        'wordLen' => 4,
-                    ],
-                ],
             ],
         ]);
 
+        $this->add([
+            'name' => 'password',
+            'type' => Password::class,
+            'options' => [
+                'label' => 'Пароль'
+            ],
+            'attributes' => [
+                'placeholder' => 'Введите пароль',
+                'autocomplete' => 'off'
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
+            'name' => 'csrf',
+            'type' => Csrf::class,
+            'options' => [
+                'csrf_options' => [
+                    'timeout' => 60
+                ]
+            ]
+        ]);
+
+        $this->add([
             'name' => 'submit',
-            'type' => 'Submit',
-            'attributes' => array(
+            'type' => Submit::class,
+            'attributes' => [
                 'value' => 'Войти',
                 'id' => 'submitbutton',
                 'class' => 'btn-success'
-            ),
-        ));
-
+            ],
+        ]);
     }
 }
