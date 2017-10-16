@@ -4,7 +4,7 @@ $loginForm->prepare();
 echo $this->form()->openTag($loginForm);
 echo $this->formRow($loginForm->get("user_name"));
 echo $this->formRow($loginForm->get("password"));
-echo $this->formCaptcha($loginForm->get("captcha"));
+//echo $this->formCaptcha($loginForm->get("captcha"));
 echo $this->formRow($loginForm->get("csrf"));
 echo $this->formRow($loginForm->get("submit"));
 echo $this->form()->closeTag();
