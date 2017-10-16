@@ -3,15 +3,22 @@ namespace IodogsApplication;
 
 use IodogsApplication\Service\Cache\Application\ApplicationCacheService;
 use IodogsApplication\Service\Cache\Factory\CacheServiceFactory;
-use Zend\Router\Http\Literal;
+
+//ZF3 use block
+use Zend\Router\Http\Literal,
+    Zend\Router\Http\Segment;
+
+//Content use block
+use IodogsApplication\Controller\AdminContentController,
+    IodogsApplication\Controller\Factory\AdminContentControllerFactory;
 
 return [
     'controllers' => [
         'invokables' => [
-            'AdminContentController' => 'IodogsApplication\Controller\AdminContentController',
             'OldApplicationController' => 'IodogsApplication\Controller\OldApplicationController',
         ],
         'factories' => [
+            AdminContentController::class => AdminContentControllerFactory::class,
             'ContentControllerFactory' => 'IodogsApplication\Controller\Factory\ContentControllerFactory',
             'InfoBlockAdminControllerFactory' => 'IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory',
             'SearchControllerFactory' => 'IodogsApplication\Controller\Factory\SearchControllerFactory'
@@ -59,16 +66,46 @@ return [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/content',
+                                    'defaults' => [
+                                        'controller' => AdminContentController::class,
+                                        'action' => 'show',
+                                    ],
                                 ],
-                                'may_terminate' => false,
+                                'may_terminate' => true,
                                 'child_routes' => [
                                     'add' => [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/add',
                                             'defaults' => [
-                                                'controller' => 'AdminContentController',
+                                                'controller' => AdminContentController::class,
                                                 'action' => 'add',
+                                            ],
+                                        ],
+                                    ],
+                                    'id' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '[:id]',
+                                            'constraints' => [
+                                                'id' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => AdminContentController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'delete' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'defaults' => [
+                                                        'controller' => AdminContentController::class,
+                                                        'action'     => 'delete',
+                                                    ],
+                                                ],
                                             ],
                                         ],
                                     ],
@@ -159,46 +196,6 @@ return [
                                 'action' => 'messageSent'
                             ],
                         ],
-                    ],
-                    'admin-content' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/content',
-                            'defaults' => [
-                                'controller' => 'AdminContentController',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'admin-content-id' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:id]',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'AdminContentController',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'admin-content-delete' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/delete',
-                                            'defaults' => [
-                                                'controller' => 'AdminContentController',
-                                                'action'     => 'delete',
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-
                     ],
                     'admin-info-block' => [
                         'type' => 'Literal',
@@ -1002,10 +999,10 @@ return [
                 ],
                  'content' => [
                     'label' => 'Материалы',
-                    'route' => 'app/admin-content',
+                    'route' => 'app/backoffice/content',
                     'pages' => [
                         [
-                            'route' => 'app/admin-content',
+                            'route' => 'app/backoffice/content',
                             'label' => 'Список материалов'
                         ],
                         [

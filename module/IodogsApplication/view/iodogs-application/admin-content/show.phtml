@@ -26,8 +26,8 @@ if(is_array($content))
 		<td><?=$material->getHeader() ?></td>
 		<td><?=$material->getSnippet() ?></td>
 		<td><?=$material->getActive() ?></td>
-		<td><a class="btn btn-success" href="<?=$this->url('app/admin-content/admin-content-id', array('id' => $material->getId())); ?>">Редактировать</a></td>
-		<td><a class="btn btn-danger" href="<?=$this->url('app/admin-content/admin-content-id/admin-content-delete', array('id' => $material->getId())); ?>">Удалить</a></td>
+		<td><a class="btn btn-success" href="<?=$this->url('app/backoffice/content/id', array('id' => $material->getId())); ?>">Редактировать</a></td>
+		<td><a class="btn btn-danger" href="<?=$this->url('app/backoffice/content/id/delete', array('id' => $material->getId())); ?>">Удалить</a></td>
 	</tr>
 	<?php } ?>
 	

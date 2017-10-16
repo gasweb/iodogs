@@ -1,7 +1,7 @@
 <div class="row-fluid">
  <?php 
  //$form->setAttribute('action', "content".$this->id);
- $form->setAttribute('action', $this->url('app/admin-content/admin-content-id', array('id' => $this->id, )));
+ $form->setAttribute('action', $this->url('app/backoffice/content/id', array('id' => $this->id, )));
  $form->prepare();
  echo $this->form()->openTag($form);
  ?>

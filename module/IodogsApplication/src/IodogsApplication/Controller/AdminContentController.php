@@ -7,8 +7,18 @@ use IodogsApplication\Form\ContentFilter;
 use IodogsApplication\Form\ConfirmForm;
 use Zend\EventManager\EventManagerInterface;
 
+//Entity use block
+use IodogsDoctrine\Entity\Content;
+
 class AdminContentController extends AbstractActionController
 {
+    /** @var \Doctrine\ORM\EntityManager $entityManager */
+    private $entityManager;
+
+    public function __construct($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     public function setEventManager(EventManagerInterface $events)
     {
@@ -21,12 +31,9 @@ class AdminContentController extends AbstractActionController
 
     public function showAction()
     {
-        $objectManager = $this->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $content = $objectManager->getRepository("\IodogsDoctrine\Entity\Content")->
-        findBy(array(), array('title' => 'ASC'));
-        //print_r($content);
-        return array("content" => $content);
+        $content = $this->entityManager->getRepository(Content::class)->
+        findBy([], ['title' => 'ASC']);
+        return ["content" => $content];
     }
     
     public function editAction(){       
@@ -35,11 +42,9 @@ class AdminContentController extends AbstractActionController
             throw new \Exception("Идентификатор материала не задан");            
         }
         else{
-            $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');
-            $content = $objectManager->find('IodogsDoctrine\Entity\Content', $contentId);                   
+            $content = $this->entityManager->find('IodogsDoctrine\Entity\Content', $contentId);                   
             if(is_object($content)){            
-            $form = new contentForm($objectManager);
+            $form = new contentForm($this->entityManager);
             $form->bind($content);
             $request = $this->getRequest();
             if ($request->isPost()) {
@@ -48,8 +53,8 @@ class AdminContentController extends AbstractActionController
                 $form->setData($request->getPost());
                 if ($form->isValid()) {
                     $content->setDateUpdate(new \DateTime("now"));
-                    $objectManager->persist($content);
-                    $objectManager->flush();
+                    $this->entityManager->persist($content);
+                    $this->entityManager->flush();
                     return $this->redirect()->refresh();
 
                 }
@@ -59,7 +64,7 @@ class AdminContentController extends AbstractActionController
         }
         else
         {
-            throw new \Exception("Продукта с id $productId не найдено");           
+            throw new \Exception("Материала с id $contentId не найдено");
         }
         }
     }
@@ -72,9 +77,7 @@ class AdminContentController extends AbstractActionController
                 throw new \Exception("Идентификатор материала не задан");            
             }
             else{
-                $objectManager = $this->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-                $content = $objectManager->find('IodogsDoctrine\Entity\Content', $contentId);                   
+                $content = $this->entityManager->find('IodogsDoctrine\Entity\Content', $contentId);                   
                 if(is_object($content)){   
                     $form = new ConfirmForm();
 
@@ -83,10 +86,10 @@ class AdminContentController extends AbstractActionController
                     $delete = $request->getPost('confirm-yes', 'no');                      
                     if($delete != "no")
                     {
-                        $objectManager->remove($content);
-                        $objectManager->flush();
+                        $this->entityManager->remove($content);
+                        $this->entityManager->flush();
                     }      
-                    return $this->redirect()->toRoute('app/admin-content');
+                    return $this->redirect()->toRoute('app/backoffice/content');
                 } 
 
                     return array('form' => $form, 'content'=>$content);
@@ -94,10 +97,8 @@ class AdminContentController extends AbstractActionController
             }
         }
 
-    public function addAction(){       
-        $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');                                
-            $form = new contentForm($objectManager);            
+    public function addAction(){
+            $form = new contentForm($this->entityManager);
             $form->get('submit')->setValue('Добавить материал');        
             $request = $this->getRequest();
             if ($request->isPost()) {
@@ -108,11 +109,11 @@ class AdminContentController extends AbstractActionController
                     $content = new \IodogsDoctrine\Entity\Content();
                     $content->setDateUpdate(new \DateTime("now"));
                     $form->getHydrator()->hydrate($form->getData(), $content);
-                    $objectManager->persist($content);
-                    $objectManager->flush();
+                    $this->entityManager->persist($content);
+                    $this->entityManager->flush();
                     return $this->
                     redirect()->
-                    toRoute('app/admin-content/admin-content-id',
+                    toRoute('app/backoffice/content/id',
                         array(
                             'id' => $content->getId()
                             )
