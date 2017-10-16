@@ -3,6 +3,7 @@ namespace IodogsApplication;
 
 use IodogsApplication\Service\Cache\Application\ApplicationCacheService;
 use IodogsApplication\Service\Cache\Factory\CacheServiceFactory;
+use Zend\Router\Http\Literal;
 
 return [
     'controllers' => [
@@ -44,6 +45,38 @@ return [
             ],
             'app' => [
                 'child_routes' => [
+                    'backoffice' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/admin',
+                            'defaults' => [
+                                'cache' => false,
+                            ],
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'content' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/content',
+                                ],
+                                'may_terminate' => false,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/add',
+                                            'defaults' => [
+                                                'controller' => 'AdminContentController',
+                                                'action' => 'add',
+                                            ],
+                                        ],
+                                    ],
+                                ]
+                            ],
+
+                        ]
+                    ],
                     'content' => [
                         'type'    => 'segment',
                         'options' => [
@@ -124,16 +157,6 @@ return [
                             'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'messageSent'
-                            ],
-                        ],
-                    ],
-                    'admin-content-add' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/content/add',
-                            'defaults' => [
-                                'controller' => 'AdminContentController',
-                                'action' => 'add',
                             ],
                         ],
                     ],
@@ -986,7 +1009,7 @@ return [
                             'label' => 'Список материалов'
                         ],
                         [
-                            'route' => 'app/admin-content-add',
+                            'route' => 'app/backoffice/content/add',
                             'label' => 'Добавить материал'
                         ],
                     ],
