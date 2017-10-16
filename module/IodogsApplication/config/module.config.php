@@ -1,18 +1,18 @@
 <?php
-return array(
-    'controllers' => array(
-        'invokables' => array(
+return [
+    'controllers' => [
+        'invokables' => [
             'AdminContentController' => 'IodogsApplication\Controller\AdminContentController',
             'OldApplicationController' => 'IodogsApplication\Controller\OldApplicationController',
-        ),
-        'factories' => array(
+        ],
+        'factories' => [
             'ContentControllerFactory' => 'IodogsApplication\Controller\Factory\ContentControllerFactory',
             'InfoBlockAdminControllerFactory' => 'IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory',
             'SearchControllerFactory' => 'IodogsApplication\Controller\Factory\SearchControllerFactory'
-        )
-    ),    
-    'service_manager' => array(
-   'factories' => array(
+        ]
+    ],
+    'service_manager' => [
+   'factories' => [
       'InfoBlockServiceFactory' => 'IodogsApplication\Service\Factory\InfoBlockServiceFactory',
       'NavigationFactory' => 'IodogsApplication\Navigation\MenuNavigationFactory',
       'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
@@ -21,1040 +21,1036 @@ return array(
       'application-nav' => 'IodogsApplication\Navigation\Factory\ApplicationNavigationFactory',
       'product-nav' => 'IodogsApplication\Navigation\Factory\ProductNavigationFactory',
       'IodogsCacheService' => 'Zend\Cache\Service\StorageCacheFactory',
-   ),
-   'invokables' => array(                      
-            ),
-),
-    'cache' => array(
-        'adapter' => array(
+   ],
+   'invokables' => [
+   ],
+    ],
+    'cache' => [
+        'adapter' => [
             'name' => 'filesystem'
-        ),
-        'options' => array(
+        ],
+        'options' => [
             'cache_dir' => 'data/cache/',
 //            'ttl' => 50
             'ttl' => 86400
-        ),
-    ),
-    'router' => array(
-        'routes' => array(
-            'region-subdomain' => array(
+        ],
+    ],
+    'router' => [
+        'routes' => [
+            'region-subdomain' => [
                 'type' => 'hostname',
-                'options' => array(
-                    'defaults' => array(
+                'options' => [
+                    'defaults' => [
                         'controller' => 'ContentControllerFactory',
                         'action' => 'region'
-                    ),
-                ),
-            ),
-            'app' => array(
-                'child_routes' => array(
-                    'content' => array(
+                    ],
+                ],
+            ],
+            'app' => [
+                'child_routes' => [
+                    'content' => [
                         'type'    => 'segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/[:slug]',
-                            'constraints' => array(
+                            'constraints' => [
                                 'slug' => '[a-zA-Z-_0-9]+',
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action'     => 'slug',
-                            ),
-                        ),
-                    ),
-                    'search' => array(
+                            ],
+                        ],
+                    ],
+                    'search' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/search',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'SearchControllerFactory',
                                 'action' => 'index'
-                            ),
-                        ),
-                    ),
-                    'home' => array(
+                            ],
+                        ],
+                    ],
+                    'home' => [
                         'type'    => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action'     => 'home',
-                            ),
-                        ),
-                    ),
-                    'wholesale' => array(
+                            ],
+                        ],
+                    ],
+                    'wholesale' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/wholesale',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'wholesale'
-                            ),
-                        ),
-                    ),
-                    'buy' => array(
+                            ],
+                        ],
+                    ],
+                    'buy' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/buy',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'buy'
-                            ),
-                        ),
-                    ),
-                    'contacts' => array(
+                            ],
+                        ],
+                    ],
+                    'contacts' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/contacts',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'contacts'
-                            ),
-                        ),
-                    ),
-                    'video' => array(
+                            ],
+                        ],
+                    ],
+                    'video' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/video',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'video'
-                            ),
-                        ),
-                    ),
-                    'message-sent' => array(
+                            ],
+                        ],
+                    ],
+                    'message-sent' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/message/sent',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'messageSent'
-                            ),
-                        ),
-                    ),
-                    'admin-content-add' =>array(
+                            ],
+                        ],
+                    ],
+                    'admin-content-add' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/content/add',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'AdminContentController',
                                 'action' => 'add',
-                            ),
-                        ),
-                    ),
-                    'admin-content' =>array(
+                            ],
+                        ],
+                    ],
+                    'admin-content' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/content',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'AdminContentController',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'admin-content-id' => array(
+                        'child_routes' => [
+                            'admin-content-id' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:id]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'AdminContentController',
                                         'action'     => 'edit',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'admin-content-delete' => array(
+                                'child_routes' => [
+                                    'admin-content-delete' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/delete',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'AdminContentController',
                                                 'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
 
-                    ),
-                    'admin-info-block' =>array(
+                    ],
+                    'admin-info-block' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/info-block/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'InfoBlockAdminControllerFactory',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'add' => array(
+                        'child_routes' => [
+                            'add' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'add',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'controller' => 'InfoBlockAdminControllerFactory',
                                         'action' => 'add'
-                                    ),
-                                ),
-                            ),
-                            'edit' => array(
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:id]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'InfoBlockAdminControllerFactory',
                                         'action'     => 'edit',
-                                    ),
-                                ),
-                            ),
-                        ),
+                                    ],
+                                ],
+                            ],
+                        ],
 
-                    ),
-                    'breed' => array(
+                    ],
+                    'breed' => [
                         'type'    => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/breed/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'BreedControllerFactory',
                                 'action'     => 'allBreeds',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'breed-slug' => array(
+                        'child_routes' => [
+                            'breed-slug' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:slug]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'slug' => '[a-zA-Z0-9-]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'BreedControllerFactory',
                                         'action' => 'breedSlug'
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'iodogs-admin' => array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'iodogs-admin' => [
                         'type'    => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/admin/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller'    => 'AdminContentController',
                                 'action'        => 'index',
-                            ),
-                        ),
-                    ),
-                    'admin-breed' =>array(
+                            ],
+                        ],
+                    ],
+                    'admin-breed' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/breed',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'AdminBreedControllerFactory',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'add' => array(
+                        'child_routes' => [
+                            'add' => [
                                 'type' => 'literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/add',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'action' => 'add'
-                                    ),
-                                ),
-                            ),
-                            'admin-breed-id' => array(
+                                    ],
+                                ],
+                            ],
+                            'admin-breed-id' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:breedId]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'breedId' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'AdminBreedControllerFactory',
                                         'action'     => 'edit',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'breed-product' => array(
+                                'child_routes' => [
+                                    'breed-product' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/products',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'action' => 'breedProduct'
-                                            ),
-                                        ),
-                                    ),
-                                    'admin-breed-delete' => array(
+                                            ],
+                                        ],
+                                    ],
+                                    'admin-breed-delete' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/delete',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'AdminBreedControllerFactory',
                                                 'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                    'admin-breed-image' => array(
+                                            ],
+                                        ],
+                                    ],
+                                    'admin-breed-image' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/image',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'action' => 'imageUpload',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'catalog' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'catalog' => [
                         'type'    => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/catalog/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'CatalogControllerFactory',
                                 'action'     => 'category',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'category-slug' => array(
+                        'child_routes' => [
+                            'category-slug' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:slug]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9A-Za-z]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'CatalogControllerFactory',
                                         'action'     => 'slug',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'solution' => array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'solution' => [
                         'type'    => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/solution/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'SolutionControllerFactory',
                                 'action'     => 'list',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'slug' => array(
+                        'child_routes' => [
+                            'slug' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:slug]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9A-Za-z]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'SolutionControllerFactory',
                                         'action'     => 'slug',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'line' => array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'line' => [
                         'type'    => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/line/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'LineControllerFactory',
                                 'action'     => 'lineList',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'slug' => array(
+                        'child_routes' => [
+                            'slug' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:slug]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9a-zA-Z-]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'LineControllerFactory',
                                         'action'     => 'index',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'admin-line' =>array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'admin-line' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/line/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'LineAdminControllerFactory',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'add' =>array(
+                        'child_routes' => [
+                            'add' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'add',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'controller' => 'LineAdminControllerFactory',
                                         'action' => 'add',
-                                    ),
-                                ),
-                            ),
-                            'admin-line-id' => array(
+                                    ],
+                                ],
+                            ],
+                            'admin-line-id' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:lineId]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'lineId' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'LineAdminControllerFactory',
                                         'action'     => 'edit',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'admin-line-delete' => array(
+                                'child_routes' => [
+                                    'admin-line-delete' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/delete',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'LineAdminControllerFactory',
                                                 'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'admin-solution' =>array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'admin-solution' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/solution/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'SolutionAdminControllerFactory',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'add' =>array(
+                        'child_routes' => [
+                            'add' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'add',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'controller' => 'SolutionAdminControllerFactory',
                                         'action' => 'add',
-                                    ),
-                                ),
-                            ),
-                            'edit' => array(
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:id]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'SolutionAdminControllerFactory',
                                         'action'     => 'edit',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'product' => array(
+                                'child_routes' => [
+                                    'product' => [
                                         'type' => 'Literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/product',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'SolutionAdminControllerFactory',
                                                 'action' => 'product',
-                                            )
-                                        ),
-                                    ),
-                                    'delete' => array(
+                                            ]
+                                        ],
+                                    ],
+                                    'delete' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/delete',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'SolutionAdminControllerFactory',
                                                 'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'admin-category' =>array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'admin-category' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/category/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'CategoryAdminControllerFactory',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'add' =>array(
+                        'child_routes' => [
+                            'add' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'add',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'controller' => 'CategoryAdminControllerFactory',
                                         'action' => 'add',
-                                    ),
-                                ),
-                            ),
-                            'admin-category-id' => array(
+                                    ],
+                                ],
+                            ],
+                            'admin-category-id' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:id]',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'CategoryAdminControllerFactory',
                                         'action'     => 'edit',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'delete' => array(
+                                'child_routes' => [
+                                    'delete' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/delete',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'CategoryAdminControllerFactory',
                                                 'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'product' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'product' => [
                         'type'    => 'segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/item/[:slug]',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9A-Za-z]+',
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'controller' => 'ProductControllerFactory',
                                 'action'     => 'index',
-                            ),
-                        ),
-                    ),
-                    'admin-product' =>array(
+                            ],
+                        ],
+                    ],
+                    'admin-product' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/product/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ProductAdminControllerFactory',
                                 'action' => 'show',
-                            ),
-                        ),
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'add' =>array(
+                        'child_routes' => [
+                            'add' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'add',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'controller' => 'ProductAdminControllerFactory',
                                         'action' => 'add',
-                                    ),
-                                ),
-                            ),
-                            'id' => array(
+                                    ],
+                                ],
+                            ],
+                            'id' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '[:id]/',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'ProductAdminControllerFactory',
                                         'action'     => 'edit',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'breed' => array(
+                                'child_routes' => [
+                                    'breed' => [
                                         'type' => 'literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => 'breed',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'action' => 'breed'
-                                            ),
-                                        ),
-                                    ),
-                                    'image' =>array(
+                                            ],
+                                        ],
+                                    ],
+                                    'image' => [
                                         'type' => 'Segment',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => 'image',
-                                            'constraints' => array(
+                                            'constraints' => [
                                                 'id' => '[0-9]+',
-                                            ),
-                                            'defaults' => array(
+                                            ],
+                                            'defaults' => [
                                                 'controller' => 'AdminProductImageControllerFactory',
                                                 'action' => 'show',
-                                            ),
-                                        ),
+                                            ],
+                                        ],
                                         'may_terminate' => true,
-                                        'child_routes' => array(
-                                            'add' => array(
+                                        'child_routes' => [
+                                            'add' => [
                                                 'type' => 'literal',
-                                                'options' => array(
+                                                'options' => [
                                                     'route' => '/add',
-                                                    'defaults' => array(
+                                                    'defaults' => [
                                                         'controller' => 'AdminProductImageControllerFactory',
                                                         'action'     => 'add',
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    'delete' => array(
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'delete' => [
                                         'type' => 'Literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/delete',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'controller' => 'ProductAdminControllerFactory',
                                                 'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'admin-image' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'admin-image' => [
                         'type' => 'segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/admin/image/[:id]/',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]+',
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'controller' => 'ImageControllerFactory',
                                 'action' => 'edit'
-                            )
-                        ),
+                            ]
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'delete' => array(
+                        'child_routes' => [
+                            'delete' => [
                                 'type' => 'segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'delete',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'id' => '[0-9]+',
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'controller' => 'ImageControllerFactory',
                                         'action' => 'delete'
-                                    )
-                                )
-                            ),
-                            'delete-success' => array(
+                                    ]
+                                ]
+                            ],
+                            'delete-success' => [
                                 'type' => 'literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => 'deleted',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'controller' => 'ImageControllerFactory',
                                         'action' => 'deleteSuccess'
-                                    )
-                                )
-                            ),
-                        ),
-                    ),
-                'old_product' => array(
+                                    ]
+                                ]
+                            ],
+                        ],
+                    ],
+                'old_product' => [
                     'type' => 'segment',
-                    'options' => array(
+                    'options' => [
                         'route' => '/product[:id]',
-                        'constraints' => array(
+                        'constraints' => [
                             'id' => '[0-9]+'
-                        ),
-                        'defaults' => array(
+                        ],
+                        'defaults' => [
                             'controller' => 'OldApplicationController',
                             'action' => 'product'
-                            ),
-                        ),
-                    ),
-                    'old_breed' => array(
+                        ],
+                    ],
+                ],
+                    'old_breed' => [
                         'type' => 'segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/breed[:id]',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'controller' => 'OldApplicationController',
                                 'action' => 'breed'
-                            ),
-                        ),
-                    ),
-                    'old_catalog' => array(
+                            ],
+                        ],
+                    ],
+                    'old_catalog' => [
                         'type' => 'segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/category[:id]',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'controller' => 'OldApplicationController',
                                 'action' => 'category'
-                            ),
-                        ),
-                    ),
-                    'breed-default' => array(
+                            ],
+                        ],
+                    ],
+                    'breed-default' => [
                         'type' => 'literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/breed',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'BreedControllerFactory',
                                 'action' => 'allBreeds'
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'navigation' => array(
-        'application-nav' => array(
-            'about' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'navigation' => [
+        'application-nav' => [
+            'about' => [
                 'label' => 'О косметике',
                 'route' => 'app/home',
-                'pages' => array(
-                    array(
+                'pages' => [
+                    [
                     'route' => 'app/content',
                     'label' => 'История бренда',
-                        'params' => array('slug' => 'brand')
-                    ),
-                    array(
+                        'params' => ['slug' => 'brand']
+                    ],
+                    [
                     'route' => 'app/content',
                     'label' => 'Ингредиенты',
-                        'params' => array('slug' => 'ingredients')
-                    ),
-                    array(
+                        'params' => ['slug' => 'ingredients']
+                    ],
+                    [
                         'route' => 'app/content',
                         'label' => 'Вопросы и ответы',
-                        'params' => array('slug' => 'faq')
-                    ),
-                    array(
+                        'params' => ['slug' => 'faq']
+                    ],
+                    [
                         'route' => 'app/video',
                         'label' => 'Видео',
-                    ),
+                    ],
 
-                ),
-            ),
-            'catalog' => array(
+                ],
+            ],
+            'catalog' => [
                 'label' => 'Продукция',
                 'route' => 'app/catalog',
-                'pages' => array(
-                    array(
+                'pages' => [
+                    [
                         'label' => 'Шампуни',
                         'route' => 'app/catalog/category-slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'shampoo'
-                        ),
-                    ),
-                  array(
+                        ],
+                    ],
+                  [
                         'label' => 'Кондиционеры',
                         'route' => 'app/catalog/category-slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'conditioners'
-                        ),
-                    ),
-                  array(
+                        ],
+                  ],
+                  [
                         'label' => 'Спреи для грумминга',
                         'route' => 'app/catalog/category-slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'spray'
-                        ),
-                    ),
-                  array(
+                        ],
+                  ],
+                  [
                         'label' => 'Добавки для шерсти',
                         'route' => 'app/catalog/category-slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'supplements'
-                        ),
-                    ),
-                  array(
+                        ],
+                  ],
+                  [
                         'label' => 'Средства для укладки',
                         'route' => 'app/catalog/category-slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'styling'
-                        ),
-                    ),
-                  array(
+                        ],
+                  ],
+                  [
                         'label' => 'Дезодоранты',
                         'route' => 'app/catalog/category-slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'replascent'
-                        ),
-                    ),
-                ),
-            ),
-            'lines' => array(
+                        ],
+                  ],
+                ],
+            ],
+            'lines' => [
                 'label' => 'Серии',
                 'route' => 'app/line',
-                'pages' => array(
-                    array(
+                'pages' => [
+                    [
                         'label' => 'Coature',
                         'route' => 'app/line/slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'coature'
-                        ),
-                    ),
-                array(
+                        ],
+                    ],
+                [
                         'label' => 'Vanity',
                         'route' => 'app/line/slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'vanity'
-                        ),
-                    ),
-                array(
+                        ],
+                ],
+                [
                         'label' => 'Salon',
                         'route' => 'app/line/slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'salon'
-                        ),
-                    ),
-                array(
+                        ],
+                ],
+                [
                         'label' => 'Everyday',
                         'route' => 'app/line/slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'everyday'
-                        ),
-                    ),
-                array(
+                        ],
+                ],
+                [
                         'label' => 'Naturaluxury Everyday',
                         'route' => 'app/line/slug',
-                        'params' => array(
+                        'params' => [
                             'slug' => 'naturaluxury-everyday'
-                        ),
-                    ),
-                ),
-            ),
-            'solutions' => array(
+                        ],
+                ],
+                ],
+            ],
+            'solutions' => [
                 'label' => 'Решения',
                 'route' => 'app/content',
-                'params' => array(
+                'params' => [
                     'slug' => 'solutions'
-                ),
-                'pages' => array(
-                    array(
+                ],
+                'pages' => [
+                    [
                     'label' => 'Для породы',
                     'route' => 'app/breed',
-                    ),
-                    array(
+                    ],
+                    [
                     'label' => 'Выпадение шерсти',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'shedding')
-                    ),
-                    array(
+                     'params' => ['slug' => 'shedding']
+                    ],
+                    [
                     'label' => 'Зудящая, шелушащаяся кожа',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'itchy-flaky-skin')
-                    ),
-                    array(
+                     'params' => ['slug' => 'itchy-flaky-skin']
+                    ],
+                    [
                     'label' => 'Нежелательный запах',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'undesirable-odor')
-                    ),
-                    array(
+                     'params' => ['slug' => 'undesirable-odor']
+                    ],
+                    [
                     'label' => 'Аллергии',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'allergies')
-                    ),
-                    array(
+                     'params' => ['slug' => 'allergies']
+                    ],
+                    [
                     'label' => 'Тонкая, безжизненная шерсть',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'thin-lifeless-hair')
-                    ),
-                    array(
+                     'params' => ['slug' => 'thin-lifeless-hair']
+                    ],
+                    [
                     'label' => 'Тусклая шерсть',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'dull-coat')
-                    ),
-                    array(
+                     'params' => ['slug' => 'dull-coat']
+                    ],
+                    [
                     'label' => 'Наэлектризованная, непослушная шерсть',
                     'route' => 'app/solution/slug',
-                     'params' => array('slug' => 'static-flyaways')
-                    ),
+                     'params' => ['slug' => 'static-flyaways']
+                    ],
 
 
-
-
-
-
-                ),
-            ),
-            'learn' => array(
+                ],
+            ],
+            'learn' => [
                 'label' => 'Обучение',
                 'route' => 'app/content',
-                'params' => array(
+                'params' => [
                     'slug' => 'learn'
-                ),
-                'pages' => array(
-                    array(
+                ],
+                'pages' => [
+                    [
                         'route' => 'app/content',
                         'label' => 'Основы купания',
-                        'params' => array('slug' => 'bathe-basic')
-                    ),
-                    array(
+                        'params' => ['slug' => 'bathe-basic']
+                    ],
+                    [
                         'route' => 'app/content',
                         'label' => 'Основы сушки',
-                        'params' => array('slug' => 'dry-basic')
-                    ),
-                    array(
+                        'params' => ['slug' => 'dry-basic']
+                    ],
+                    [
                         'route' => 'app/content',
                         'label' => 'Разрушаем мифы',
-                        'params' => array('slug' => 'myths')
-                    ),
-                    array(
+                        'params' => ['slug' => 'myths']
+                    ],
+                    [
                         'route' => 'app/content',
                         'label' => 'Правила ухода за собакой',
-                        'params' => array('slug' => 'do-dont')
-                    ),
-                    array(
+                        'params' => ['slug' => 'do-dont']
+                    ],
+                    [
                         'route' => 'app/content',
                         'label' => 'Уход за щенками',
-                        'params' => array('slug' => 'puppy')
-                    ),
-                    array(
+                        'params' => ['slug' => 'puppy']
+                    ],
+                    [
                         'route' => 'app/content',
                         'label' => 'Типы шерсти',
-                        'params' => array('slug' => 'coat-types')
-                    ),
+                        'params' => ['slug' => 'coat-types']
+                    ],
 
-                ),
-            ),
-        ),
-            'admin-nav' => array(
-                'category' => array(
+                ],
+            ],
+        ],
+            'admin-nav' => [
+                'category' => [
                     'label' => 'Категории',
                     'route' => 'app/admin-category',
-                    'pages' => array(
-                        array(
+                    'pages' => [
+                        [
                             'route' => 'app/admin-category',
                             'label' => 'Список категорий'
-                            ),
-                        array(
+                        ],
+                        [
                             'route' => 'app/admin-category/add',
                             'label' => 'Добавить категорию'
-                            ),
-                        ),
-                    ),                
-                'products' => array(
+                        ],
+                    ],
+                ],
+                'products' => [
                     'label' => 'Продукты',
                     'route' => 'app/admin-product',
-                        'pages' => array(                               
-                                array(
+                        'pages' => [
+                                [
                                     'route' => 'app/admin-product',
                                     'label' => 'Список продуктов',
-                                    ),
-                                array(
+                                ],
+                                [
                                     'route' => 'app/admin-product/add',
                                     'label' => 'Добавить продукт',
-                                    ),
-                            ),                  
-                ),                                                             
-                 'content' => array(
+                                ],
+                        ],
+                ],
+                 'content' => [
                     'label' => 'Материалы',
                     'route' => 'app/admin-content',
-                    'pages' => array(
-                        array(
+                    'pages' => [
+                        [
                             'route' => 'app/admin-content',
                             'label' => 'Список материалов'
-                            ),
-                        array(
+                        ],
+                        [
                             'route' => 'app/admin-content-add',
                             'label' => 'Добавить материал'
-                            ),
-                        ),
-                    ),
-                'info_block' => array(
+                        ],
+                    ],
+                 ],
+                'info_block' => [
                     'label' => 'Инфоблоки',
                     'route' => 'app/admin-info-block',
-                    'pages' => array(
-                        array(
+                    'pages' => [
+                        [
                             'route' => 'app/admin-info-block',
                             'label' => 'Список инфоблоков'
-                            ),
-                        array(
+                        ],
+                        [
                             'route' => 'app/admin-info-block/add',
                             'label' => 'Добавить инфоблок'
-                            ),
-                        ),
-                    ),
-                 'lines' => array(
+                        ],
+                    ],
+                ],
+                 'lines' => [
                     'label' => 'Серии',
                     'route' => 'app/admin-line',
-                    'pages' => array(
-                        array(
+                    'pages' => [
+                        [
                             'route' => 'app/admin-line',
                             'label' => 'Список серий'
-                            ),
-                        array(
+                        ],
+                        [
                             'route' => 'app/admin-line/add',
                             'label' => 'Добавить серию'
-                            ),
-                        ),
-                    ),
-                'breeds' => array(
+                        ],
+                    ],
+                 ],
+                'breeds' => [
                     'label' => 'Породы',
                     'route' => 'app/admin-breed',
-                    'pages' => array(
-                        array(
+                    'pages' => [
+                        [
                             'route' => 'app/admin-breed',
                             'label' => 'Список пород'
-                            ),
-                        array(
+                        ],
+                        [
                             'route' => 'app/admin-breed/add',
                             'label' => 'Добавить породу'
-                            ),
-                        ),
-                    ),
-                'solution' => array(
+                        ],
+                    ],
+                ],
+                'solution' => [
                     'label' => 'Решения',
                     'route' => 'app/admin-solution',
-                    'pages' => array(
-                        array(
+                    'pages' => [
+                        [
                             'route' => 'app/admin-solution',
                             'label' => 'Список'
-                            ),
-                        array(
+                        ],
+                        [
                             'route' => 'app/admin-solution/add',
                             'label' => 'Добавить решение'
-                            ),
-                        ),
-                    ),
+                        ],
+                    ],
+                ],
 
                 /*'distributors' => array(
                     'label' => 'Дистрибьюторы',
@@ -1083,16 +1079,16 @@ return array(
                             'label' => 'Добавить '
                             ),
                         ),
-                    ),*/   
-                ),
-        ),
-    'view_manager' => array(
+                    ),*/
+            ],
+    ],
+    'view_manager' => [
         'display_not_found_reason' => false,
         'display_exceptions'       => false,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => array(
+        'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'layout/layout-iframe'           => __DIR__ . '/../view/layout/layout-iframe.phtml',
             'layout/layout-login'           => __DIR__ . '/../view/layout/layout-login.phtml',
@@ -1100,34 +1096,34 @@ return array(
             //'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
-        ),
-        'template_path_stack' => array(
+        ],
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-    'view_helpers' => array(
-    'invokables' => array(               
+        ],
+    ],
+    'view_helpers' => [
+    'invokables' => [
         'PageHelper' => 'IodogsApplication\View\Helper\PageHelper',
-        'ButtonHelper' => 'IodogsApplication\View\Helper\ButtonHelper',         
-    ),
-    'factories' => array(       
-    ),
-    'translator' => array(
+        'ButtonHelper' => 'IodogsApplication\View\Helper\ButtonHelper',
+    ],
+    'factories' => [
+    ],
+    'translator' => [
         'locale' => 'ru_RU',
-        'translation_file_patterns' => array(
-            array(
+        'translation_file_patterns' => [
+            [
                 'type'     => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
 
-    'module_layouts' => array(
+    'module_layouts' => [
         /*'FileStorage' => 'layout/layout-admin',
         'IsleAdmin' => 'layout/layout-admin',*/
         'IodogsApplication' => 'layout/layout',
-        
-    ),
-    ),
-);
+
+    ],
+    ],
+];
