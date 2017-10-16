@@ -15,7 +15,7 @@ class BreedReviewStrategy implements StrategyInterface
 
     public function extract($value)
     {
-        if($value instanceof IodogsDoctrine\Entity\Breed)
+        if($value instanceof \IodogsDoctrine\Entity\Breed)
         {
             return $value->getId();
         }
