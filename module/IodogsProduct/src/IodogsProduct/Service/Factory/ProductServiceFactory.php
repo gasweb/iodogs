@@ -8,16 +8,16 @@ namespace IodogsProduct\Service\Factory;
  use Zend\ServiceManager\Exception\ServiceNotFoundException;
  use Zend\ServiceManager\Factory\FactoryInterface;
  use Zend\ServiceManager\ServiceLocatorInterface;
+ use IodogsFiles\Service\ImageService;
+ use Doctrine\ORM\EntityManager;
 
  class ProductServiceFactory implements FactoryInterface
  {
 
      public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
      {
-         $objectManager = $container->get('Doctrine\ORM\EntityManager');
-         $imageService = $container->get('ImageServiceFactory');
+         $objectManager = $container->get(EntityManager::class);
+         $imageService = $container->get(ImageService::class);
          return new ProductService($objectManager, $imageService);
      }
-
-
  }
