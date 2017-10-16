@@ -41,6 +41,19 @@
         "zendframework/zend-developer-tools": "^1.1.0",
         "zendframework/zend-test": "^3.0.1"
     },
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "clear-cache-app": "php http/index.php clear-cache --type=app",
+        "development-disable": "zf-development-mode disable",
+        "development-enable": "zf-development-mode enable",
+        "development-status": "zf-development-mode status",
+        "post-create-project-cmd": [
+            "@development-enable"
+        ],
+        "serve": "php -S 0.0.0.0:8080 -t http/ http/index.php",
+        "test": "phpunit"
+    },
     "autoload": {
         "psr-4": {
             "IodogsApplication\\": "module/IodogsApplication/src/",
