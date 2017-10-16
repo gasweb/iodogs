@@ -1,6 +1,7 @@
 /http/upload
 /http/node_modules
 /data/cache
+/data/log
 /data/DoctrineORMModule
 .idea/*
 .vagrant/
