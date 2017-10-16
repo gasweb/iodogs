@@ -148,7 +148,7 @@ return [
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'add' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => 'add',
                                             'defaults' => [
@@ -158,7 +158,7 @@ return [
                                         ],
                                     ],
                                     'edit' => [
-                                        'type' => 'segment',
+                                        'type' => Segment::class,
                                         'options' => [
                                             'route' => '[:id]',
                                             'constraints' => [
@@ -185,7 +185,7 @@ return [
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'add' => [
-                                        'type' => 'literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/add',
                                             'defaults' => [
@@ -254,7 +254,7 @@ return [
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'delete' => [
-                                        'type' => 'segment',
+                                        'type' => Segment::class,
                                         'options' => [
                                             'route' => 'delete',
                                             'constraints' => [
@@ -267,7 +267,7 @@ return [
                                         ]
                                     ],
                                     'delete-success' => [
-                                        'type' => 'literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => 'deleted',
                                             'defaults' => [
@@ -279,7 +279,7 @@ return [
                                 ],
                             ],
                             'product' => [
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => [
                                     'route' => 'product',
                                     'defaults' => [
@@ -290,7 +290,7 @@ return [
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'add' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/add',
                                             'defaults' => [
@@ -300,7 +300,7 @@ return [
                                         ],
                                     ],
                                     'id' => [
-                                        'type' => 'segment',
+                                        'type' => Segment::class,
                                         'options' => [
                                             'route' => '/[:id]',
                                             'constraints' => [
@@ -314,7 +314,7 @@ return [
                                         'may_terminate' => true,
                                         'child_routes' => [
                                             'breed' => [
-                                                'type' => 'literal',
+                                                'type' => Literal::class,
                                                 'options' => [
                                                     'route' => '/breed',
                                                     'defaults' => [
@@ -323,7 +323,7 @@ return [
                                                 ],
                                             ],
                                             'image' => [
-                                                'type' => 'Segment',
+                                                'type' => Segment::class,
                                                 'options' => [
                                                     'route' => '/image',
                                                     'constraints' => [
@@ -337,7 +337,7 @@ return [
                                                 'may_terminate' => true,
                                                 'child_routes' => [
                                                     'add' => [
-                                                        'type' => 'literal',
+                                                        'type' => Literal::class,
                                                         'options' => [
                                                             'route' => '/add',
                                                             'defaults' => [
@@ -350,7 +350,7 @@ return [
                                                 ],
                                             ],
                                             'delete' => [
-                                                'type' => 'Literal',
+                                                'type' => Literal::class,
                                                 'options' => [
                                                     'route' => '/delete',
                                                     'defaults' => [
@@ -375,7 +375,7 @@ return [
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'add' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/add',
                                             'defaults' => [
@@ -523,7 +523,7 @@ return [
                         ]
                     ],
                     'content' => [
-                        'type'    => 'segment',
+                        'type'    => Segment::class,
                         'options' => [
                             'route'    => '/[:slug]',
                             'constraints' => [
@@ -536,7 +536,7 @@ return [
                         ],
                     ],
                     'search' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/search',
                             'defaults' => [
@@ -546,7 +546,7 @@ return [
                         ],
                     ],
                     'home' => [
-                        'type'    => 'literal',
+                        'type'    => Literal::class,
                         'options' => [
                             'route'    => '/',
                             'defaults' => [
@@ -556,7 +556,7 @@ return [
                         ],
                     ],
                     'wholesale' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/wholesale',
                             'defaults' => [
@@ -566,7 +566,7 @@ return [
                         ],
                     ],
                     'buy' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/buy',
                             'defaults' => [
@@ -576,7 +576,7 @@ return [
                         ],
                     ],
                     'contacts' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/contacts',
                             'defaults' => [
@@ -586,7 +586,7 @@ return [
                         ],
                     ],
                     'video' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/video',
                             'defaults' => [
@@ -596,7 +596,7 @@ return [
                         ],
                     ],
                     'message-sent' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/message/sent',
                             'defaults' => [
@@ -606,7 +606,7 @@ return [
                         ],
                     ],
                     'breed' => [
-                        'type'    => 'literal',
+                        'type'    => Literal::class,
                         'options' => [
                             'route'    => '/breed/',
                             'defaults' => [
@@ -617,7 +617,7 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'breed-slug' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '[:slug]',
                                     'constraints' => [
@@ -631,18 +631,8 @@ return [
                             ],
                         ],
                     ],
-                    'iodogs-admin' => [
-                        'type'    => 'Literal',
-                        'options' => [
-                            'route'    => '/admin/',
-                            'defaults' => [
-                                'controller'    => 'AdminContentController',
-                                'action'        => 'index',
-                            ],
-                        ],
-                    ],
                     'catalog' => [
-                        'type'    => 'literal',
+                        'type'    => Literal::class,
                         'options' => [
                             'route'    => '/catalog/',
                             'defaults' => [
@@ -653,7 +643,7 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'category-slug' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '[:slug]',
                                     'constraints' => [
@@ -668,7 +658,7 @@ return [
                         ],
                     ],
                     'solution' => [
-                        'type'    => 'literal',
+                        'type'    => Literal::class,
                         'options' => [
                             'route'    => '/solution/',
                             'defaults' => [
@@ -679,7 +669,7 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'slug' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '[:slug]',
                                     'constraints' => [
@@ -694,7 +684,7 @@ return [
                         ],
                     ],
                     'line' => [
-                        'type'    => 'literal',
+                        'type'    => Literal::class,
                         'options' => [
                             'route'    => '/line/',
                             'defaults' => [
@@ -705,7 +695,7 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'slug' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '[:slug]',
                                     'constraints' => [
@@ -720,7 +710,7 @@ return [
                         ],
                     ],
                     'product' => [
-                        'type'    => 'segment',
+                        'type'    => Segment::class,
                         'options' => [
                             'route'    => '/item/[:slug]',
                             'constraints' => [
@@ -733,7 +723,7 @@ return [
                         ],
                     ],
                 'old_product' => [
-                    'type' => 'segment',
+                    'type' => Segment::class,
                     'options' => [
                         'route' => '/product[:id]',
                         'constraints' => [
@@ -746,7 +736,7 @@ return [
                     ],
                 ],
                     'old_breed' => [
-                        'type' => 'segment',
+                        'type' => Segment::class,
                         'options' => [
                             'route' => '/breed[:id]',
                             'constraints' => [
@@ -759,7 +749,7 @@ return [
                         ],
                     ],
                     'old_catalog' => [
-                        'type' => 'segment',
+                        'type' => Segment::class,
                         'options' => [
                             'route' => '/category[:id]',
                             'constraints' => [
@@ -772,7 +762,7 @@ return [
                         ],
                     ],
                     'breed-default' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/breed',
                             'defaults' => [
