@@ -1,19 +1,24 @@
 <?php
-return array(
-	'controllers' => array(
-		'factories' => array(
+namespace IodogsBreed;
+
+use IodogsBreed\Controller\AdminBreedController,
+    IodogsBreed\Controller\Factory\AdminBreedControllerFactory;
+
+return [
+	'controllers' => [
+		'factories' => [
 			'BreedControllerFactory' => 'IodogsBreed\Controller\Factory\BreedControllerFactory',
-			'AdminBreedControllerFactory' => 'IodogsBreed\Controller\Factory\AdminBreedControllerFactory',
-			),
-		),
-    'service_manager' => array(
-			'factories' => array(
+            AdminBreedController::class => AdminBreedControllerFactory::class
+        ],
+    ],
+    'service_manager' => [
+			'factories' => [
 				'BreedServiceFactory' => 'IodogsBreed\Service\Factory\BreedServiceFactory',
-			),
-        ),
-	'view_manager' => array(
-        'template_path_stack' => array(
+            ],
+    ],
+	'view_manager' => [
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -1,5 +1,5 @@
 <?php 
-$this->ButtonHelper()->showAddButton($this->url('app/admin-breed/add'), "Добавить породу");
+$this->ButtonHelper()->showAddButton($this->url('app/backoffice/breed/add'), "Добавить породу");
 ?>
 <?php
 if(is_array($this->breeds))
@@ -10,7 +10,7 @@ if(is_array($this->breeds))
 			?>
 			<tr>
 			<td>
-				<a href="<?=$this->url('app/admin-breed/admin-breed-id', array('breedId' =>
+				<a href="<?=$this->url('app/backoffice/breed/id', array('breedId' =>
 				$breed->getId())) ?>">
 					<?=$breed->getEngTitle() ?>
 				</a>
@@ -19,12 +19,12 @@ if(is_array($this->breeds))
 				<?=$breed->getRusTitle() ?>
 			</td>
 			<td>
-				<a href="<?=$this->url('app/admin-breed/admin-breed-id', array('breedId' =>
+				<a href="<?=$this->url('app/backoffice/breed/id', array('breedId' =>
 				$breed->getId())) ?>">
 					Редактировать
 				</a>
 			<td>
-				<a href="<?=$this->url('app/admin-breed/admin-breed-id/admin-breed-delete', array('breedId' =>
+				<a href="<?=$this->url('app/backoffice/breed/id/delete', array('breedId' =>
 				$breed->getId())) ?>">
 					Удалить
 				</a>

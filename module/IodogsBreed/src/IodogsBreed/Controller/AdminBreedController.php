@@ -64,7 +64,7 @@ class AdminBreedController extends AbstractActionController
                         $this->om->remove($Breed);
                         $this->om->flush();
                     }
-                    return $this->redirect()->toRoute('app/admin-breed');
+                    return $this->redirect()->toRoute('app/backoffice/breed');
                 }
 
                 return array('form' => $form, 'viewArray'=>$viewArray);
@@ -104,7 +104,7 @@ class AdminBreedController extends AbstractActionController
                 $this->om->persist($Breed);
                 $this->om->flush();
 //                $this->redirect()->refresh();
-                return $this->redirect()->toRoute('app/admin-breed/admin-breed-id', array('breedId' => $Breed->getId()));
+                return $this->redirect()->toRoute('app/backoffice/breed/id', array('breedId' => $Breed->getId()));
             }
         }
 
@@ -149,7 +149,7 @@ class AdminBreedController extends AbstractActionController
 
                         $this->om->persist($Breed);
                         $this->om->flush();
-                        return $this->redirect()->toRoute('app/admin-breed/admin-breed-id',
+                        return $this->redirect()->toRoute('app/backoffice/breed/id',
                               array(
                                   'breedId' => $Breed->getId()
                                   )
@@ -197,7 +197,7 @@ class AdminBreedController extends AbstractActionController
 
                 $this->om->flush();
 
-                return $this->redirect()->toRoute('app/admin-breed/admin-breed-id',
+                return $this->redirect()->toRoute('app/backoffice/breed/id',
                     array(
                         'breedId' => $Breed->getId()
                     )

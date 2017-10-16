@@ -12,11 +12,16 @@ use Zend\Router\Http\Literal,
 use IodogsApplication\Controller\AdminContentController,
     IodogsApplication\Controller\Factory\AdminContentControllerFactory,
     IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory,
-    IodogsApplication\Controller\InfoBlockAdminController;
+    IodogsApplication\Controller\InfoBlockAdminController,
+    IodogsApplication\Service\InfoBlockService,
+    IodogsApplication\Service\Factory\InfoBlockServiceFactory;
 
 //Products use block
 use IodogsProduct\Controller\ProductAdminController,
     IodogsProduct\Controller\AdminProductImageController;
+
+//Breed use block
+use IodogsBreed\Controller\AdminBreedController;
 
 return [
     'controllers' => [
@@ -32,7 +37,7 @@ return [
     ],
     'service_manager' => [
    'factories' => [
-      'InfoBlockServiceFactory' => 'IodogsApplication\Service\Factory\InfoBlockServiceFactory',
+       InfoBlockService::class => InfoBlockServiceFactory::class,
       'NavigationFactory' => 'IodogsApplication\Navigation\MenuNavigationFactory',
       'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
       'ContentServiceFactory' => 'IodogsApplication\Service\Factory\ContentServiceFactory',
@@ -156,6 +161,72 @@ return [
                                 ],
 
                             ],
+                            'breed' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => 'breed',
+                                    'defaults' => [
+                                        'controller' => AdminBreedController::class,
+                                        'action' => 'show',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => 'literal',
+                                        'options' => [
+                                            'route' => '/add',
+                                            'defaults' => [
+                                                'action' => 'add'
+                                            ],
+                                        ],
+                                    ],
+                                    'id' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '[:breedId]',
+                                            'constraints' => [
+                                                'breedId' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => AdminBreedController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'product' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/products',
+                                                    'defaults' => [
+                                                        'action' => 'breed-product'
+                                                    ],
+                                                ],
+                                            ],
+                                            'delete' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'defaults' => [
+                                                        'controller' => AdminBreedController::class,
+                                                        'action'     => 'delete',
+                                                    ],
+                                                ],
+                                            ],
+                                            'image' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/image',
+                                                    'defaults' => [
+                                                        'action' => 'imageUpload',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
                             'product' => [
                                 'type' => 'Literal',
                                 'options' => [
@@ -219,7 +290,8 @@ return [
                                                         'options' => [
                                                             'route' => '/add',
                                                             'defaults' => [
-                                                                'controller' => 'AdminProductImageControllerFactory',
+                                                                'controller' =>
+                                                                    AdminProductImageController::class,
                                                                 'action'     => 'add',
                                                             ],
                                                         ],
@@ -359,72 +431,6 @@ return [
                             'defaults' => [
                                 'controller'    => 'AdminContentController',
                                 'action'        => 'index',
-                            ],
-                        ],
-                    ],
-                    'admin-breed' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/breed',
-                            'defaults' => [
-                                'controller' => 'AdminBreedControllerFactory',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'add' => [
-                                'type' => 'literal',
-                                'options' => [
-                                    'route' => '/add',
-                                    'defaults' => [
-                                        'action' => 'add'
-                                    ],
-                                ],
-                            ],
-                            'admin-breed-id' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:breedId]',
-                                    'constraints' => [
-                                        'breedId' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'AdminBreedControllerFactory',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'breed-product' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/products',
-                                            'defaults' => [
-                                                'action' => 'breedProduct'
-                                            ],
-                                        ],
-                                    ],
-                                    'admin-breed-delete' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/delete',
-                                            'defaults' => [
-                                                'controller' => 'AdminBreedControllerFactory',
-                                                'action'     => 'delete',
-                                            ],
-                                        ],
-                                    ],
-                                    'admin-breed-image' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/image',
-                                            'defaults' => [
-                                                'action' => 'imageUpload',
-                                            ],
-                                        ],
-                                    ],
-                                ],
                             ],
                         ],
                     ],
@@ -1049,14 +1055,14 @@ return [
                  ],
                 'breeds' => [
                     'label' => 'Породы',
-                    'route' => 'app/admin-breed',
+                    'route' => 'app/backoffice/breed',
                     'pages' => [
                         [
-                            'route' => 'app/admin-breed',
+                            'route' => 'app/backoffice/breed',
                             'label' => 'Список пород'
                         ],
                         [
-                            'route' => 'app/admin-breed/add',
+                            'route' => 'app/backoffice/breed/add',
                             'label' => 'Добавить породу'
                         ],
                     ],

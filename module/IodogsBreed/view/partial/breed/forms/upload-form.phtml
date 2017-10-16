@@ -2,7 +2,7 @@
     <h1>Редактировать изображение для породы <?=$viewArray['rus_title']?></h1>
     <img src="<?=$viewArray['file_path']?>" alt="">
     <?php
-    $uploadForm->setAttribute('action', $this->url("app/admin-breed/admin-breed-id/admin-breed-image", array("breedId"=>$viewArray['id'])));
+    $uploadForm->setAttribute('action', $this->url("app/backoffice/breed/id/image", array("breedId"=>$viewArray['id'])));
     $uploadForm->prepare();
     ?>
     <?php echo $this->form()->openTag($uploadForm); ?>

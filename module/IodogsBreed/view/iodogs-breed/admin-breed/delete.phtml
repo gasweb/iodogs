@@ -1,6 +1,6 @@
 <div class="col-md-10 col-md-offset-1 center">
  <?php
-$form->setAttribute('action', $this->url('app/admin-breed/admin-breed-id/admin-breed-delete', array('breedId' => $viewArray['id'])));
+$form->setAttribute('action', $this->url('app/backoffice/breed/id/delete', array('breedId' => $viewArray['id'])));
  ?>
  <h1 class="center"><?php echo $this->escapeHtml("Удалить ".$viewArray['rus_title']." ".$viewArray['eng_title']); ?></h1>
  <img src="<?=$this->escapeHtmlAttr($viewArray['file_path'])?>" alt="">

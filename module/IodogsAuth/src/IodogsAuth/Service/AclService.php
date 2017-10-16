@@ -9,7 +9,8 @@ use IodogsApplication\Controller\Factory\AdminContentControllerFactory,
     IodogsApplication\Controller\AdminContentController,
     IodogsApplication\Controller\InfoBlockAdminController,
     IodogsProduct\Controller\ProductAdminController,
-    IodogsProduct\Controller\AdminProductImageController;
+    IodogsProduct\Controller\AdminProductImageController,
+    IodogsBreed\Controller\AdminBreedController;
 
 /**
  * Acl service
@@ -32,7 +33,7 @@ class AclService extends BaseAcl
             AdminContentControllerFactory::class,
             InfoBlockAdminController::class,
             'LineAdminControllerFactory',
-            'AdminBreedControllerFactory',
+            AdminBreedController::class,
             'CategoryAdminControllerFactory',
             AdminProductImageController::class,
             'InfoBlockAdminControllerFactory',

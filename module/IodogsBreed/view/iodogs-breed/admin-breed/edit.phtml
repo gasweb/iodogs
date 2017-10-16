@@ -1,6 +1,6 @@
 <div class="col-md-10 col-md-offset-1">
     <?php
-    $editForm->setAttribute('action', $this->url('app/admin-breed/admin-breed-id', array('breedId' => $viewArray['id'])));
+    $editForm->setAttribute('action', $this->url('app/backoffice/breed/id', array('breedId' => $viewArray['id'])));
     echo $this->partial('partial/breed/forms/upload-form', array(
         'uploadForm' => $uploadForm,
         'viewArray' => $viewArray

@@ -1,25 +1,27 @@
 <?php
 
 use IodogsFiles\Service\S3Service,
-    IodogsFiles\Service\Factory\S3ServiceFactory;
+    IodogsFiles\Service\Factory\S3ServiceFactory,
+    IodogsFiles\Service\ImageService,
+    IodogsFiles\Service\Factory\ImageServiceFactory;
 
-return array(
-    'service_manager' => array(
-        'factories' => array(
+return [
+    'service_manager' => [
+        'factories' => [
             'ImageUploadServiceFactory' => 'IodogsFiles\Service\Factory\ImageUploadServiceFactory',
-            'ImageServiceFactory' => 'IodogsFiles\Service\Factory\ImageServiceFactory',
             S3Service::class => S3ServiceFactory::class,
-        ),
-    ),
-    'controllers' => array(
-        'factories' => array(
+            ImageService::class => ImageServiceFactory::class
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
             'ImageControllerFactory' => 'IodogsFiles\Controller\Factory\ImageControllerFactory',
 
-        )
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
+        ]
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-);
+        ],
+    ],
+];
