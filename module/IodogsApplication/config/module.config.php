@@ -1,4 +1,9 @@
 <?php
+namespace IodogsApplication;
+
+use IodogsApplication\Service\Cache\Application\ApplicationCacheService;
+use IodogsApplication\Service\Cache\Factory\CacheServiceFactory;
+
 return [
     'controllers' => [
         'invokables' => [
@@ -21,19 +26,10 @@ return [
       'application-nav' => 'IodogsApplication\Navigation\Factory\ApplicationNavigationFactory',
       'product-nav' => 'IodogsApplication\Navigation\Factory\ProductNavigationFactory',
       'IodogsCacheService' => 'Zend\Cache\Service\StorageCacheFactory',
+       ApplicationCacheService::class => CacheServiceFactory::class,
    ],
    'invokables' => [
    ],
-    ],
-    'cache' => [
-        'adapter' => [
-            'name' => 'filesystem'
-        ],
-        'options' => [
-            'cache_dir' => 'data/cache/',
-//            'ttl' => 50
-            'ttl' => 86400
-        ],
     ],
     'router' => [
         'routes' => [
@@ -1107,16 +1103,6 @@ return [
         'ButtonHelper' => 'IodogsApplication\View\Helper\ButtonHelper',
     ],
     'factories' => [
-    ],
-    'translator' => [
-        'locale' => 'ru_RU',
-        'translation_file_patterns' => [
-            [
-                'type'     => 'gettext',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
-            ],
-        ],
     ],
 
     'module_layouts' => [
