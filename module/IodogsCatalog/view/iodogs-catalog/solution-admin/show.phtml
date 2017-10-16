@@ -9,7 +9,7 @@ foreach ($this->solutions AS $solution)
     ?>
     <tr>
         <td>
-            <a href="<?=$this->url('app/admin-solution/edit', array('id' => $solution->getId()))?>">
+            <a href="<?=$this->url('app/backoffice/solution/edit', array('id' => $solution->getId()))?>">
                 <?=$solution->getTitle()?>
             </a>
         </td>

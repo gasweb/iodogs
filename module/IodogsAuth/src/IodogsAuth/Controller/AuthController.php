@@ -47,16 +47,16 @@ class AuthController extends AbstractActionController
     public function successAction()
     {
         //$aclService = $this->getServiceLocator()->get('AclService');
-        print_r($aclService);
+//        print_r($aclService);
         /*if($this->authService->checkAuth())
             return new ViewModel();
         $this->redirect()->toRoute('login');*/
 //        $list = $this->aclService->getRightLists();
         //$roles = $this->aclService->getRoles();
        // $resources = $this->aclService->getResources();
-        print_r($roles);
-        print_r($list);
-        print_r($resources);
+//        print_r($roles);
+//        print_r($list);
+//        print_r($resources);
         //if($this->aclService->isAllowed('Guest', 'ContentController', 'slug'))
           //  echo 'yes'; else echo "no";
 

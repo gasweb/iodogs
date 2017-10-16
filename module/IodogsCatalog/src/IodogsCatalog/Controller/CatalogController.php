@@ -34,10 +34,6 @@ class CatalogController extends AbstractActionController
     public function indexAction()
     {
         $categoryId = (int) $this->params()->fromRoute('id', 0);
-
-        /*$CategoryService = $this->getServiceLocator()
-                    ->get('CategoryService');*/
-        //$Category = $CategoryService->getCategoryById($categoryId);
         $Category = $this->catalogService->getCategoryById($categoryId);
         $Products = $this->productService->getProductsByCategory($categoryId);
 
@@ -48,7 +44,6 @@ class CatalogController extends AbstractActionController
        
         if($Products){
             foreach($Products AS $Product){
-                /*$productsViewArray[] = $ProductService->getProductViewArray($Product);*/
                 $productsViewArray[] = $this->productService->getProductViewArray($Product);
             }
         }
@@ -68,9 +63,7 @@ class CatalogController extends AbstractActionController
         $categories = $objectManager->
         getRepository('IodogsDoctrine\Entity\Category')->
         findAll();                 
-        /*$Products = $objectManager->
-        getRepository('Iodogs\Entity\Product')->
-        findBy(array('category' => $catId));*/
+
         return (array("categories" => $categories));
     }
 

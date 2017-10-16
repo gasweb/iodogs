@@ -50,7 +50,7 @@ class ImageController extends AbstractActionController
                     if($delete != 'no')
                     {
                         $this->imageService->deleteImageById($imageId);
-                        return $this->redirect()->toRoute('app/admin-image/delete-success', array('id' => $imageId));
+                        return $this->redirect()->toRoute('app/backoffice/image/delete-success', array('id' => $imageId));
                     }
                 }
 
@@ -58,7 +58,7 @@ class ImageController extends AbstractActionController
             }
             else
             {
-                return $this->redirect()->toRoute('app/admin-image/delete-success', array('id' => $File->getId()));
+                return $this->redirect()->toRoute('app/backoffice/image/delete-success', array('id' => $File->getId()));
             }
         }
     }
@@ -81,7 +81,7 @@ class ImageController extends AbstractActionController
                     if ($imageEditForm->isValid()) {
                         $this->om->persist($File);
                         $this->om->flush();
-                        return $this->redirect()->toRoute('app/admin-image',
+                        return $this->redirect()->toRoute('app/backofice/image',
                             array(
                                 'id' => $File->getId()
                             )

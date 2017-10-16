@@ -23,6 +23,18 @@ use IodogsProduct\Controller\ProductAdminController,
 //Breed use block
 use IodogsBreed\Controller\AdminBreedController;
 
+//Images use block
+use IodogsFiles\Controller\ImageController;
+
+//Categories use block
+use IodogsCatalog\Controller\CategoryAdminController;
+
+//Line use block
+use IodogsCatalog\Controller\LineAdminController;
+
+//Solution use block
+use IodogsCatalog\Controller\SolutionAdminController;
+
 return [
     'controllers' => [
         'invokables' => [
@@ -227,6 +239,45 @@ return [
                                     ],
                                 ],
                             ],
+                            'image' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => 'image/[:id]/',
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
+                                    ],
+                                    'defaults' => [
+                                        'controller' => ImageController::class,
+                                        'action' => 'edit'
+                                    ]
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'delete' => [
+                                        'type' => 'segment',
+                                        'options' => [
+                                            'route' => 'delete',
+                                            'constraints' => [
+                                                'id' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => ImageController::class,
+                                                'action' => 'delete'
+                                            ]
+                                        ]
+                                    ],
+                                    'delete-success' => [
+                                        'type' => 'literal',
+                                        'options' => [
+                                            'route' => 'deleted',
+                                            'defaults' => [
+                                                'controller' => ImageController::class,
+                                                'action' => 'deleteSuccess'
+                                            ]
+                                        ]
+                                    ],
+                                ],
+                            ],
                             'product' => [
                                 'type' => 'Literal',
                                 'options' => [
@@ -312,7 +363,163 @@ return [
                                     ],
                                 ],
                             ],
-
+                            'line' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => 'line',
+                                    'defaults' => [
+                                        'controller' => LineAdminController::class,
+                                        'action' => 'show',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => 'Literal',
+                                        'options' => [
+                                            'route' => '/add',
+                                            'defaults' => [
+                                                'controller' => LineAdminController::class,
+                                                'action' => 'add',
+                                            ],
+                                        ],
+                                    ],
+                                    'id' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '/[:lineId]',
+                                            'constraints' => [
+                                                'lineId' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => LineAdminController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'delete' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'defaults' => [
+                                                        'controller' => LineAdminController::class,
+                                                        'action'     => 'delete',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'solution' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => 'solution',
+                                    'defaults' => [
+                                        'controller' => SolutionAdminController::class,
+                                        'action' => 'show',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/add',
+                                            'defaults' => [
+                                                'controller' => SolutionAdminController::class,
+                                                'action' => 'add',
+                                            ],
+                                        ],
+                                    ],
+                                    'edit' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '/[:id]',
+                                            'constraints' => [
+                                                'id' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => SolutionAdminController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'product' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/product',
+                                                    'defaults' => [
+                                                        'controller' => SolutionAdminController::class,
+                                                        'action' => 'product',
+                                                    ]
+                                                ],
+                                            ],
+                                            'delete' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'defaults' => [
+                                                        'controller' => SolutionAdminController::class,
+                                                        'action'     => 'delete',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'category' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => 'category',
+                                    'defaults' => [
+                                        'controller' => CategoryAdminController::class,
+                                        'action' => 'show',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/add',
+                                            'defaults' => [
+                                                'controller' => CategoryAdminController::class,
+                                                'action' => 'add',
+                                            ],
+                                        ],
+                                    ],
+                                    'id' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '/[:id]',
+                                            'constraints' => [
+                                                'id' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => CategoryAdminController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'delete' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'defaults' => [
+                                                        'controller' => CategoryAdminController::class,
+                                                        'action'     => 'delete',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ]
                     ],
                     'content' => [
@@ -512,163 +719,6 @@ return [
                             ],
                         ],
                     ],
-                    'admin-line' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/line/',
-                            'defaults' => [
-                                'controller' => 'LineAdminControllerFactory',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'add' => [
-                                'type' => 'Literal',
-                                'options' => [
-                                    'route' => 'add',
-                                    'defaults' => [
-                                        'controller' => 'LineAdminControllerFactory',
-                                        'action' => 'add',
-                                    ],
-                                ],
-                            ],
-                            'admin-line-id' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:lineId]',
-                                    'constraints' => [
-                                        'lineId' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'LineAdminControllerFactory',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'admin-line-delete' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/delete',
-                                            'defaults' => [
-                                                'controller' => 'LineAdminControllerFactory',
-                                                'action'     => 'delete',
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                    'admin-solution' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/solution/',
-                            'defaults' => [
-                                'controller' => 'SolutionAdminControllerFactory',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'add' => [
-                                'type' => 'Literal',
-                                'options' => [
-                                    'route' => 'add',
-                                    'defaults' => [
-                                        'controller' => 'SolutionAdminControllerFactory',
-                                        'action' => 'add',
-                                    ],
-                                ],
-                            ],
-                            'edit' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:id]',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'SolutionAdminControllerFactory',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'product' => [
-                                        'type' => 'Literal',
-                                        'options' => [
-                                            'route' => '/product',
-                                            'defaults' => [
-                                                'controller' => 'SolutionAdminControllerFactory',
-                                                'action' => 'product',
-                                            ]
-                                        ],
-                                    ],
-                                    'delete' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/delete',
-                                            'defaults' => [
-                                                'controller' => 'SolutionAdminControllerFactory',
-                                                'action'     => 'delete',
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                    'admin-category' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/category/',
-                            'defaults' => [
-                                'controller' => 'CategoryAdminControllerFactory',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'add' => [
-                                'type' => 'Literal',
-                                'options' => [
-                                    'route' => 'add',
-                                    'defaults' => [
-                                        'controller' => 'CategoryAdminControllerFactory',
-                                        'action' => 'add',
-                                    ],
-                                ],
-                            ],
-                            'admin-category-id' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:id]',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'CategoryAdminControllerFactory',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'delete' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => '/delete',
-                                            'defaults' => [
-                                                'controller' => 'CategoryAdminControllerFactory',
-                                                'action'     => 'delete',
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
                     'product' => [
                         'type'    => 'segment',
                         'options' => [
@@ -679,45 +729,6 @@ return [
                             'defaults' => [
                                 'controller' => 'ProductControllerFactory',
                                 'action'     => 'index',
-                            ],
-                        ],
-                    ],
-                    'admin-image' => [
-                        'type' => 'segment',
-                        'options' => [
-                            'route' => '/admin/image/[:id]/',
-                            'constraints' => [
-                                'id' => '[0-9]+',
-                            ],
-                            'defaults' => [
-                                'controller' => 'ImageControllerFactory',
-                                'action' => 'edit'
-                            ]
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'delete' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => 'delete',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'ImageControllerFactory',
-                                        'action' => 'delete'
-                                    ]
-                                ]
-                            ],
-                            'delete-success' => [
-                                'type' => 'literal',
-                                'options' => [
-                                    'route' => 'deleted',
-                                    'defaults' => [
-                                        'controller' => 'ImageControllerFactory',
-                                        'action' => 'deleteSuccess'
-                                    ]
-                                ]
                             ],
                         ],
                     ],

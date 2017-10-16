@@ -7,10 +7,18 @@ use IodogsCatalog\Form\CategoryForm;
 use IodogsApplication\Form\ConfirmForm;
 use IodogsCatalog\InputFilter\CategoryFilter;
 use Zend\EventManager\EventManagerInterface;
+use IodogsDoctrine\Entity\Category;
 
 class CategoryAdminController extends AbstractActionController
 {
+    
+    /** @var \Doctrine\ORM\EntityManager $om */
+    private $om;
 
+    public function __construct($om)
+    {
+        $this->om = $om;
+    }
 
     public function setEventManager(EventManagerInterface $events)
     {
@@ -23,9 +31,7 @@ class CategoryAdminController extends AbstractActionController
 
     public function showAction()
     {
-        $objectManager = $this->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $categories = $objectManager->getRepository("\IodogsDoctrine\Entity\Category")->findAll();        
+        $categories = $this->om->getRepository("\IodogsDoctrine\Entity\Category")->findAll();        
         return array("categories" => $categories);
     }
     
@@ -37,11 +43,9 @@ class CategoryAdminController extends AbstractActionController
             throw new \Exception("Идентификатор категории не задан");            
         }
         else{
-            $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');
-            $category = $objectManager->find('IodogsDoctrine\Entity\Category', $categoryId);                   
+            $category = $this->om->find('IodogsDoctrine\Entity\Category', $categoryId);                   
             if(is_object($category)){            
-            $form = new categoryForm($objectManager);            
+            $form = new categoryForm($this->om);            
             $form->get('submit')->setValue('Edit');
             $form->bind($category);                       
             $request = $this->getRequest();
@@ -50,11 +54,11 @@ class CategoryAdminController extends AbstractActionController
                 $form->setInputFilter($inputFilter);
                 $form->setData($request->getPost());
                 if ($form->isValid()) {                    
-                    $objectManager->persist($category);
-                    $objectManager->flush();
+                    $this->om->persist($category);
+                    $this->om->flush();
                     return $this->
                     redirect()->
-                    toRoute('app/admin-category/admin-category-id',
+                    toRoute('app/backoffice/category/id',
                         array(
                             'id' => $category->getId()
                             )
@@ -67,17 +71,16 @@ class CategoryAdminController extends AbstractActionController
         }
         else
         {
-            throw new \Exception("Продукта с id $productId не найдено");           
+            throw new \Exception("Продукта с id $categoryId не найдено");
         }
         }
     }
 
     public function infoBlockAction()
     {
-        $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $categoryId = (int) $this->params()->fromRoute('id', 0);
-        $Category = $objectManager->find('IodogsDoctrine\Entity\Category', $categoryId);
-        $InfoBlockForm = new InfoBlockForm($objectManager);
+        $Category = $this->om->find(Category::class, $categoryId);
+        $InfoBlockForm = new InfoBlockForm($this->om);
         $InfoBlockForm->bind($Category);
         $request = $this->getRequest();
         if($request->isPost())
@@ -87,10 +90,8 @@ class CategoryAdminController extends AbstractActionController
         }
     }
 
-    public function addAction(){       
-        $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');                                
-            $form = new categoryForm($objectManager);            
+    public function addAction(){
+            $form = new categoryForm($this->om);            
             $form->get('submit')->setValue('Добавить категорию');        
             $request = $this->getRequest();
             if ($request->isPost()) {
@@ -100,15 +101,15 @@ class CategoryAdminController extends AbstractActionController
                 if ($form->isValid()) { 
                     $category = new \IodogsDoctrine\Entity\Category();                    
                     $form->getHydrator()->hydrate($form->getData(), $category);
-                    $objectManager->persist($category);
-                    $objectManager->flush();
-                    /*return $this->
+                    $this->om->persist($category);
+                    $this->om->flush();
+                    return $this->
                     redirect()->
-                    toRoute('app/admin-category/admin-category-id',
+                    toRoute('app/backoffice/category/id',
                         array(
                             'id' => $category->getId()
                             )
-                        );*/
+                        );
 
                 }
             }
@@ -124,9 +125,7 @@ class CategoryAdminController extends AbstractActionController
                 throw new \Exception("Идентификатор категории не задан");            
             }
             else{
-                $objectManager = $this->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-                $category = $objectManager->find('IodogsDoctrine\Entity\Category', $categoryId);                   
+                $category = $this->om->find(Category::class, $categoryId);
                 if(is_object($category)){   
                     $form = new ConfirmForm();
 
@@ -135,10 +134,10 @@ class CategoryAdminController extends AbstractActionController
                     $delete = $request->getPost('confirm-yes', 'no');                      
                     if($delete != "no")
                     {
-                        $objectManager->remove($category);
-                        $objectManager->flush();
+                        $this->om->remove($category);
+                        $this->om->flush();
                     }      
-                    return $this->redirect()->toRoute('app/admin-category');
+                    return $this->redirect()->toRoute('app/backoffice/category');
                 } 
 
                     return array('form' => $form, 'category'=>$category);

@@ -44,7 +44,7 @@ if(is_array($productFiles) && $productFiles){
                     <?=$productFile['description']?>
                 <?php endif; ?>
             </td>
-            <td><a data-id="<?=$productFile['id']?>" href="<?=$this->url("app/admin-image", array("id"=>$productFile['id']))?>" class="btn btn-danger edit-link" target="_blank">Редактировать</a>
+            <td><a data-id="<?=$productFile['id']?>" href="<?=$this->url("app/backoffice/image", array("id"=>$productFile['id']))?>" class="btn btn-danger edit-link" target="_blank">Редактировать</a>
                 <div id="modal-<?=$productFile['id']?>" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -64,7 +64,7 @@ if(is_array($productFiles) && $productFiles){
                     </div>
                 </div>
             </td>
-            <td><a href="<?=$this->url("app/admin-image/delete", array("id"=>$productFile['id']))?>" class="btn btn-success" target="_blank">Удалить</a></td>
+            <td><a href="<?=$this->url("app/backoffice/image/delete", array("id"=>$productFile['id']))?>" class="btn btn-success" target="_blank">Удалить</a></td>
         </tr>
         <?php
     }

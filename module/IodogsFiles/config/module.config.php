@@ -3,19 +3,23 @@
 use IodogsFiles\Service\S3Service,
     IodogsFiles\Service\Factory\S3ServiceFactory,
     IodogsFiles\Service\ImageService,
-    IodogsFiles\Service\Factory\ImageServiceFactory;
+    IodogsFiles\Service\Factory\ImageServiceFactory,
+    IodogsFiles\Controller\Factory\ImageControllerFactory,
+    IodogsFiles\Controller\ImageController,
+    IodogsFiles\Service\Factory\ImageUploadServiceFactory,
+    IodogsFiles\Service\ImageUploadService;
 
 return [
     'service_manager' => [
         'factories' => [
-            'ImageUploadServiceFactory' => 'IodogsFiles\Service\Factory\ImageUploadServiceFactory',
+            ImageUploadService::class => ImageUploadServiceFactory::class,
             S3Service::class => S3ServiceFactory::class,
             ImageService::class => ImageServiceFactory::class
         ],
     ],
     'controllers' => [
         'factories' => [
-            'ImageControllerFactory' => 'IodogsFiles\Controller\Factory\ImageControllerFactory',
+            ImageController::class => ImageControllerFactory::class,
 
         ]
     ],

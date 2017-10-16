@@ -4,14 +4,14 @@ return [
         'admin-nav' => [
             'category' => [
                 'label' => 'Категории',
-                'route' => 'app/admin-category',
+                'route' => 'app/backoffice/category',
                 'pages' => [
                     [
-                        'route' => 'app/admin-category',
+                        'route' => 'app/backoffice/category',
                         'label' => 'Список категорий'
                     ],
                     [
-                        'route' => 'app/admin-category/add',
+                        'route' => 'app/backoffice/category/add',
                         'label' => 'Добавить категорию'
                     ],
                 ],
@@ -60,14 +60,14 @@ return [
             ],
             'lines' => [
                 'label' => 'Серии',
-                'route' => 'app/admin-line',
+                'route' => 'app/backoffice/line',
                 'pages' => [
                     [
-                        'route' => 'app/admin-line',
+                        'route' => 'app/backoffice/line',
                         'label' => 'Список серий'
                     ],
                     [
-                        'route' => 'app/admin-line/add',
+                        'route' => 'app/backoffice/line/add',
                         'label' => 'Добавить серию'
                     ],
                 ],
@@ -88,47 +88,18 @@ return [
             ],
             'solution' => [
                 'label' => 'Решения',
-                'route' => 'app/admin-solution',
+                'route' => 'app/backoffice/solution',
                 'pages' => [
                     [
-                        'route' => 'app/admin-solution',
+                        'route' => 'app/backoffice/solution',
                         'label' => 'Список'
                     ],
                     [
-                        'route' => 'app/admin-solution/add',
+                        'route' => 'app/backoffice/solution/add',
                         'label' => 'Добавить решение'
                     ],
                 ],
             ],
-
-            /*'distributors' => array(
-                'label' => 'Дистрибьюторы',
-                'route' => 'admin-distributor',
-                'pages' => array(
-                    array(
-                        'route' => 'admin-distributor',
-                        'label' => 'Список дистрибьюторов'
-                        ),
-                    array(
-                        'route' => 'admin-distributor-add',
-                        'label' => 'Добавить дистрибьютора'
-                        ),
-                    ),
-                ),
-            'review' => array(
-                'label' => 'Отзывы',
-                'route' => 'admin-review',
-                'pages' => array(
-                    array(
-                        'route' => 'admin-review',
-                        'label' => 'Список отзывов'
-                        ),
-                    array(
-                        'route' => 'admin-review-add',
-                        'label' => 'Добавить '
-                        ),
-                    ),
-                ),*/
         ],
     ],
 ];

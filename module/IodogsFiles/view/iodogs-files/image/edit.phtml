@@ -1,6 +1,6 @@
 <div class="row-fluid">
     <?php
-    $imageEditForm->setAttribute('action', $this->url('app/admin-image', array('id' => $this->file['id'], )));
+    $imageEditForm->setAttribute('action', $this->url('app/backoffice/image', array('id' => $this->file['id'], )));
     $imageEditForm->prepare();
     echo $this->form()->openTag($imageEditForm);
     ?>

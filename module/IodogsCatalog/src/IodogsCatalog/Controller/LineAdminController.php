@@ -9,6 +9,14 @@ use Zend\Mvc\Controller\AbstractActionController,
 class LineAdminController extends AbstractActionController
 {
 
+    /** @var \Doctrine\ORM\EntityManager $om */
+    private $om;
+    
+    public function __construct($om)
+    {
+        $this->om = $om;
+    }
+
     /**
     Функция меняет исходный layout для данного контроллера на админский layout
     **/
@@ -21,9 +29,7 @@ class LineAdminController extends AbstractActionController
 
     public function showAction()
     {
-        $objectManager = $this->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $lines = $objectManager->getRepository("\IodogsDoctrine\Entity\Line")->findAll();        
+        $lines = $this->om->getRepository("\IodogsDoctrine\Entity\Line")->findAll();        
         return array("lines" => $lines);
     }
     
@@ -35,9 +41,7 @@ class LineAdminController extends AbstractActionController
                 throw new \Exception("Идентификатор серии не задан");            
             }
             else{
-                $objectManager = $this->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-                $line = $objectManager->find('IodogsDoctrine\Entity\Line', $lineId);                   
+                $line = $this->om->find('IodogsDoctrine\Entity\Line', $lineId);                   
                 if(is_object($line)){   
                     $form = new ConfirmForm();
 
@@ -46,10 +50,10 @@ class LineAdminController extends AbstractActionController
                     $delete = $request->getPost('confirm-yes', 'no');                      
                     if($delete != "no")
                     {
-                        $objectManager->remove($line);
-                        $objectManager->flush();
+                        $this->om->remove($line);
+                        $this->om->flush();
                     }      
-                    return $this->redirect()->toRoute('app/admin-line');
+                    return $this->redirect()->toRoute('app/backoffice/line');
                 } 
 
                     return array('form' => $form, 'line'=>$line);
@@ -65,22 +69,20 @@ class LineAdminController extends AbstractActionController
             throw new \Exception("Идентификатор серии не задан");            
         }
         else{
-            $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');
-            $line = $objectManager->find('IodogsDoctrine\Entity\Line', $lineId);                   
+            $line = $this->om->find('IodogsDoctrine\Entity\Line', $lineId);                   
             if(is_object($line)){            
-            $form = new LineForm($objectManager);            
+            $form = new LineForm($this->om);            
             $form->get('submit')->setValue('Edit');
             $form->bind($line);                       
             $request = $this->getRequest();
             if ($request->isPost()) {               
                 $form->setData($request->getPost());
                 if ($form->isValid()) {                    
-                    $objectManager->persist($line);
-                    $objectManager->flush();
+                    $this->om->persist($line);
+                    $this->om->flush();
                     return $this->
                     redirect()->
-                    toRoute('app/admin-line/admin-line-id',
+                    toRoute('app/backoffice/line/id',
                         array(
                             'lineId' => $line->getId()
                             )
@@ -93,14 +95,12 @@ class LineAdminController extends AbstractActionController
         }
         else
         {
-            throw new \Exception("Продукта с id $productId не найдено");           
+            throw new \Exception("Продукта с id $lineId не найдено");
         }
         }
     }
-    public function addAction(){       
-        $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');                                
-            $form = new lineForm($objectManager);            
+    public function addAction(){
+            $form = new lineForm($this->om);            
             $form->get('submit')->setValue('Добавить линию');        
             $request = $this->getRequest();
             if ($request->isPost()) {               
@@ -108,11 +108,11 @@ class LineAdminController extends AbstractActionController
                 if ($form->isValid()) { 
                     $line = new \IodogsDoctrine\Entity\Line();                    
                     $form->getHydrator()->hydrate($form->getData(), $line);
-                    $objectManager->persist($line);
-                    $objectManager->flush();
+                    $this->om->persist($line);
+                    $this->om->flush();
                     return $this->
                     redirect()->
-                    toRoute('app/admin-line/admin-line-id',
+                    toRoute('app/backoffice/line/id',
                         array(
                             'id' => $line->getId()
                             )

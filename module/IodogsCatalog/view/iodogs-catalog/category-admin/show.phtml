@@ -1,22 +1,22 @@
 <?php 
-$this->ButtonHelper()->showAddButton($this->url('app/admin-category/add'), "Добавить категорию");
+$this->ButtonHelper()->showAddButton($this->url('app/backoffice/category/add'), "Добавить категорию");
 if(is_array($categories))
 {			
 	?><h1 class="center">Список категорий</h1><table class="table table-hover"><?php
 	foreach ($categories as $category){
 		?><tr>
 		<td>
-			<a href="<?=$this->url('app/admin-category/admin-category-id', array('id' => $category->getId())) ?>">
+			<a href="<?=$this->url('app/backoffice/category/id', array('id' => $category->getId())) ?>">
 				<?=$category->getTitle() ?> /<?=$category->getSlug() ?>
 			</a>
 		</td>
 		<td>
-			<a href="<?=$this->url('app/admin-category/admin-category-id', array('id' => $category->getId())) ?>">
+			<a href="<?=$this->url('app/backoffice/category/id', array('id' => $category->getId())) ?>">
 				Редактировать
 			</a>
 		</td>
 		<td>
-			<a href="<?=$this->url('app/admin-category/admin-category-id/delete', array('id' => $category->getId())) ?>">
+			<a href="<?=$this->url('app/backoffice/category/id/delete', array('id' => $category->getId())) ?>">
 				Удалить
 			</a>
 		</td>

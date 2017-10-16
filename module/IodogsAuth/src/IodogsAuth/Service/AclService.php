@@ -10,7 +10,11 @@ use IodogsApplication\Controller\Factory\AdminContentControllerFactory,
     IodogsApplication\Controller\InfoBlockAdminController,
     IodogsProduct\Controller\ProductAdminController,
     IodogsProduct\Controller\AdminProductImageController,
-    IodogsBreed\Controller\AdminBreedController;
+    IodogsBreed\Controller\AdminBreedController,
+    IodogsFiles\Controller\ImageController,
+    IodogsCatalog\Controller\CategoryAdminController,
+    IodogsCatalog\Controller\SolutionAdminController,
+    IodogsCatalog\Controller\LineAdminController;
 
 /**
  * Acl service
@@ -27,21 +31,20 @@ class AclService extends BaseAcl
         $this->addRole(new Role('Guest'));
         $this->addRole(new Role('Admin'), 'Guest');
 
-        $adminResources = array(
+        $adminResources = [
             ProductAdminController::class,
             AdminContentController::class,
             AdminContentControllerFactory::class,
             InfoBlockAdminController::class,
-            'LineAdminControllerFactory',
+            LineAdminController::class,
             AdminBreedController::class,
-            'CategoryAdminControllerFactory',
+            CategoryAdminController::class,
             AdminProductImageController::class,
-            'InfoBlockAdminControllerFactory',
-            'SolutionAdminControllerFactory',
-            'ImageControllerFactory',
-        );
+            SolutionAdminController::class,
+            ImageController::class,
+        ];
 
-        $guestResources = array(
+        $guestResources = [
             'OldApplicationController',
             'ContentControllerFactory',
             'AuthControllerFactory',
@@ -51,7 +54,7 @@ class AclService extends BaseAcl
             'BreedControllerFactory',
             'ReviewControllerFactory',
             'SolutionControllerFactory',
-        );
+        ];
 
         foreach ($adminResources as $adminResource) {
             $this->addResource(new Resource($adminResource));

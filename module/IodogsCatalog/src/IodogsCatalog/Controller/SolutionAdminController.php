@@ -12,11 +12,10 @@ use Zend\Mvc\Controller\AbstractActionController,
 
 class SolutionAdminController extends AbstractActionController
 {
+    /** @var \Doctrine\ORM\EntityManager */
     private $om;
 
-    /**
-     * @var SolutionService
-     */
+    /** @var  \IodogsCatalog\Service\SolutionService $solutionService */
     private $solutionService;
 
     public function __construct($om, $solutionService)
@@ -37,9 +36,7 @@ class SolutionAdminController extends AbstractActionController
 
     public function showAction()
     {
-        $objectManager = $this->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $solutions = $objectManager->getRepository('\IodogsDoctrine\Entity\Solution')->findAll();
+        $solutions = $this->om->getRepository('\IodogsDoctrine\Entity\Solution')->findAll();
         return array("solutions" => $solutions);
     }
 
@@ -51,9 +48,7 @@ class SolutionAdminController extends AbstractActionController
             throw new \Exception("Идентификатор серии не задан");
         }
         else{
-            $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');
-            $line = $objectManager->find('IodogsDoctrine\Entity\Line', $lineId);
+            $line = $this->om->find('IodogsDoctrine\Entity\Line', $lineId);
             if(is_object($line)){
                 $form = new ConfirmForm();
 
@@ -62,10 +57,10 @@ class SolutionAdminController extends AbstractActionController
                     $delete = $request->getPost('confirm-yes', 'no');
                     if($delete != "no")
                     {
-                        $objectManager->remove($line);
-                        $objectManager->flush();
+                        $this->om->remove($line);
+                        $this->om->flush();
                     }
-                    return $this->redirect()->toRoute('app/admin-line');
+                    return $this->redirect()->toRoute('app/backoffice/line');
                 }
 
                 return array('form' => $form, 'line'=>$line);
@@ -145,7 +140,7 @@ class SolutionAdminController extends AbstractActionController
 
                     $this->om->persist($Solution);
                     $this->om->flush();
-                    $this->redirect()->toRoute('app/admin-solution/edit', array('id' => $Solution->getId()));
+                    $this->redirect()->toRoute('app/backoffice/solution/edit', array('id' => $Solution->getId()));
                 }
             }
         }
@@ -174,7 +169,7 @@ class SolutionAdminController extends AbstractActionController
                 $this->om->flush();
                 return $this->
                 redirect()->
-                toRoute('app/admin-solution/edit',
+                toRoute('app/backoffice/solution/edit',
                     array(
                         'id' => $solution->getId()
                         )

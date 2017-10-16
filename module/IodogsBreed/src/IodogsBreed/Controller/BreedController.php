@@ -66,22 +66,6 @@ class BreedController extends AbstractActionController
                 $breedReviews = $this->reviewService->getReviewByBreedId($breedId);
                 $breedReviewViewArray = $this->reviewService->getViewByArray($breedReviews);
 
-//                $BreedListForm = new BreedListForm();
-
-//                $BreedListForm->bind($Breed);
-
-                
-//                $categories_unique = array_unique($category);
-
-
-                /*$ReviewService = $this->getServiceLocator()
-                    ->get('ReviewService');
-                $reviews = $ReviewService->getReviewByBreed($breedId);
-                $reviewViewInfo = $ReviewService->getViewInfoByArray($reviews);
-                shuffle($reviewViewInfo);
-
-		array_multisort($category, SORT_ASC, $products);
-        */
         		return (array(
                     "products" => $productViewArray,
         			"reviews" => $breedReviewViewArray,

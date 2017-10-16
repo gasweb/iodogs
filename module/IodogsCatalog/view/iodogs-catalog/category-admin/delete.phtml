@@ -1,6 +1,6 @@
 <div class="col-md-10 col-md-offset-1">
  <?php 
-$form->setAttribute('action', $this->url('app/admin-category/admin-category-id/delete', array('id' => $this->category->getId())));
+$form->setAttribute('action', $this->url('app/backoffice/category/id/delete', array('id' => $this->category->getId())));
  $form->prepare();
  echo $this->form()->openTag($form);
  ?>

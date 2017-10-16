@@ -9,12 +9,15 @@ namespace IodogsProduct\Controller\Factory;
  use Zend\ServiceManager\Factory\FactoryInterface;
  use Zend\ServiceManager\ServiceLocatorInterface;
 
+ use IodogsProduct\Service\ProductService,
+     Doctrine\ORM\EntityManager;
+
  class ProductAdminControllerFactory implements FactoryInterface
  {
      public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
      {
-         $objectManager = $container->get('Doctrine\ORM\EntityManager');
-         $productService = $container->get('ProductServiceFactory');
+         $objectManager = $container->get(EntityManager::class);
+         $productService = $container->get(ProductService::class);
          return new ProductAdminController($objectManager, $productService);
      }
 

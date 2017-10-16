@@ -3,7 +3,9 @@
 use IodogsProduct\Controller\Factory\ProductAdminControllerFactory,
     IodogsProduct\Controller\ProductAdminController,
     IodogsProduct\Controller\Factory\AdminProductImageControllerFactory,
-    IodogsProduct\Controller\AdminProductImageController;
+    IodogsProduct\Controller\AdminProductImageController,
+    IodogsProduct\Service\ProductService,
+    IodogsProduct\Service\Factory\ProductServiceFactory;
 
 return [
 		'controllers' => [
@@ -15,7 +17,7 @@ return [
         ],
 	    'service_manager' => [
 		   'factories' => [
-		   	'ProductServiceFactory' => 'IodogsProduct\Service\Factory\ProductServiceFactory',
+               ProductService::class => ProductServiceFactory::class,
            ],
 		   'invokables' => [
 

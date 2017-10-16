@@ -3,7 +3,7 @@
     <?php
     //print_r($confirmForm);
     
-    $confirmForm->setAttribute('action', $this->url('app/admin-image/delete', array('id' => $this->file->getId())));
+    $confirmForm->setAttribute('action', $this->url('app/backoffice/image/delete', array('id' => $this->file->getId())));
     $confirmForm->prepare();
     echo $this->form()->openTag($confirmForm);
     ?>

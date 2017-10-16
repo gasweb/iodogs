@@ -1,42 +1,49 @@
 <?php
-return array(
-    'controllers' => array(
-        /*'invokables' => array(
-            'IodogsCatalog\Controller\Catalog' => 'IodogsCatalog\Controller\CatalogController'            
-        ),*/
-        'factories' => array(
+namespace IodogsCatalog;
+
+use IodogsCatalog\Controller\CategoryAdminController,
+    IodogsCatalog\Controller\Factory\CategoryAdminControllerFactory,
+    IodogsCatalog\Controller\LineAdminController,
+    IodogsCatalog\Controller\Factory\LineAdminControllerFactory,
+    IodogsCatalog\Controller\SolutionAdminController,
+    IodogsCatalog\Controller\Factory\SolutionAdminControllerFactory;
+
+return [
+    'controllers' => [
+        'factories' => [
             'CatalogControllerFactory' => 'IodogsCatalog\Controller\Factory\CatalogControllerFactory',
+            CategoryAdminController::class => CategoryAdminControllerFactory::class,
             'CategoryAdminControllerFactory' => 'IodogsCatalog\Controller\Factory\CategoryAdminControllerFactory',
-            'LineControllerFactory' => 'IodogsCatalog\Controller\Factory\LineControllerFactory',
+            LineAdminController::class => LineAdminControllerFactory::class,
             'LineAdminControllerFactory' => 'IodogsCatalog\Controller\Factory\LineAdminControllerFactory',
             'SolutionAdminControllerFactory' => 'IodogsCatalog\Controller\Factory\SolutionAdminControllerFactory',
+            SolutionAdminController::class => SolutionAdminControllerFactory::class,
             'SolutionControllerFactory' => 'IodogsCatalog\Controller\Factory\SolutionControllerFactory',
+        ],
 
-            ),
-
-    ),    
-    'service_manager' => array(
-   'factories' => array(
+    ],
+    'service_manager' => [
+   'factories' => [
             'CatalogServiceFactory' => 'IodogsCatalog\Service\Factory\CatalogServiceFactory',
             'LineServiceFactory' => 'IodogsCatalog\Service\Factory\LineServiceFactory',
             'SolutionServiceFactory' => 'IodogsCatalog\Service\Factory\SolutionServiceFactory',
 
-            ),
-   'invokables' => array(            
+   ],
+   'invokables' => [
             'CategoryService' => 'IodogsCatalog\Service\CategoryService',
-            'LineService' => 'IodogsCatalog\Service\LineService'),
-),
-    'view_manager' => array(
-        'template_path_stack' => array(
+            'LineService' => 'IodogsCatalog\Service\LineService'],
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ), 
-    'view_helpers' => array(
-    'invokables' => array(       
-        
-    ),
-    'factories' => array(
-        
-        )
-    ),
-);
+        ],
+    ],
+    'view_helpers' => [
+    'invokables' => [
+
+    ],
+    'factories' => [
+
+    ]
+    ],
+];

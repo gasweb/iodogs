@@ -8,13 +8,14 @@ namespace IodogsCatalog\Controller\Factory;
  use Zend\ServiceManager\Exception\ServiceNotFoundException;
  use Zend\ServiceManager\Factory\FactoryInterface;
  use Zend\ServiceManager\ServiceLocatorInterface;
+ use Doctrine\ORM\EntityManager;
 
  class CategoryAdminControllerFactory implements FactoryInterface
  {
 
      public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
      {
-         $objectManager = $container->get('Doctrine\ORM\EntityManager');
+         $objectManager = $container->get(EntityManager::class);
          return new CategoryAdminController($objectManager);
      }
 

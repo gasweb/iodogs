@@ -10,13 +10,16 @@ namespace IodogsCatalog\Controller\Factory;
  use Zend\ServiceManager\Factory\FactoryInterface;
  use Zend\ServiceManager\ServiceLocatorInterface;
 
+ use IodogsCatalog\Service\CatalogService,
+     IodogsProduct\Service\ProductService;
+
  class CatalogControllerFactory implements FactoryInterface
  {
 
      public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
      {
-         $CatalogService = $container->get('CatalogServiceFactory');
-         $ProductService = $container->get('ProductServiceFactory');
+         $CatalogService = $container->get(CatalogService::class);
+         $ProductService = $container->get(ProductService::class);
 
 
          return new CatalogController($CatalogService, $ProductService, $container);

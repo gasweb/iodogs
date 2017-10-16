@@ -1,6 +1,6 @@
 <div class="col-md-10 col-md-offset-1">
  <?php 
-$form->setAttribute('action', $this->url('app/admin-line/admin-line-id/admin-line-delete', array('lineId' => $this->line->getId())));
+$form->setAttribute('action', $this->url('app/backoffice/line/id/delete', array('lineId' => $this->line->getId())));
  $form->prepare();
  echo $this->form()->openTag($form);
  ?>

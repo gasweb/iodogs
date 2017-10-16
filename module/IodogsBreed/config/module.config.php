@@ -2,7 +2,9 @@
 namespace IodogsBreed;
 
 use IodogsBreed\Controller\AdminBreedController,
-    IodogsBreed\Controller\Factory\AdminBreedControllerFactory;
+    IodogsBreed\Controller\Factory\AdminBreedControllerFactory,
+    IodogsBreed\Service\BreedService,
+    IodogsBreed\Service\Factory\BreedServiceFactory;
 
 return [
 	'controllers' => [
@@ -13,7 +15,7 @@ return [
     ],
     'service_manager' => [
 			'factories' => [
-				'BreedServiceFactory' => 'IodogsBreed\Service\Factory\BreedServiceFactory',
+                BreedService::class => BreedServiceFactory::class,
             ],
     ],
 	'view_manager' => [

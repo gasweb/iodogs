@@ -1,5 +1,5 @@
 <?php
- namespace IodogsProduct\Service\Interface;
+ namespace IodogsProduct\Service\Abstraction;
 
  interface ProductServiceInterface
  {
