@@ -6,7 +6,7 @@ use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use IodogsBreed\Strategy\BreedReviewStrategy;
 use IodogsProduct\Form\ProductReviewFieldset;
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 
 class ReviewForm extends Form implements ObjectManagerAwareInterface
 {

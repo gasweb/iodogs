@@ -13,7 +13,7 @@ class InfoBlockForm extends Form implements ObjectManagerAwareInterface
     public function __construct(ObjectManager $objectManager)
     {
         $this->setObjectManager($objectManager);
-        $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+        $this->setHydrator(new \Zend\Hydrator\ClassMethods);
         $hydrator = $this->getHydrator();
         $hydrator->addStrategy('dateUpdate', new DateUpdateStrategy($objectManager));
         parent::__construct('infoBlockForm');

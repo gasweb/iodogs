@@ -16,7 +16,7 @@ namespace IodogsBreed\Form;
                  /*$this->setHydrator(new \DoctrineModule\Stdlib\Hydrator\DoctrineObject($objectManager, "\Iodogs\Entity\Breed"))->setObject(new \Iodogs\Entity\Breed());                
                $hydrator = $this->getHydrator(); 
                 $hydrator->addStrategy('breed', new \IsleAdmin\Strategy\ProductBreedStrategy($objectManager)); */  
-                $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+                $this->setHydrator(new \Zend\Hydrator\ClassMethods);
                 /*$this->setHydrator(new \DoctrineModule\Stdlib\Hydrator\DoctrineObject($objectManager, "\Iodogs\Entity\Breed"))->setObject(new \Iodogs\Entity\Breed()); */
                 $hydrator = $this->getHydrator();  
                /* $hydrator->addStrategy('breed', new \Iodogs\Strategy\BreedStrategy($objectManager));  */        

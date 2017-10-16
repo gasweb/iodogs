@@ -8,7 +8,7 @@ use IodogsCatalog\Strategy\SolutionProductCollectionStrategy;
 use IodogsDoctrine\Entity\Product;
 use Zend\Form\Form;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 
 class SolutionProductForm extends Form implements ObjectManagerAwareInterface
 {

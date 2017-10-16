@@ -2,7 +2,7 @@
 namespace IodogsApplication\Form;
 
 use Zend\Form\Form,
-    Zend\Stdlib\Hydrator\ClassMethods;
+    Zend\Hydrator\ClassMethods;
 
 class ContactForm extends Form
 {

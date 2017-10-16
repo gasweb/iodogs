@@ -13,7 +13,7 @@ namespace IodogsProduct\Form;
             public function __construct(ObjectManager $objectManager)
             {
                 $this->setObjectManager($objectManager);
-                $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+                $this->setHydrator(new \Zend\Hydrator\ClassMethods);
                 $hydrator = $this->getHydrator();     
                 $hydrator->addStrategy('category', new \IodogsCatalog\Strategy\CategoryStrategy($objectManager));          
                 $hydrator->addStrategy('line', new \IodogsCatalog\Strategy\LineStrategy($objectManager));          

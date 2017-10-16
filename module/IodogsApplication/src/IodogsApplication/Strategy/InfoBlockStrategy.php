@@ -1,7 +1,7 @@
 <?php
 namespace IodogsApplication\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 use Doctrine\ORM\EntityManager;
 
 class InfoBlockStrategy implements StrategyInterface
@@ -15,7 +15,7 @@ class InfoBlockStrategy implements StrategyInterface
 
     public function extract($value)
     {
-        if($value instanceof IodogsDoctrine\Entity\InfoBlock)
+        if($value instanceof \IodogsDoctrine\Entity\InfoBlock)
         {
             return $value->getId();
         }

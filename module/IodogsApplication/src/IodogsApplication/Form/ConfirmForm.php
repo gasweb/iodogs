@@ -10,7 +10,7 @@ namespace IodogsApplication\Form;
             public function __construct()
             {               
                 parent::__construct('confirm-form');
-                /*$this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+                /*$this->setHydrator(new \Zend\Hydrator\ClassMethods);
                 $hydrator = $this->getHydrator(); */                                                                           
                  
                 $this->add(array(

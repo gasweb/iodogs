@@ -15,7 +15,7 @@ namespace IodogsProduct\Form;
                
                 $this->setObjectManager($objectManager);
                 $this->setHydrator(new DoctrineObject($objectManager, "\IodogsDoctrine\Entity\Product"))->setObject(new Product());
-//                $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+//                $this->setHydrator(new \Zend\Hydrator\ClassMethods());
                 $hydrator = $this->getHydrator(); 
                 $hydrator->addStrategy('breed', new BreedProductCollectionStrategy());
                 parent::__construct('product-breed-form');                                     

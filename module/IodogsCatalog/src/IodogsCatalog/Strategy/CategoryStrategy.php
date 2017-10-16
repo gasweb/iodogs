@@ -1,7 +1,7 @@
 <?php
 namespace IodogsCatalog\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 use Doctrine\ORM\EntityManager;
 
 class CategoryStrategy implements StrategyInterface
@@ -15,7 +15,7 @@ class CategoryStrategy implements StrategyInterface
 
     public function extract($value)
     {     
-        if($value instanceof IodogsDoctrine\Entity\Category)
+        if($value instanceof \IodogsDoctrine\Entity\Category)
         {
             return $value->getId();
         }

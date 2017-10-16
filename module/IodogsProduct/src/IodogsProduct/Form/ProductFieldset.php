@@ -14,7 +14,7 @@ namespace IodogsProduct\Form;
             {
                 $this->setObjectManager($objectManager);                            
                 parent::__construct('product-field-set');
-                //$this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+                //$this->setHydrator(new \Zend\Hydrator\ClassMethods());
                 $this->setHydrator(new \DoctrineModule\Stdlib\Hydrator\DoctrineObject($objectManager, "\IodogsDoctrine\Entity\Product"))->setObject(new \IodogsDoctrine\Entity\Product());
                 $hydrator = $this->getHydrator();                 
 

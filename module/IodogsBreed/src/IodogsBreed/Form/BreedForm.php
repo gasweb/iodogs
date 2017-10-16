@@ -2,7 +2,7 @@
 namespace IodogsBreed\Form;
 
 /*use Zend\Form\Form,
-    Zend\Stdlib\Hydrator\ClassMethods;*/
+    Zend\Hydrator\ClassMethods;*/
 
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,7 +15,7 @@ class BreedForm extends Form implements ObjectManagerAwareInterface
         {
 
             $this->setObjectManager($objectManager);
-            $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+            $this->setHydrator(new \Zend\Hydrator\ClassMethods);
             $hydrator = $this->getHydrator();
             $hydrator->addStrategy('info_block', new InfoBlockStrategy($objectManager));
 

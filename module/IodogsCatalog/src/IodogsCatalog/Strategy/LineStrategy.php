@@ -1,7 +1,7 @@
 <?php
 namespace IodogsCatalog\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 use Doctrine\ORM\EntityManager;
 
 class LineStrategy implements StrategyInterface
@@ -13,7 +13,7 @@ class LineStrategy implements StrategyInterface
 
     public function extract($value)
     {             
-        if($value instanceof IodogsDoctrine\Entity\Line)
+        if($value instanceof \IodogsDoctrine\Entity\Line)
         {
         return $value->getId();
         }

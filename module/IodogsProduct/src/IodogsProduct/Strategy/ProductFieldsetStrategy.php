@@ -1,7 +1,7 @@
 <?php
 namespace IodogsProduct\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 use Doctrine\ORM\EntityManager;
 
 class ProductFieldsetStrategy implements StrategyInterface

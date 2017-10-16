@@ -12,7 +12,7 @@ class ImageEditForm extends Form implements ObjectManagerAwareInterface
     {               
                
     $this->setObjectManager($objectManager);
-    $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+    $this->setHydrator(new \Zend\Hydrator\ClassMethods);
     $hydrator = $this->getHydrator();  
     parent::__construct('image-edit-form');
         $this->add(array(

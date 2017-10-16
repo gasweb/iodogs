@@ -13,7 +13,7 @@ namespace IodogsCatalog\Form;
             public function __construct(ObjectManager $objectManager)
             {
                 $this->setObjectManager($objectManager);
-                $this->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+                $this->setHydrator(new \Zend\Hydrator\ClassMethods);
                 $hydrator = $this->getHydrator();
                 $hydrator->addStrategy('info_block', new InfoBlockStrategy($objectManager));
 
