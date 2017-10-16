@@ -1,39 +1,38 @@
 <?php
-return array(
-    'router' => array(
-        'routes' => array(
-            'region-subdomain' => array(
+return [
+    'router' => [
+        'routes' => [
+            'region-subdomain' => [
                 'type' => 'Hostname',
-                'options' => array(
+                'options' => [
                     'route' => '[:sub].__SITE_HOST_NAME__',
-                    'constraint' => array(
+                    'constraint' => [
                         'sub' => '([a-zA-Z0-9-]+)',
-                    ),
-                    'defaults' => array(
+                    ],
+                    'defaults' => [
                         'controller' => 'ContentControllerFactory',
                         'action' => 'region'
-                    ),
-                ),
-                'child_routes' => array(
-                    'region-page' => array(
+                    ],
+                ],
+                'child_routes' => [
+                    'region-page' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/',
-                            'defaults' => array(
+                            'defaults' => [
                                 'controller' => 'ContentControllerFactory',
                                 'action' => 'region'
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'app' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'app' => [
                 'type' => 'Hostname',
-                'options' => array(
+                'options' => [
                     'route' => '__SITE_HOST_NAME__',
-                ),
-//                'child_routes' => array(),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];
