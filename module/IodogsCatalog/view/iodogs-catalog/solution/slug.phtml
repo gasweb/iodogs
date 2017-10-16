@@ -2,7 +2,9 @@
 echo $this->partial('partial/sidebar/left-sidebar');
 ?>
     <div class="col-md-9">
-<h1><?=$solution['info_block']['header']?></h1>
+        <?php if (isset($solution['info_block']['header'])): ?>
+            <h1><?=$solution['info_block']['header']?></h1>
+        <?php endif; ?>
 <?php
     echo $this->partialLoop('partial/product/card_horizontal.phtml', $products);
 ?>

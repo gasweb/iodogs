@@ -12,7 +12,9 @@ $this->headMeta($page['keywords'], "keywords");
     <div style="overflow: hidden">
     <blockquote class="pull-right" style="width:70%; overflow: hidden; text-align: right">
         <span class="italic">«<?=$page['aphorism']['content']?>»</span>
-        <br><?=$page['aphorism']['author']?>
+        <?php if (isset($page['aphorism']['author'])): ?>
+            <br><?=$page['aphorism']['author']?>
+        <?php endif; ?>
     </blockquote>
     </div>
     <div class="col-md-9">
