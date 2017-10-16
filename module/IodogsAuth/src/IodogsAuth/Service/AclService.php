@@ -6,7 +6,8 @@ use Zend\Permissions\Acl\Resource\GenericResource as Resource;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
 
 use IodogsApplication\Controller\Factory\AdminContentControllerFactory,
-    IodogsApplication\Controller\AdminContentController;
+    IodogsApplication\Controller\AdminContentController,
+    IodogsApplication\Controller\InfoBlockAdminController;
 
 /**
  * Acl service
@@ -27,6 +28,7 @@ class AclService extends BaseAcl
             'ProductAdminControllerFactory',
             AdminContentController::class,
             AdminContentControllerFactory::class,
+            InfoBlockAdminController::class,
             'LineAdminControllerFactory',
             'AdminBreedControllerFactory',
             'CategoryAdminControllerFactory',

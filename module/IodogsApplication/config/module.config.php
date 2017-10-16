@@ -10,7 +10,9 @@ use Zend\Router\Http\Literal,
 
 //Content use block
 use IodogsApplication\Controller\AdminContentController,
-    IodogsApplication\Controller\Factory\AdminContentControllerFactory;
+    IodogsApplication\Controller\Factory\AdminContentControllerFactory,
+    IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory,
+    IodogsApplication\Controller\InfoBlockAdminController;
 
 return [
     'controllers' => [
@@ -20,7 +22,7 @@ return [
         'factories' => [
             AdminContentController::class => AdminContentControllerFactory::class,
             'ContentControllerFactory' => 'IodogsApplication\Controller\Factory\ContentControllerFactory',
-            'InfoBlockAdminControllerFactory' => 'IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory',
+            InfoBlockAdminController::class => InfoBlockAdminControllerFactory::class,
             'SearchControllerFactory' => 'IodogsApplication\Controller\Factory\SearchControllerFactory'
         ]
     ],
@@ -55,17 +57,19 @@ return [
                     'backoffice' => [
                         'type' => Literal::class,
                         'options' => [
-                            'route' => '/admin',
+                            'route' => '/admin/',
                             'defaults' => [
                                 'cache' => false,
+                                'controller' => AdminContentController::class,
+                                'action' => 'index',
                             ],
                         ],
-                        'may_terminate' => false,
+                        'may_terminate' => true,
                         'child_routes' => [
                             'content' => [
                                 'type' => Literal::class,
                                 'options' => [
-                                    'route' => '/content',
+                                    'route' => 'content',
                                     'defaults' => [
                                         'controller' => AdminContentController::class,
                                         'action' => 'show',
@@ -110,6 +114,43 @@ return [
                                         ],
                                     ],
                                 ]
+                            ],
+                            'info-block' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => 'info-block',
+                                    'defaults' => [
+                                        'controller' => InfoBlockAdminController::class,
+                                        'action' => 'show',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => 'Literal',
+                                        'options' => [
+                                            'route' => 'add',
+                                            'defaults' => [
+                                                'controller' => InfoBlockAdminController::class,
+                                                'action' => 'add'
+                                            ],
+                                        ],
+                                    ],
+                                    'edit' => [
+                                        'type' => 'segment',
+                                        'options' => [
+                                            'route' => '[:id]',
+                                            'constraints' => [
+                                                'id' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => InfoBlockAdminController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                    ],
+                                ],
+
                             ],
 
                         ]
@@ -196,43 +237,6 @@ return [
                                 'action' => 'messageSent'
                             ],
                         ],
-                    ],
-                    'admin-info-block' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/info-block/',
-                            'defaults' => [
-                                'controller' => 'InfoBlockAdminControllerFactory',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'add' => [
-                                'type' => 'Literal',
-                                'options' => [
-                                    'route' => 'add',
-                                    'defaults' => [
-                                        'controller' => 'InfoBlockAdminControllerFactory',
-                                        'action' => 'add'
-                                    ],
-                                ],
-                            ],
-                            'edit' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:id]',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'InfoBlockAdminControllerFactory',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                            ],
-                        ],
-
                     ],
                     'breed' => [
                         'type'    => 'literal',
@@ -1013,14 +1017,14 @@ return [
                  ],
                 'info_block' => [
                     'label' => 'Инфоблоки',
-                    'route' => 'app/admin-info-block',
+                    'route' => 'app/backoffice/info-block',
                     'pages' => [
                         [
-                            'route' => 'app/admin-info-block',
+                            'route' => 'app/backoffice/info-block',
                             'label' => 'Список инфоблоков'
                         ],
                         [
-                            'route' => 'app/admin-info-block/add',
+                            'route' => 'app/backoffice/info-block/add',
                             'label' => 'Добавить инфоблок'
                         ],
                     ],

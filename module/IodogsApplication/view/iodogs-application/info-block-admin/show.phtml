@@ -1,5 +1,5 @@
 <?php
-$this->ButtonHelper()->showAddButton($this->url('app/admin-info-block/add'), "Добавить материал инфоблока");
+$this->ButtonHelper()->showAddButton($this->url('app/backoffice/info-block/add'), "Добавить материал инфоблока");
 ?>
     <h1 class="center">Список материалов инфоблока</h1>
 <?php
@@ -18,7 +18,7 @@ if(is_array($infoBlocks))
             <tr>
                 <td><?=$material->getHeader() ?></td>
                 <td><?=$material->getSnippet() ?></td>
-                <td><a class="btn btn-success" href="<?=$this->url('app/admin-info-block/edit', array('id' => $material->getId())); ?>">Редактировать</a></td>
+                <td><a class="btn btn-success" href="<?=$this->url('app/backoffice/info-block/edit', array('id' => $material->getId())); ?>">Редактировать</a></td>
             </tr>
         <?php } ?>
 

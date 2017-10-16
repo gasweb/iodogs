@@ -5,9 +5,13 @@ use Zend\Mvc\Controller\AbstractActionController;
 use IodogsApplication\Form\InfoBlock\InfoBlockForm;
 use Zend\EventManager\EventManagerInterface;
 
+//Entities use block
+use IodogsDoctrine\Entity\InfoBlock;
+
 class InfoBlockAdminController extends AbstractActionController
 {
 
+    /** @var \Doctrine\ORM\EntityManager $om */
     private $om;
 
     public function __construct($om)
@@ -31,7 +35,7 @@ class InfoBlockAdminController extends AbstractActionController
             throw new \Exception("Идентификатор материала не задан");
         }
         else{
-            $InfoBlock = $this->om->find('IodogsDoctrine\Entity\InfoBlock', $infoBlockId);
+            $InfoBlock = $this->om->find(InfoBlock::class, $infoBlockId);
             $InfoBlockForm = new InfoBlockForm($this->om);
             if(is_object($InfoBlock)){
                 $InfoBlockForm->bind($InfoBlock);
@@ -53,7 +57,7 @@ class InfoBlockAdminController extends AbstractActionController
             }
             else
             {
-                throw new \Exception("Продукта с id $productId не найдено");
+                throw new \Exception("Инфоблока с id $infoBlockId не найдено");
             }
         }
     }
@@ -73,7 +77,7 @@ class InfoBlockAdminController extends AbstractActionController
                 $this->om->flush();
                 return $this->
                 redirect()->
-                toRoute('app/admin-info-block/edit',
+                toRoute('app/backoffice/info-block/edit',
                     array(
                         'id' => $InfoBlock->getId()
                     )
@@ -87,7 +91,7 @@ class InfoBlockAdminController extends AbstractActionController
 
     public function showAction()
     {
-        $infoBlocks = $this->om->getRepository('IodogsDoctrine\Entity\InfoBlock')->
+        $infoBlocks = $this->om->getRepository(InfoBlock::class)->
         findBy(array(), array('title' => 'ASC'));
         return array("infoBlocks" => $infoBlocks);
     }
