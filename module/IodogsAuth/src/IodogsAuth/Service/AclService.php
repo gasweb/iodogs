@@ -7,7 +7,9 @@ use Zend\Permissions\Acl\Role\GenericRole as Role;
 
 use IodogsApplication\Controller\Factory\AdminContentControllerFactory,
     IodogsApplication\Controller\AdminContentController,
-    IodogsApplication\Controller\InfoBlockAdminController;
+    IodogsApplication\Controller\InfoBlockAdminController,
+    IodogsProduct\Controller\ProductAdminController,
+    IodogsProduct\Controller\AdminProductImageController;
 
 /**
  * Acl service
@@ -25,14 +27,14 @@ class AclService extends BaseAcl
         $this->addRole(new Role('Admin'), 'Guest');
 
         $adminResources = array(
-            'ProductAdminControllerFactory',
+            ProductAdminController::class,
             AdminContentController::class,
             AdminContentControllerFactory::class,
             InfoBlockAdminController::class,
             'LineAdminControllerFactory',
             'AdminBreedControllerFactory',
             'CategoryAdminControllerFactory',
-            'AdminProductImageControllerFactory',
+            AdminProductImageController::class,
             'InfoBlockAdminControllerFactory',
             'SolutionAdminControllerFactory',
             'ImageControllerFactory',

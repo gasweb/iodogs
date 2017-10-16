@@ -1,5 +1,5 @@
 <?php 
-$this->ButtonHelper()->showAddButton($this->url('app/admin-product/add'), "Добавить продукт");
+$this->ButtonHelper()->showAddButton($this->url('app/backoffice/product/add'), "Добавить продукт");
 ?>
 <h1 class="center">Список продуктов</h1>
 <?php
@@ -30,17 +30,17 @@ if(is_array($products))
 			<td><?=$product->getEngTitle()?></td>			
 			<td><?=$product->getSortOrder()?></td>
 			<td>
-				<a href="<?=$this->url('app/admin-product/id', array('id' => $product->getId())); ?>">
+				<a href="<?=$this->url('app/backoffice/product/id', array('id' => $product->getId())); ?>">
 					Редактировать
 				</a>
 			</td>
 			<td>
-				<a href="<?=$this->url('app/admin-product/id/delete', array('id' => $product->getId())); ?>">
+				<a href="<?=$this->url('app/backoffice/product/id/delete', array('id' => $product->getId())); ?>">
 					Удалить
 				</a>
 			</td>		
 			<td>
-					<a href="<?=$this->url('app/admin-product/id/image', array('id' => $product->getId())); ?>">
+					<a href="<?=$this->url('app/backoffice/product/id/image', array('id' => $product->getId())); ?>">
 						Добавить изображение
 					</a>
 			</td>		

@@ -1,10 +1,14 @@
 <?php
+
+use IodogsFiles\Service\S3Service,
+    IodogsFiles\Service\Factory\S3ServiceFactory;
+
 return array(
     'service_manager' => array(
         'factories' => array(
             'ImageUploadServiceFactory' => 'IodogsFiles\Service\Factory\ImageUploadServiceFactory',
             'ImageServiceFactory' => 'IodogsFiles\Service\Factory\ImageServiceFactory',
-            'S3ServiceFactory' => 'IodogsFiles\Service\Factory\S3ServiceFactory',
+            S3Service::class => S3ServiceFactory::class,
         ),
     ),
     'controllers' => array(

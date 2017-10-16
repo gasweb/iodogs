@@ -7,19 +7,21 @@ use IodogsApplication\Form\ConfirmForm;
 use IodogsProduct\Form\ProductBreedForm;
 use Zend\EventManager\EventManagerInterface;
 
+//Entities use block
+use IodogsDoctrine\Entity\Product;
+
 class ProductAdminController extends AbstractActionController
 {
 
+    /** @var \Doctrine\ORM\EntityManager $om */
     private $om;
 
-    /**
-     * @var \IodogsProduct\Service\ProductService
-     */
+    /** @var \IodogsProduct\Service\ProductService $productService */
     private $productService;
 
-    public function __construct($objectManager, $productService)
+    public function __construct($om, $productService)
     {
-        $this->om = $objectManager;
+        $this->om = $om;
         $this->productService = $productService;
     }
 
@@ -35,12 +37,10 @@ class ProductAdminController extends AbstractActionController
     public function showAction()
     {
         $categoryId = (int) $this->params()->fromRoute('category', 0);
-        $objectManager = $this->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
         if($categoryId)
         {
-            $products = $objectManager->
-            getRepository("\IodogsDoctrine\Entity\Product")->
+            $products = $this->om->
+            getRepository(Product::class)->
             findBy(
                 array('category' => $categoryId),
                 array('sortOrder' => 'ASC')
@@ -48,17 +48,17 @@ class ProductAdminController extends AbstractActionController
         }
         else
         { 
-            $products = $objectManager->
-            getRepository("\IodogsDoctrine\Entity\Product")->
+            $products = $this->om->
+            getRepository(Product::class)->
             findBy(array(),array('sortOrder' => 'ASC'));
         }
         //print_r($products);
         return array("products" => $products);
     }
+
     public function addAction(){
-        $objectManager = $this->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $form = new ProductForm($objectManager);
+
+        $form = new ProductForm($this->om);
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest();
          if ($request->isPost()){
@@ -68,12 +68,12 @@ class ProductAdminController extends AbstractActionController
                  $product = new \IodogsDoctrine\Entity\Product();
                  //$product->setDateUpdate();                 
                  $form->getHydrator()->hydrate($form->getData(), $product);
-                 $objectManager->persist($product);
-                 $objectManager->flush();
+                 $this->om->persist($product);
+                 $this->om->flush();
 
                  return $this->
                     redirect()->
-                    toRoute('app/admin-product/id',
+                    toRoute('app/backoffice/product/id',
                         array(
                             'id' => $product->getId()
                             )
@@ -92,9 +92,7 @@ class ProductAdminController extends AbstractActionController
                 throw new \Exception("Идентификатор продукта не задан");            
             }
             else{
-                $objectManager = $this->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-                $product = $objectManager->find('IodogsDoctrine\Entity\Product', $productId);                   
+                $product = $this->om->find(Product::class, $productId);
                 if(is_object($product)){   
                     $form = new ConfirmForm();
 
@@ -103,10 +101,10 @@ class ProductAdminController extends AbstractActionController
                     $delete = $request->getPost('confirm-yes', 'no');                      
                     if($delete != "no")
                     {
-                        $objectManager->remove($product);
-                        $objectManager->flush();
+                        $this->om->remove($product);
+                        $this->om->flush();
                     }      
-                    return $this->redirect()->toRoute('app/admin-product');
+                    return $this->redirect()->toRoute('app/backoffice/product');
                 } 
 
                     return array('form' => $form, 'product'=>$product);
@@ -120,11 +118,9 @@ class ProductAdminController extends AbstractActionController
             throw new \Exception("Идентификатор продукта не задан");            
         }
         else{
-            $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');
-            $product = $objectManager->find('IodogsDoctrine\Entity\Product', $productId);                   
+            $product = $this->om->find(Product::class, $productId);
             if(is_object($product)){            
-            $form = new productForm($objectManager);
+            $form = new productForm($this->om);
 
             //$hydrator->extract($product,$form);
             $form->get('submit')->setValue('Edit');
@@ -139,7 +135,7 @@ class ProductAdminController extends AbstractActionController
                     $this->om->flush();
                     return $this->
                     redirect()->
-                    toRoute('app/admin-product/id',
+                    toRoute('app/backoffice/product/id',
                         array(
                             'id' => $product->getId()
                             )
@@ -165,15 +161,6 @@ class ProductAdminController extends AbstractActionController
             }
             else{
                 $Product = $this->productService->getProductById($productId);
-
-//                $breedService = $this->getServiceLocator()->get('BreedServiceFactory');
-
-                /*$breed = $breedService->getBreedById(1);
-                $Product->addBreed($breed);
-
-                $this->om->persist($Product);
-                $this->om->flush();*/
-
 
                 if($Product){
                     $viewArray = $this->productService->getViewArray($Product);

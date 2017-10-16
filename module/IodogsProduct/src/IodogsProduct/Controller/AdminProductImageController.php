@@ -71,10 +71,10 @@ class AdminProductImageController extends AbstractActionController
                 $files =  $request->getFiles()->toArray();
 
                 $uploadResult = $this->imageUploadService->uploadFiles(
-                    array(
+                    [
                         "files" => $files,
                         "upload_dir" => "product$productId"
-                    )
+                    ]
                 );
                 $fileErrors = $uploadResult['fileUploadErrors'];
                 $filesUploaded = $uploadResult['upload_id'];
@@ -103,10 +103,10 @@ class AdminProductImageController extends AbstractActionController
 
             return $this->
             redirect()->
-            toRoute('app/admin-product/id/image',
-                array(
+            toRoute('app/backoffice/product/id/image',
+                [
                     'id' => $productId
-                )
+                ]
             );
         }
     }
@@ -132,12 +132,12 @@ class AdminProductImageController extends AbstractActionController
             
 
 
-            return array(
+            return [
                 'form' => $form,
                 "productFiles" => $productImages,
                 "Product" => $Product,
                 "productId" => $productId,
-            );
+            ];
         }
     }
 

@@ -1,23 +1,21 @@
 <?php
 namespace IodogsFiles\Service\Factory;
 
+use Interop\Container\ContainerInterface;
 use IodogsFiles\Service\ImageUploadService;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Doctrine\ORM\EntityManager;
+use IodogsFiles\Service\S3Service;
 
 class ImageUploadServiceFactory implements FactoryInterface
 {
-    /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $objectManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
-        $S3Service = $serviceLocator->get('S3ServiceFactory');
+        $objectManager = $container->get(EntityManager::class);
+        $S3Service = $container->get(S3Service::class);
         return new ImageUploadService($objectManager, $S3Service);
     }
+
+
 }

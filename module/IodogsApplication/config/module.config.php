@@ -14,6 +14,10 @@ use IodogsApplication\Controller\AdminContentController,
     IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory,
     IodogsApplication\Controller\InfoBlockAdminController;
 
+//Products use block
+use IodogsProduct\Controller\ProductAdminController,
+    IodogsProduct\Controller\AdminProductImageController;
+
 return [
     'controllers' => [
         'invokables' => [
@@ -151,6 +155,90 @@ return [
                                     ],
                                 ],
 
+                            ],
+                            'product' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => 'product',
+                                    'defaults' => [
+                                        'controller' => ProductAdminController::class,
+                                        'action' => 'show',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'add' => [
+                                        'type' => 'Literal',
+                                        'options' => [
+                                            'route' => '/add',
+                                            'defaults' => [
+                                                'controller' => ProductAdminController::class,
+                                                'action' => 'add',
+                                            ],
+                                        ],
+                                    ],
+                                    'id' => [
+                                        'type' => 'segment',
+                                        'options' => [
+                                            'route' => '/[:id]',
+                                            'constraints' => [
+                                                'id' => '[0-9]+',
+                                            ],
+                                            'defaults' => [
+                                                'controller' => ProductAdminController::class,
+                                                'action'     => 'edit',
+                                            ],
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'breed' => [
+                                                'type' => 'literal',
+                                                'options' => [
+                                                    'route' => '/breed',
+                                                    'defaults' => [
+                                                        'action' => 'breed'
+                                                    ],
+                                                ],
+                                            ],
+                                            'image' => [
+                                                'type' => 'Segment',
+                                                'options' => [
+                                                    'route' => '/image',
+                                                    'constraints' => [
+                                                        'id' => '[0-9]+',
+                                                    ],
+                                                    'defaults' => [
+                                                        'controller' => AdminProductImageController::class,
+                                                        'action' => 'show',
+                                                    ],
+                                                ],
+                                                'may_terminate' => true,
+                                                'child_routes' => [
+                                                    'add' => [
+                                                        'type' => 'literal',
+                                                        'options' => [
+                                                            'route' => '/add',
+                                                            'defaults' => [
+                                                                'controller' => 'AdminProductImageControllerFactory',
+                                                                'action'     => 'add',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                            'delete' => [
+                                                'type' => 'Literal',
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'defaults' => [
+                                                        'controller' => ProductAdminController::class,
+                                                        'action'     => 'delete',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
 
                         ]
@@ -588,90 +676,6 @@ return [
                             ],
                         ],
                     ],
-                    'admin-product' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/admin/product/',
-                            'defaults' => [
-                                'controller' => 'ProductAdminControllerFactory',
-                                'action' => 'show',
-                            ],
-                        ],
-                        'may_terminate' => true,
-                        'child_routes' => [
-                            'add' => [
-                                'type' => 'Literal',
-                                'options' => [
-                                    'route' => 'add',
-                                    'defaults' => [
-                                        'controller' => 'ProductAdminControllerFactory',
-                                        'action' => 'add',
-                                    ],
-                                ],
-                            ],
-                            'id' => [
-                                'type' => 'segment',
-                                'options' => [
-                                    'route' => '[:id]/',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => 'ProductAdminControllerFactory',
-                                        'action'     => 'edit',
-                                    ],
-                                ],
-                                'may_terminate' => true,
-                                'child_routes' => [
-                                    'breed' => [
-                                        'type' => 'literal',
-                                        'options' => [
-                                            'route' => 'breed',
-                                            'defaults' => [
-                                                'action' => 'breed'
-                                            ],
-                                        ],
-                                    ],
-                                    'image' => [
-                                        'type' => 'Segment',
-                                        'options' => [
-                                            'route' => 'image',
-                                            'constraints' => [
-                                                'id' => '[0-9]+',
-                                            ],
-                                            'defaults' => [
-                                                'controller' => 'AdminProductImageControllerFactory',
-                                                'action' => 'show',
-                                            ],
-                                        ],
-                                        'may_terminate' => true,
-                                        'child_routes' => [
-                                            'add' => [
-                                                'type' => 'literal',
-                                                'options' => [
-                                                    'route' => '/add',
-                                                    'defaults' => [
-                                                        'controller' => 'AdminProductImageControllerFactory',
-                                                        'action'     => 'add',
-                                                    ],
-                                                ],
-                                            ],
-                                        ],
-                                    ],
-                                    'delete' => [
-                                        'type' => 'Literal',
-                                        'options' => [
-                                            'route' => '/delete',
-                                            'defaults' => [
-                                                'controller' => 'ProductAdminControllerFactory',
-                                                'action'     => 'delete',
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
                     'admin-image' => [
                         'type' => 'segment',
                         'options' => [
@@ -989,14 +993,14 @@ return [
                 ],
                 'products' => [
                     'label' => 'Продукты',
-                    'route' => 'app/admin-product',
+                    'route' => 'app/backoffice/product',
                         'pages' => [
                                 [
-                                    'route' => 'app/admin-product',
+                                    'route' => 'app/backoffice/product',
                                     'label' => 'Список продуктов',
                                 ],
                                 [
-                                    'route' => 'app/admin-product/add',
+                                    'route' => 'app/backoffice/product/add',
                                     'label' => 'Добавить продукт',
                                 ],
                         ],

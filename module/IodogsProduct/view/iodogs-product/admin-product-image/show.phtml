@@ -1,6 +1,6 @@
 <?php
 // File: upload-form.phtml
-$form->setAttribute('action', $this->url("app/admin-product/id/image/add", array("id"=>$this->productId)));
+$form->setAttribute('action', $this->url("app/backoffice/product/id/image/add", array("id"=>$this->productId)));
 $form->prepare(); // The correct enctype is set here ?>
 <?php echo $this->form()->openTag($form); ?>
 <div class="form-element" style="text-align: center; padding: 15px; margin: 20px auto; border: 1px dotted gray;">
@@ -39,7 +39,11 @@ if(is_array($productFiles) && $productFiles){
                 <img src="<?=$productFile['src_small'] ?>" alt="">
             </td>
             <td><?=$productFile['sort']?></td>
-            <td><?=$productFile['description']?></td>
+            <td>
+                <?php if(isset($productFile['description'])): ?>
+                    <?=$productFile['description']?>
+                <?php endif; ?>
+            </td>
             <td><a data-id="<?=$productFile['id']?>" href="<?=$this->url("app/admin-image", array("id"=>$productFile['id']))?>" class="btn btn-danger edit-link" target="_blank">Редактировать</a>
                 <div id="modal-<?=$productFile['id']?>" class="modal fade">
                     <div class="modal-dialog">
