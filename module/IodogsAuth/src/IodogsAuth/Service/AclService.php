@@ -16,6 +16,17 @@ use IodogsApplication\Controller\Factory\AdminContentControllerFactory,
     IodogsCatalog\Controller\SolutionAdminController,
     IodogsCatalog\Controller\LineAdminController;
 
+//Public auth use block
+use IodogsApplication\Controller\ContentController,
+    IodogsCatalog\Controller\CatalogController,
+    IodogsAuth\Controller\AuthController,
+    IodogsProduct\Controller\ProductController,
+    IodogsCatalog\Controller\LineController,
+    IodogsBreed\Controller\BreedController,
+    IodogsReview\Controller\ReviewController,
+    IodogsCatalog\Controller\SolutionController,
+    IodogsApplication\Controller\OldApplicationController;
+
 /**
  * Acl service
  *
@@ -45,15 +56,15 @@ class AclService extends BaseAcl
         ];
 
         $guestResources = [
-            'OldApplicationController',
-            'ContentControllerFactory',
-            'AuthControllerFactory',
-            'CatalogControllerFactory',
-            'ProductControllerFactory',
-            'LineControllerFactory',
-            'BreedControllerFactory',
-            'ReviewControllerFactory',
-            'SolutionControllerFactory',
+            OldApplicationController::class,
+            ContentController::class,
+            AuthController::class,
+            CatalogController::class,
+            ProductController::class,
+            LineController::class,
+            BreedController::class,
+            ReviewController::class,
+            SolutionController::class
         ];
 
         foreach ($adminResources as $adminResource) {

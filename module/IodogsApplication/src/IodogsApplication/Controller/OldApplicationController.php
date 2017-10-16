@@ -2,7 +2,10 @@
 namespace IodogsApplication\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+    Zend\View\Model\ViewModel,
+    IodogsProduct\Service\ProductService,
+    IodogsBreed\Service\BreedService,
+    IodogsCatalog\Service\CatalogService;
 
 /**
  * Default action for module
@@ -11,10 +14,18 @@ use Zend\Mvc\Controller\AbstractActionController,
 
 class OldApplicationController extends AbstractActionController
 {
+    /** @var \Interop\Container\ContainerInterface $container */
+    private $container;
+
+    public function __construct($container)
+    {
+        $this->container = $container;
+    }
+
     public function productAction()
     {
         $productId = (int) $this->params()->fromRoute('id', 0);
-        $ProductService = $this->getServiceLocator()->get('ProductServiceFactory');
+        $ProductService = $this->container->get(ProductService::class);
         $Product = $ProductService->getProductById($productId);
         if($ProductService->checkInstance($Product))
         {
@@ -29,7 +40,7 @@ class OldApplicationController extends AbstractActionController
     public function breedAction()
     {
         $breedId = (int) $this->params()->fromRoute('id', 0);
-        $BreedService = $this->getServiceLocator()->get('BreedServiceFactory');
+        $BreedService = $this->container->get(BreedService::class);
         $Breed = $BreedService->getBreedById($breedId);
         if($BreedService->checkInstance($Breed))
         {
@@ -44,7 +55,7 @@ class OldApplicationController extends AbstractActionController
     public function categoryAction()
     {
         $categoryId = (int) $this->params()->fromRoute('id', 0);
-        $CategoryService = $this->getServiceLocator()->get('CatalogServiceFactory');
+        $CategoryService = $this->container->get(CatalogService::class);
         $Category = $CategoryService->getCategoryById($categoryId);
         if($CategoryService->checkInstance($Category))
         {

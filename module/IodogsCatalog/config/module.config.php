@@ -8,45 +8,40 @@ use IodogsCatalog\Controller\CategoryAdminController,
     IodogsCatalog\Controller\SolutionAdminController,
     IodogsCatalog\Controller\Factory\SolutionAdminControllerFactory,
     IodogsCatalog\Service\CatalogService,
-    IodogsCatalog\Controller\Factory\CatalogControllerFactory;
+    IodogsCatalog\Controller\Factory\CatalogControllerFactory,
+    IodogsCatalog\Controller\CatalogController,
+    IodogsCatalog\Controller\LineController,
+    IodogsCatalog\Controller\Factory\LineControllerFactory,
+    IodogsCatalog\Controller\SolutionController,
+    IodogsCatalog\Controller\Factory\SolutionControllerFactory,
+    IodogsCatalog\Service\LineService,
+    IodogsCatalog\Service\Factory\LineServiceFactory,
+    IodogsCatalog\Service\SolutionService,
+    IodogsCatalog\Service\Factory\SolutionServiceFactory;
 use IodogsCatalog\Service\Factory\CatalogServiceFactory;
 
 return [
     'controllers' => [
         'factories' => [
-            'CatalogControllerFactory' => 'IodogsCatalog\Controller\Factory\CatalogControllerFactory',
+            CatalogController::class => CatalogControllerFactory::class,
             CategoryAdminController::class => CategoryAdminControllerFactory::class,
-            'CategoryAdminControllerFactory' => 'IodogsCatalog\Controller\Factory\CategoryAdminControllerFactory',
             LineAdminController::class => LineAdminControllerFactory::class,
-            'LineAdminControllerFactory' => 'IodogsCatalog\Controller\Factory\LineAdminControllerFactory',
-            'SolutionAdminControllerFactory' => 'IodogsCatalog\Controller\Factory\SolutionAdminControllerFactory',
+            LineController::class => LineControllerFactory::class,
             SolutionAdminController::class => SolutionAdminControllerFactory::class,
-            'SolutionControllerFactory' => 'IodogsCatalog\Controller\Factory\SolutionControllerFactory',
+            SolutionController::class => SolutionControllerFactory::class,
         ],
 
     ],
     'service_manager' => [
-   'factories' => [
-       CatalogService::class => CatalogServiceFactory::class,
-            'LineServiceFactory' => 'IodogsCatalog\Service\Factory\LineServiceFactory',
-            'SolutionServiceFactory' => 'IodogsCatalog\Service\Factory\SolutionServiceFactory',
-
-   ],
-   'invokables' => [
-            'CategoryService' => 'IodogsCatalog\Service\CategoryService',
-            'LineService' => 'IodogsCatalog\Service\LineService'],
+       'factories' => [
+           CatalogService::class => CatalogServiceFactory::class,
+           LineService::class => LineServiceFactory::class,
+           SolutionService::class => SolutionServiceFactory::class
+       ],
     ],
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-    ],
-    'view_helpers' => [
-    'invokables' => [
-
-    ],
-    'factories' => [
-
-    ]
     ],
 ];

@@ -1,4 +1,5 @@
 <?php
+namespace IodogsFiles;
 
 use IodogsFiles\Service\S3Service,
     IodogsFiles\Service\Factory\S3ServiceFactory,

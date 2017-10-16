@@ -1,7 +1,9 @@
 <?php
 namespace IodogsAuth;
 
-use Zend\Mvc\MvcEvent;
+use Zend\Mvc\MvcEvent,
+    IodogsAuth\Service\AuthService,
+    IodogsAuth\Service\AclService;
 
 class Module
 {
@@ -32,8 +34,8 @@ class Module
         $application = $e->getApplication();
         $routeMatch = $e->getRouteMatch();
         $serviceManager = $application->getServiceManager();
-        $authService = $serviceManager->get('AuthServiceFactory');
-        $aclService = $serviceManager->get('AclService');
+        $authService = $serviceManager->get(AuthService::class);
+        $aclService = $serviceManager->get(AclService::class);
         $controller = $routeMatch->getParam('controller');
 
         $controller_ = $e->getTarget();

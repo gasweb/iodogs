@@ -6,7 +6,8 @@ use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     IodogsApplication\Form\InputFilter\ContactFormInputFilter,
     Zend\Mail,
-    Zend\Mail\Transport\Sendmail;
+    Zend\Mail\Transport\Sendmail,
+    IodogsCatalog\Service\LineService;
 
 /**
  * Default action for module
@@ -130,7 +131,7 @@ class ContentController extends AbstractActionController
      */
     public function homeAction()
     {
-        $lineService = $this->sl->get('LineServiceFactory');
+        $lineService = $this->sl->get(LineService::class);
         $lines = $lineService->getLinesArray();
         return (array("lines" => $lines));
     }

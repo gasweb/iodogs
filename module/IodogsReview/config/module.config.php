@@ -1,32 +1,40 @@
 <?php
-return array(
-    'service_manager' => array(
-        'factories' => array(
-            'ReviewServiceFactory' => 'IodogsReview\Service\Factory\ReviewServiceFactory'
-        ),
-    ),
-    'controllers' => array(
-        'factories' => array(
-            'ReviewControllerFactory' => 'IodogsReview\Controller\Factory\ReviewControllerFactory'
-        ),
-    ),
-    'router' => array(
-        'routes' => array(
-            'review-add' => array(
-                'type' => 'literal',
-                'options' => array(
+namespace IodogsReview;
+
+use IodogsReview\Service\ReviewService,
+    IodogsReview\Service\Factory\ReviewServiceFactory,
+    IodogsReview\Controller\ReviewController,
+    IodogsReview\Controller\Factory\ReviewControllerFactory;
+use Zend\Router\Http\Literal;
+
+return [
+    'service_manager' => [
+        'factories' => [
+            ReviewService::class => ReviewServiceFactory::class
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
+            ReviewController::class => ReviewControllerFactory::class
+        ],
+    ],
+    'router' => [
+        'routes' => [
+            'review-add' => [
+                'type' => Literal::class,
+                'options' => [
                     'route' => '/review/add',
-                    'defaults' => array(
-                        'controller' => 'ReviewControllerFactory',
+                    'defaults' => [
+                        'controller' => ReviewController::class,
                         'action' => 'add'
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-);
+        ],
+    ],
+];

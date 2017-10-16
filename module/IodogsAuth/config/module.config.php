@@ -1,38 +1,44 @@
 <?php
+namespace IodogsAuth;
 
-return array(
-    'service_manager' => array(
-        'factories' => array(
-            'AuthServiceFactory' => 'IodogsAuth\Service\Factory\AuthServiceFactory',
-        ),
-        'invokables' => array(
-            'AclService' => 'IodogsAuth\Service\AclService'
-        ),
-    ),
-    'controllers' => array(
-        'factories' => array(
-            'AuthControllerFactory' => 'IodogsAuth\Controller\Factory\AuthControllerFactory'
-        ),
-    ),
-    'view_manager' => array(
+use IodogsAuth\Service\AclService,
+    IodogsAuth\Service\Factory\AclServiceFactory,
+    IodogsAuth\Service\AuthService,
+    IodogsAuth\Service\Factory\AuthServiceFactory,
+    Zend\ServiceManager\Factory\InvokableFactory,
+    IodogsAuth\Controller\Factory\AuthControllerFactory,
+    IodogsAuth\Controller\AuthController;
+return [
+    'service_manager' => [
+        'factories' => [
+            AuthService::class => AuthServiceFactory::class,
+            AclService::class => AclServiceFactory::class
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
+            AuthController::class => AuthControllerFactory::class
+        ],
+    ],
+    'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
-        'template_path_stack' => array(
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-    'router' => array(
-        'routes' => array(
-            'login' => array(
+        ],
+    ],
+    'router' => [
+        'routes' => [
+            'login' => [
                 'type' => 'literal',
-                'options' => array(
+                'options' => [
                     'route' => '/login',
-                    'defaults' => array(
-                        'controller' => 'AuthControllerFactory',
+                    'defaults' => [
+                        'controller' => AuthController::class,
                         'action' => 'login'
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

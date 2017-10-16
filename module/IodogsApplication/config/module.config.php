@@ -14,37 +14,50 @@ use IodogsApplication\Controller\AdminContentController,
     IodogsApplication\Controller\Factory\InfoBlockAdminControllerFactory,
     IodogsApplication\Controller\InfoBlockAdminController,
     IodogsApplication\Service\InfoBlockService,
-    IodogsApplication\Service\Factory\InfoBlockServiceFactory;
+    IodogsApplication\Service\Factory\InfoBlockServiceFactory,
+    IodogsApplication\Controller\ContentController,
+    IodogsApplication\Controller\Factory\ContentControllerFactory;
 
 //Products use block
 use IodogsProduct\Controller\ProductAdminController,
-    IodogsProduct\Controller\AdminProductImageController;
+    IodogsProduct\Controller\AdminProductImageController,
+    IodogsProduct\Controller\ProductController;
 
 //Breed use block
-use IodogsBreed\Controller\AdminBreedController;
+use IodogsBreed\Controller\AdminBreedController,
+    IodogsBreed\Controller\BreedController;
 
 //Images use block
 use IodogsFiles\Controller\ImageController;
 
 //Categories use block
-use IodogsCatalog\Controller\CategoryAdminController;
+use IodogsCatalog\Controller\CategoryAdminController,
+    IodogsCatalog\Controller\CatalogController;
 
 //Line use block
-use IodogsCatalog\Controller\LineAdminController;
+use IodogsCatalog\Controller\LineAdminController,
+    IodogsCatalog\Controller\LineController;
 
 //Solution use block
-use IodogsCatalog\Controller\SolutionAdminController;
+use IodogsCatalog\Controller\SolutionAdminController,
+    IodogsCatalog\Controller\SolutionController;
+
+//Search use block
+use IodogsApplication\Controller\SearchController,
+    IodogsApplication\Controller\Factory\SearchControllerFactory;
+
+//Old aplication
+use IodogsApplication\Controller\OldApplicationController,
+    IodogsApplication\Controller\Factory\OldApplicationControllerFactory;
 
 return [
     'controllers' => [
-        'invokables' => [
-            'OldApplicationController' => 'IodogsApplication\Controller\OldApplicationController',
-        ],
         'factories' => [
             AdminContentController::class => AdminContentControllerFactory::class,
-            'ContentControllerFactory' => 'IodogsApplication\Controller\Factory\ContentControllerFactory',
+            ContentController::class => ContentControllerFactory::class,
             InfoBlockAdminController::class => InfoBlockAdminControllerFactory::class,
-            'SearchControllerFactory' => 'IodogsApplication\Controller\Factory\SearchControllerFactory'
+            SearchController::class => SearchControllerFactory::class,
+            OldApplicationController::class => OldApplicationControllerFactory::class
         ]
     ],
     'service_manager' => [
@@ -68,7 +81,7 @@ return [
                 'type' => 'hostname',
                 'options' => [
                     'defaults' => [
-                        'controller' => 'ContentControllerFactory',
+                        'controller' => ContentController::class,
                         'action' => 'region'
                     ],
                 ],
@@ -530,7 +543,7 @@ return [
                                 'slug' => '[a-zA-Z-_0-9]+',
                             ],
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action'     => 'slug',
                             ],
                         ],
@@ -540,7 +553,7 @@ return [
                         'options' => [
                             'route' => '/search',
                             'defaults' => [
-                                'controller' => 'SearchControllerFactory',
+                                'controller' => SearchController::class,
                                 'action' => 'index'
                             ],
                         ],
@@ -550,7 +563,7 @@ return [
                         'options' => [
                             'route'    => '/',
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action'     => 'home',
                             ],
                         ],
@@ -560,7 +573,7 @@ return [
                         'options' => [
                             'route' => '/wholesale',
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action' => 'wholesale'
                             ],
                         ],
@@ -570,7 +583,7 @@ return [
                         'options' => [
                             'route' => '/buy',
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action' => 'buy'
                             ],
                         ],
@@ -580,7 +593,7 @@ return [
                         'options' => [
                             'route' => '/contacts',
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action' => 'contacts'
                             ],
                         ],
@@ -590,7 +603,7 @@ return [
                         'options' => [
                             'route' => '/video',
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action' => 'video'
                             ],
                         ],
@@ -600,7 +613,7 @@ return [
                         'options' => [
                             'route' => '/message/sent',
                             'defaults' => [
-                                'controller' => 'ContentControllerFactory',
+                                'controller' => ContentController::class,
                                 'action' => 'messageSent'
                             ],
                         ],
@@ -610,7 +623,7 @@ return [
                         'options' => [
                             'route'    => '/breed/',
                             'defaults' => [
-                                'controller' => 'BreedControllerFactory',
+                                'controller' => BreedController::class,
                                 'action'     => 'allBreeds',
                             ],
                         ],
@@ -624,7 +637,7 @@ return [
                                         'slug' => '[a-zA-Z0-9-]+',
                                     ],
                                     'defaults' => [
-                                        'controller' => 'BreedControllerFactory',
+                                        'controller' => BreedController::class,
                                         'action' => 'breedSlug'
                                     ],
                                 ],
@@ -636,7 +649,7 @@ return [
                         'options' => [
                             'route'    => '/catalog/',
                             'defaults' => [
-                                'controller' => 'CatalogControllerFactory',
+                                'controller' => CatalogController::class,
                                 'action'     => 'category',
                             ],
                         ],
@@ -650,7 +663,7 @@ return [
                                         'id' => '[0-9A-Za-z]+',
                                     ],
                                     'defaults' => [
-                                        'controller' => 'CatalogControllerFactory',
+                                        'controller' => CatalogController::class,
                                         'action'     => 'slug',
                                     ],
                                 ],
@@ -662,7 +675,7 @@ return [
                         'options' => [
                             'route'    => '/solution/',
                             'defaults' => [
-                                'controller' => 'SolutionControllerFactory',
+                                'controller' => SolutionController::class,
                                 'action'     => 'list',
                             ],
                         ],
@@ -676,7 +689,7 @@ return [
                                         'id' => '[0-9A-Za-z]+',
                                     ],
                                     'defaults' => [
-                                        'controller' => 'SolutionControllerFactory',
+                                        'controller' => SolutionController::class,
                                         'action'     => 'slug',
                                     ],
                                 ],
@@ -688,8 +701,8 @@ return [
                         'options' => [
                             'route'    => '/line/',
                             'defaults' => [
-                                'controller' => 'LineControllerFactory',
-                                'action'     => 'lineList',
+                                'controller' => LineController::class,
+                                'action'     => 'line-list',
                             ],
                         ],
                         'may_terminate' => true,
@@ -702,7 +715,7 @@ return [
                                         'id' => '[0-9a-zA-Z-]+',
                                     ],
                                     'defaults' => [
-                                        'controller' => 'LineControllerFactory',
+                                        'controller' => LineController::class,
                                         'action'     => 'index',
                                     ],
                                 ],
@@ -717,7 +730,7 @@ return [
                                 'id' => '[0-9A-Za-z]+',
                             ],
                             'defaults' => [
-                                'controller' => 'ProductControllerFactory',
+                                'controller' => ProductController::class,
                                 'action'     => 'index',
                             ],
                         ],
@@ -730,7 +743,7 @@ return [
                             'id' => '[0-9]+'
                         ],
                         'defaults' => [
-                            'controller' => 'OldApplicationController',
+                            'controller' => OldApplicationController::class,
                             'action' => 'product'
                         ],
                     ],
@@ -743,7 +756,7 @@ return [
                                 'id' => '[0-9]+'
                             ],
                             'defaults' => [
-                                'controller' => 'OldApplicationController',
+                                'controller' => OldApplicationController::class,
                                 'action' => 'breed'
                             ],
                         ],
@@ -756,7 +769,7 @@ return [
                                 'id' => '[0-9]+'
                             ],
                             'defaults' => [
-                                'controller' => 'OldApplicationController',
+                                'controller' => OldApplicationController::class,
                                 'action' => 'category'
                             ],
                         ],
@@ -766,7 +779,7 @@ return [
                         'options' => [
                             'route' => '/breed',
                             'defaults' => [
-                                'controller' => 'BreedControllerFactory',
+                                'controller' => BreedController::class,
                                 'action' => 'allBreeds'
                             ],
                         ],
