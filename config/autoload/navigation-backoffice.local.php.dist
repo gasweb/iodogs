@@ -1,0 +1,134 @@
+<?php
+return [
+    'navigation' => [
+        'admin-nav' => [
+            'category' => [
+                'label' => 'Категории',
+                'route' => 'app/admin-category',
+                'pages' => [
+                    [
+                        'route' => 'app/admin-category',
+                        'label' => 'Список категорий'
+                    ],
+                    [
+                        'route' => 'app/admin-category/add',
+                        'label' => 'Добавить категорию'
+                    ],
+                ],
+            ],
+            'products' => [
+                'label' => 'Продукты',
+                'route' => 'app/backoffice/product',
+                'pages' => [
+                    [
+                        'route' => 'app/backoffice/product',
+                        'label' => 'Список продуктов',
+                    ],
+                    [
+                        'route' => 'app/backoffice/product/add',
+                        'label' => 'Добавить продукт',
+                    ],
+                ],
+            ],
+            'content' => [
+                'label' => 'Материалы',
+                'route' => 'app/backoffice/content',
+                'pages' => [
+                    [
+                        'route' => 'app/backoffice/content',
+                        'label' => 'Список материалов'
+                    ],
+                    [
+                        'route' => 'app/backoffice/content/add',
+                        'label' => 'Добавить материал'
+                    ],
+                ],
+            ],
+            'info_block' => [
+                'label' => 'Инфоблоки',
+                'route' => 'app/backoffice/info-block',
+                'pages' => [
+                    [
+                        'route' => 'app/backoffice/info-block',
+                        'label' => 'Список инфоблоков'
+                    ],
+                    [
+                        'route' => 'app/backoffice/info-block/add',
+                        'label' => 'Добавить инфоблок'
+                    ],
+                ],
+            ],
+            'lines' => [
+                'label' => 'Серии',
+                'route' => 'app/admin-line',
+                'pages' => [
+                    [
+                        'route' => 'app/admin-line',
+                        'label' => 'Список серий'
+                    ],
+                    [
+                        'route' => 'app/admin-line/add',
+                        'label' => 'Добавить серию'
+                    ],
+                ],
+            ],
+            'breeds' => [
+                'label' => 'Породы',
+                'route' => 'app/backoffice/breed',
+                'pages' => [
+                    [
+                        'route' => 'app/backoffice/breed',
+                        'label' => 'Список пород'
+                    ],
+                    [
+                        'route' => 'app/backoffice/breed/add',
+                        'label' => 'Добавить породу'
+                    ],
+                ],
+            ],
+            'solution' => [
+                'label' => 'Решения',
+                'route' => 'app/admin-solution',
+                'pages' => [
+                    [
+                        'route' => 'app/admin-solution',
+                        'label' => 'Список'
+                    ],
+                    [
+                        'route' => 'app/admin-solution/add',
+                        'label' => 'Добавить решение'
+                    ],
+                ],
+            ],
+
+            /*'distributors' => array(
+                'label' => 'Дистрибьюторы',
+                'route' => 'admin-distributor',
+                'pages' => array(
+                    array(
+                        'route' => 'admin-distributor',
+                        'label' => 'Список дистрибьюторов'
+                        ),
+                    array(
+                        'route' => 'admin-distributor-add',
+                        'label' => 'Добавить дистрибьютора'
+                        ),
+                    ),
+                ),
+            'review' => array(
+                'label' => 'Отзывы',
+                'route' => 'admin-review',
+                'pages' => array(
+                    array(
+                        'route' => 'admin-review',
+                        'label' => 'Список отзывов'
+                        ),
+                    array(
+                        'route' => 'admin-review-add',
+                        'label' => 'Добавить '
+                        ),
+                    ),
+                ),*/
+        ],
+    ],
+];

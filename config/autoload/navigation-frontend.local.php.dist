@@ -1,0 +1,212 @@
+<?php
+return [
+    'navigation' => [
+        'application-nav' => [
+            'about' => [
+                'label' => 'О косметике',
+                'route' => 'app/home',
+                'pages' => [
+                    [
+                        'route' => 'app/content',
+                        'label' => 'История бренда',
+                        'params' => ['slug' => 'brand']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Ингредиенты',
+                        'params' => ['slug' => 'ingredients']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Вопросы и ответы',
+                        'params' => ['slug' => 'faq']
+                    ],
+                    [
+                        'route' => 'app/video',
+                        'label' => 'Видео',
+                    ],
+
+                ],
+            ],
+            'catalog' => [
+                'label' => 'Продукция',
+                'route' => 'app/catalog',
+                'pages' => [
+                    [
+                        'label' => 'Шампуни',
+                        'route' => 'app/catalog/category-slug',
+                        'params' => [
+                            'slug' => 'shampoo'
+                        ],
+                    ],
+                    [
+                        'label' => 'Кондиционеры',
+                        'route' => 'app/catalog/category-slug',
+                        'params' => [
+                            'slug' => 'conditioners'
+                        ],
+                    ],
+                    [
+                        'label' => 'Спреи для грумминга',
+                        'route' => 'app/catalog/category-slug',
+                        'params' => [
+                            'slug' => 'spray'
+                        ],
+                    ],
+                    [
+                        'label' => 'Добавки для шерсти',
+                        'route' => 'app/catalog/category-slug',
+                        'params' => [
+                            'slug' => 'supplements'
+                        ],
+                    ],
+                    [
+                        'label' => 'Средства для укладки',
+                        'route' => 'app/catalog/category-slug',
+                        'params' => [
+                            'slug' => 'styling'
+                        ],
+                    ],
+                    [
+                        'label' => 'Дезодоранты',
+                        'route' => 'app/catalog/category-slug',
+                        'params' => [
+                            'slug' => 'replascent'
+                        ],
+                    ],
+                ],
+            ],
+            'lines' => [
+                'label' => 'Серии',
+                'route' => 'app/line',
+                'pages' => [
+                    [
+                        'label' => 'Coature',
+                        'route' => 'app/line/slug',
+                        'params' => [
+                            'slug' => 'coature'
+                        ],
+                    ],
+                    [
+                        'label' => 'Vanity',
+                        'route' => 'app/line/slug',
+                        'params' => [
+                            'slug' => 'vanity'
+                        ],
+                    ],
+                    [
+                        'label' => 'Salon',
+                        'route' => 'app/line/slug',
+                        'params' => [
+                            'slug' => 'salon'
+                        ],
+                    ],
+                    [
+                        'label' => 'Everyday',
+                        'route' => 'app/line/slug',
+                        'params' => [
+                            'slug' => 'everyday'
+                        ],
+                    ],
+                    [
+                        'label' => 'Naturaluxury Everyday',
+                        'route' => 'app/line/slug',
+                        'params' => [
+                            'slug' => 'naturaluxury-everyday'
+                        ],
+                    ],
+                ],
+            ],
+            'solutions' => [
+                'label' => 'Решения',
+                'route' => 'app/content',
+                'params' => [
+                    'slug' => 'solutions'
+                ],
+                'pages' => [
+                    [
+                        'label' => 'Для породы',
+                        'route' => 'app/breed',
+                    ],
+                    [
+                        'label' => 'Выпадение шерсти',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'shedding']
+                    ],
+                    [
+                        'label' => 'Зудящая, шелушащаяся кожа',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'itchy-flaky-skin']
+                    ],
+                    [
+                        'label' => 'Нежелательный запах',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'undesirable-odor']
+                    ],
+                    [
+                        'label' => 'Аллергии',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'allergies']
+                    ],
+                    [
+                        'label' => 'Тонкая, безжизненная шерсть',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'thin-lifeless-hair']
+                    ],
+                    [
+                        'label' => 'Тусклая шерсть',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'dull-coat']
+                    ],
+                    [
+                        'label' => 'Наэлектризованная, непослушная шерсть',
+                        'route' => 'app/solution/slug',
+                        'params' => ['slug' => 'static-flyaways']
+                    ],
+
+
+                ],
+            ],
+            'learn' => [
+                'label' => 'Обучение',
+                'route' => 'app/content',
+                'params' => [
+                    'slug' => 'learn'
+                ],
+                'pages' => [
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Основы купания',
+                        'params' => ['slug' => 'bathe-basic']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Основы сушки',
+                        'params' => ['slug' => 'dry-basic']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Разрушаем мифы',
+                        'params' => ['slug' => 'myths']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Правила ухода за собакой',
+                        'params' => ['slug' => 'do-dont']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Уход за щенками',
+                        'params' => ['slug' => 'puppy']
+                    ],
+                    [
+                        'route' => 'app/content',
+                        'label' => 'Типы шерсти',
+                        'params' => ['slug' => 'coat-types']
+                    ],
+
+                ],
+            ],
+        ],
+    ],
+];
