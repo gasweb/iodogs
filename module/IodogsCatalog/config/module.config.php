@@ -6,7 +6,10 @@ use IodogsCatalog\Controller\CategoryAdminController,
     IodogsCatalog\Controller\LineAdminController,
     IodogsCatalog\Controller\Factory\LineAdminControllerFactory,
     IodogsCatalog\Controller\SolutionAdminController,
-    IodogsCatalog\Controller\Factory\SolutionAdminControllerFactory;
+    IodogsCatalog\Controller\Factory\SolutionAdminControllerFactory,
+    IodogsCatalog\Service\CatalogService,
+    IodogsCatalog\Controller\Factory\CatalogControllerFactory;
+use IodogsCatalog\Service\Factory\CatalogServiceFactory;
 
 return [
     'controllers' => [
@@ -24,7 +27,7 @@ return [
     ],
     'service_manager' => [
    'factories' => [
-            'CatalogServiceFactory' => 'IodogsCatalog\Service\Factory\CatalogServiceFactory',
+       CatalogService::class => CatalogServiceFactory::class,
             'LineServiceFactory' => 'IodogsCatalog\Service\Factory\LineServiceFactory',
             'SolutionServiceFactory' => 'IodogsCatalog\Service\Factory\SolutionServiceFactory',
 

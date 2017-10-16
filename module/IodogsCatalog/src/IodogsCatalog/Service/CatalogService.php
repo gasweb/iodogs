@@ -6,6 +6,7 @@ namespace IodogsCatalog\Service;
 
 class CatalogService
 {
+    /** @var \Doctrine\ORM\EntityManager $objectManager */
 	private $objectManager;
 
 	private $infoBlockService;
@@ -33,7 +34,7 @@ class CatalogService
     {           
             $Categories = $this->objectManager->
             getRepository('IodogsDoctrine\Entity\Category')->
-            findBy(array("active"=>1));
+            findAll();
             foreach ($Categories as $Category) {
                 $categoriesArray[] = array(
                     "id" => $Category->getId(),

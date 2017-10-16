@@ -10,12 +10,12 @@ class CatalogController extends AbstractActionController
     /**
     * @var \IodogsProduct\Service\ProductService
     */
-    private $ProductService;
+    private $productService;
 
     /**
-    * @var \IodogsCatalog\Service\ProductService
+    * @var \IodogsCatalog\Service\CatalogService
     */
-    private $CatalogService;
+    private $catalogService;
 
     /**
     * @var \IodogsCatalog\Service\LineService
@@ -58,13 +58,12 @@ class CatalogController extends AbstractActionController
 
     public function categoryAction()
     {
-        $objectManager = $this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager');   
-        $categories = $objectManager->
-        getRepository('IodogsDoctrine\Entity\Category')->
-        findAll();                 
 
-        return (array("categories" => $categories));
+        $categories = $this->catalogService->getCategoriesArray();
+
+        return [
+            "categories" => $categories
+        ];
     }
 
     public function slugAction(){
