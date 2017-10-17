@@ -111,7 +111,20 @@ class ContentController extends AbstractActionController
                 $mail->setFrom($postData['email'], $postData['name']);
                 $mail->addTo('big-papa@mail.ru', 'Gas Smith');
                 $mail->setSubject($header);
-                $transport = new Sendmail();
+                $transport = new Mail\Transport\Smtp();
+                $transport->setOptions(new Mail\Transport\SmtpOptions(
+                    [
+                        'host' => 'smtp.mail.ru',
+                        'port' => 465,
+                        'connection_class'  => 'login',
+                        'connection_config' => [
+                            'username' => 'big-papa@mail.ru',
+                            'password' => '248-10-82',
+                            'charset' => 'UTF-8'
+                        ],
+                    ]
+                ));
+
                 $transport->send($mail);
 
                 return $this->
