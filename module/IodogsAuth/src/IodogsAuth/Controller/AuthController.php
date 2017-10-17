@@ -28,14 +28,14 @@ class AuthController extends AbstractActionController
     public function loginAction()
     {
         if($this->authService->checkAuth())
-            $this->redirect()->toRoute('app/iodogs-admin');
+            $this->redirect()->toRoute('app/backoffice');
         
         $request = $this->getRequest();
         if($request->isPost())
         {
             $result = $this->authService->authenticateByCredentials($request->getPost('user_name'), $request->getPost('password'));
             if($result->getCode() == 1)
-                $this->redirect()->toRoute('app/iodogs-admin');
+                $this->redirect()->toRoute('app/backoffice');
         }
         $LoginForm = new LoginForm();
 
