@@ -34,6 +34,7 @@ return [
                 'options' => [
                     'route' => '/login',
                     'defaults' => [
+                        'cache' => false,
                         'controller' => AuthController::class,
                         'action' => 'login'
                     ],
