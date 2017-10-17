@@ -35,7 +35,8 @@
         "evandotpro/edp-module-layouts": "^1.0",
         "zendframework/zend-permissions-acl": "*@stable",
         "zendframework/zend-mvc-console": "^1.1",
-        "zendframework/zend-hydrator": "^2.3"
+        "zendframework/zend-hydrator": "^2.3",
+        "zendframework/zend-file": "^2.7"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "^1.1.0",
