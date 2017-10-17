@@ -593,6 +593,7 @@ return [
                         'options' => [
                             'route' => '/contacts',
                             'defaults' => [
+                                'cache' => false,
                                 'controller' => ContentController::class,
                                 'action' => 'contacts'
                             ],
