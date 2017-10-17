@@ -1,0 +1,11 @@
+<?php
+return [
+    'backoffice' => [
+        'credentials' => [
+            [
+                'login' => null,
+                'password' => null
+            ]
+        ]
+    ]
+];

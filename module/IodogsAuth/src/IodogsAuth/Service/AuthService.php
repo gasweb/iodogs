@@ -6,24 +6,31 @@ use IodogsAuth\Adapter\AuthAdapter;
 
 class AuthService
 {
+    /** @var \Zend\Authentication\AuthenticationService $zf2AuthService */
     private $zf2AuthService;
 
-    public function __construct($AuthenticationService)
+    /** @var \IodogsAuth\Adapter\AuthAdapter $authAdapter */
+    private $authAdapter;
+
+    public function __construct($AuthenticationService, $authAdapter)
     {
         $this->zf2AuthService = $AuthenticationService;
+        $this->authAdapter = $authAdapter;
     }
 
     public function authenticateByCredentials($login, $password)
     {
-        $AuthAdapter = new AuthAdapter($login, $password);
-        $AuthResult = $this->zf2AuthService->authenticate($AuthAdapter);
+        $this->authAdapter->setLogin($login)->setPassword($password);
+        $AuthResult = $this->zf2AuthService->authenticate($this->authAdapter);
         return $AuthResult;
     }
 
     public function checkAuth()
     {
         if ($this->zf2AuthService->hasIdentity())
-        return true;
+        {
+            return true;
+        }
         return false;
     }
 }

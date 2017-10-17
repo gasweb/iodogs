@@ -7,10 +7,13 @@ use IodogsAuth\Service\AclService,
     IodogsAuth\Service\Factory\AuthServiceFactory,
     Zend\ServiceManager\Factory\InvokableFactory,
     IodogsAuth\Controller\Factory\AuthControllerFactory,
-    IodogsAuth\Controller\AuthController;
+    IodogsAuth\Controller\AuthController,
+    IodogsAuth\Adapter\AuthAdapter,
+    IodogsAuth\Adapter\AuthAdapterFactory;
 return [
     'service_manager' => [
         'factories' => [
+            AuthAdapter::class => AuthAdapterFactory::class,
             AuthService::class => AuthServiceFactory::class,
             AclService::class => AclServiceFactory::class
         ],

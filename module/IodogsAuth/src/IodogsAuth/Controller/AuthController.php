@@ -27,21 +27,33 @@ class AuthController extends AbstractActionController
 
     public function loginAction()
     {
+        $message = 'Введите логин и пароль для входа';
+
         if($this->authService->checkAuth())
+        {
             $this->redirect()->toRoute('app/backoffice');
-        
+        }
+
         $request = $this->getRequest();
         if($request->isPost())
         {
             $result = $this->authService->authenticateByCredentials($request->getPost('user_name'), $request->getPost('password'));
+
             if($result->getCode() == 1)
+            {
                 $this->redirect()->toRoute('app/backoffice');
+            }
+            else{
+                $message = "Неправильный логин или пароль...";
+            }
+
         }
         $LoginForm = new LoginForm();
 
-        return array(
-            'loginForm' => $LoginForm
-        );
+        return [
+            'loginForm' => $LoginForm,
+            'message' => $message
+        ];
     }
 
     public function successAction()
