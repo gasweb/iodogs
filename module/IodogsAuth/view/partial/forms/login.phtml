@@ -1,13 +1,13 @@
 <div class="jumbotron">
     <?php
-    $loginForm->setAttribute('action', $this->url('login'));
-    $loginForm->prepare();
-    echo $this->form()->openTag($loginForm);
-    echo $this->formRow($loginForm->get("user_name"));
-    echo $this->formRow($loginForm->get("password"));
+    $this->loginForm->setAttribute('action', $this->url('login'));
+    $this->loginForm->prepare();
+    echo $this->form()->openTag($this->loginForm);
+    echo $this->formRow($this->loginForm->get("user_name"));
+    echo $this->formRow($this->loginForm->get("password"));
     //echo $this->formCaptcha($loginForm->get("captcha"));
-    echo $this->formRow($loginForm->get("csrf"));
-    echo $this->formRow($loginForm->get("submit"));
+    echo $this->formRow($this->loginForm->get("csrf"));
+    echo $this->formRow($this->loginForm->get("submit"));
     echo $this->form()->closeTag();
     ?>
     <?php if ($this->message): ?>

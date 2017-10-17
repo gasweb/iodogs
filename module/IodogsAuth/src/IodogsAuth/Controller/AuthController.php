@@ -50,10 +50,10 @@ class AuthController extends AbstractActionController
         }
         $LoginForm = new LoginForm();
 
-        return [
+        return new ViewModel([
+            'message' => $message,
             'loginForm' => $LoginForm,
-            'message' => $message
-        ];
+        ]);
     }
 
     public function successAction()
