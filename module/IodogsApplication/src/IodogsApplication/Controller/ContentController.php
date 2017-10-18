@@ -114,12 +114,14 @@ class ContentController extends AbstractActionController
                 $transport = new Mail\Transport\Smtp();
                 $transport->setOptions(new Mail\Transport\SmtpOptions(
                     [
-                        'host' => 'smtp.mail.ru',
+                        'name' => 'contact-us',
+                        'host' => 'ssl://smtp.mail.ru',
                         'port' => 465,
-                        'connection_class'  => 'login',
+                        'connection_class'  => 'smtp',
                         'connection_config' => [
-                            'username' => 'big-papa@mail.ru',
-                            'password' => '248-10-82',
+                            'username' => 'mail@isleofdogs.ru',
+                            'password' => 'Ob;lBmA2mZ7q',
+                            'ssl' => 'tls',
                             'charset' => 'UTF-8'
                         ],
                     ]
