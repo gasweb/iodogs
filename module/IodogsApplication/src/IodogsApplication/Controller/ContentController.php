@@ -2,6 +2,7 @@
 namespace IodogsApplication\Controller;
 
 use IodogsApplication\Form\ContactForm;
+use IodogsApplication\Service\Mail\MailService;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     IodogsApplication\Form\InputFilter\ContactFormInputFilter,
@@ -17,6 +18,7 @@ use Zend\Mvc\Controller\AbstractActionController,
 class ContentController extends AbstractActionController
 {
     private $contentService;
+    /** @var  \Interop\Container\ContainerInterface $sl */
     private $sl;
 
     public function __construct($ContentService, $sl)
@@ -98,37 +100,17 @@ class ContentController extends AbstractActionController
             {
                 $header = (!empty($postData['header'])) ? $postData['header'] : 'iodogs: сообщение из формы контактов';
 
+                /** @var \Doctrine\ORM\EntityManager $om */
                 $om = $this->sl->get('Doctrine\ORM\EntityManager');
+
+                /** @var \IodogsApplication\Service\Mail\MailService $mailService */
+                $mailService = $this->sl->get(MailService::class);
                 $ContactFormEntity = new \IodogsDoctrine\Entity\ContactForm();
                 $ContactFormEntity->setDateAdd(new \DateTime("now"));
                 $ContactForm->getHydrator()->hydrate($ContactForm->getData(), $ContactFormEntity);
                 $om->persist($ContactFormEntity);
                 $om->flush();
-
-                $mail = new Mail\Message();
-                $mail->setEncoding('UTF-8');
-                $mail->setBody($postData['message']);
-                $mail->setFrom($postData['email'], $postData['name']);
-                $mail->addTo('big-papa@mail.ru', 'Gas Smith');
-                $mail->setSubject($header);
-                $transport = new Mail\Transport\Smtp();
-                $transport->setOptions(new Mail\Transport\SmtpOptions(
-                    [
-                        'name' => 'contact-us',
-                        'host' => 'ssl://smtp.mail.ru',
-                        'port' => 465,
-                        'connection_class'  => 'smtp',
-                        'connection_config' => [
-                            'username' => 'mail@isleofdogs.ru',
-                            'password' => 'Ob;lBmA2mZ7q',
-                            'ssl' => 'tls',
-                            'charset' => 'UTF-8'
-                        ],
-                    ]
-                ));
-
-                $transport->send($mail);
-
+                $mailService->sendContactUs($postData);
                 return $this->
                 redirect()->
                 toRoute('app/message-sent');

@@ -1,0 +1,21 @@
+<?php
+return [
+    'mail' => [
+    'to' => '__EMAIL_TO__',
+    'contact-us' => [
+            'transport' => [
+                'options' => [
+                    'host' => '__EMAIL_CUSTOMER_SERVICE_HOST__',
+                    'port' => __EMAIL_CUSTOMER_SERVICE_PORT__,
+                    'connection_class'  => 'plain',
+                    'connection_config' => [
+                        'username' => '__EMAIL_CUSTOMER_SERVICE_USER__',
+                        'password' => '__EMAIL_CUSTOMER_SERVICE_PASSWORD__',
+                        'ssl' => 'ssl',
+                        'charset' => 'UTF-8'
+                    ],
+                ]
+            ]
+        ]
+    ]
+];

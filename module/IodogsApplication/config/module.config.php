@@ -4,6 +4,11 @@ namespace IodogsApplication;
 use IodogsApplication\Service\Cache\Application\ApplicationCacheService;
 use IodogsApplication\Service\Cache\Factory\CacheServiceFactory;
 
+use IodogsApplication\Service\Mail\MailService,
+    IodogsApplication\Service\Mail\MailServiceFactory,
+    IodogsApplication\Service\Mail\Transport\TransportService,
+    IodogsApplication\Service\Mail\Transport\TransportServiceFactory;
+
 //ZF3 use block
 use Zend\Router\Http\Literal,
     Zend\Router\Http\Segment;
@@ -62,6 +67,8 @@ return [
     ],
     'service_manager' => [
    'factories' => [
+       MailService::class => MailServiceFactory::class,
+       TransportService::class => TransportServiceFactory::class,
        InfoBlockService::class => InfoBlockServiceFactory::class,
       'NavigationFactory' => 'IodogsApplication\Navigation\MenuNavigationFactory',
       'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
