@@ -38,7 +38,7 @@ class ContactForm
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=200, nullable=false)
+     * @ORM\Column(name="phone", type="string", length=200, nullable=true)
      */
     private $phone;
 
