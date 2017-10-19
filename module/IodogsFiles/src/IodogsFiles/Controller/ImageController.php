@@ -2,11 +2,13 @@
 namespace IodogsFiles\Controller;
 
 use IodogsFiles\Form\ImageEditForm;
+use IodogsFiles\Form\Upload\ImageUploadForm;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     IodogsApplication\Form\ConfirmForm,
     Zend\EventManager\EventManagerInterface,
-    IodogsFiles\InputFilter\ImageEditFilter;
+    IodogsFiles\InputFilter\ImageEditFilter,
+    Imagick;
 
 class ImageController extends AbstractActionController
 {
@@ -98,6 +100,53 @@ class ImageController extends AbstractActionController
     public function deleteSuccessAction()
     {
         return (new ViewModel());
+    }
+
+    public function uploadAction()
+    {
+        /** @var \IodogsFiles\Form\Upload\ImageUploadForm $ImageUploadForm */
+        $ImageUploadForm = new ImageUploadForm();
+        $messages = '';
+        $data = '';
+
+        /** @var \Zend\Http\PhpEnvironment\Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost())
+        {
+            $postData = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            $ImageUploadForm->setData($postData);
+            if ($ImageUploadForm->isValid())
+            {
+                $data = $ImageUploadForm->getData();
+                if (isset($data['image_file']) && is_array($data['image_file']))
+                {
+                    foreach ($data['image_file'] as $file) {
+                        $Imagick = new Imagick();
+                        $Imagick->readImage($file['tmp_name']);
+                        $Imagick->adaptiveResizeImage(700, 700);
+                        $name = md5(microtime().mt_rand(0, 1000));
+                        $Imagick->writeImage("./data/tmp/$name-700.jpg");
+                        $Imagick->adaptiveResizeImage(300, 300);
+                        $Imagick->writeImage("./data/tmp/$name-300.jpg");
+                    }
+
+                }
+
+            } else{
+                $messages = $ImageUploadForm->getMessages();
+            }
+        }
+        return new ViewModel(
+            [
+                'form' => $ImageUploadForm,
+                'messages' => $messages,
+                'data' => $data,
+            ]
+        );
     }
 
 }

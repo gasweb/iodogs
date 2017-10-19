@@ -260,41 +260,60 @@ return [
                                 ],
                             ],
                             'image' => [
-                                'type' => Segment::class,
+                                'type' => Literal::class,
                                 'options' => [
-                                    'route' => 'image/[:id]/',
-                                    'constraints' => [
-                                        'id' => '[0-9]+',
-                                    ],
-                                    'defaults' => [
-                                        'controller' => ImageController::class,
-                                        'action' => 'edit'
-                                    ]
+                                    'route' => 'image',
                                 ],
-                                'may_terminate' => true,
+                                'may_terminate' => false,
                                 'child_routes' => [
-                                    'delete' => [
+                                    'upload' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/upload',
+                                            'defaults' => [
+                                                'controller' => ImageController::class,
+                                                'action' => 'upload'
+                                            ]
+                                        ]
+                                    ],
+                                    'id' => [
                                         'type' => Segment::class,
                                         'options' => [
-                                            'route' => 'delete',
+                                            'route' => '/[:id]',
                                             'constraints' => [
                                                 'id' => '[0-9]+',
                                             ],
                                             'defaults' => [
                                                 'controller' => ImageController::class,
-                                                'action' => 'delete'
+                                                'action' => 'edit'
                                             ]
-                                        ]
-                                    ],
-                                    'delete-success' => [
-                                        'type' => Literal::class,
-                                        'options' => [
-                                            'route' => 'deleted',
-                                            'defaults' => [
-                                                'controller' => ImageController::class,
-                                                'action' => 'deleteSuccess'
-                                            ]
-                                        ]
+                                        ],
+                                        'may_terminate' => true,
+                                        'child_routes' => [
+                                            'delete' => [
+                                                'type' => Segment::class,
+                                                'options' => [
+                                                    'route' => '/delete',
+                                                    'constraints' => [
+                                                        'id' => '[0-9]+',
+                                                    ],
+                                                    'defaults' => [
+                                                        'controller' => ImageController::class,
+                                                        'action' => 'delete'
+                                                    ]
+                                                ]
+                                            ],
+                                            'delete-success' => [
+                                                'type' => Literal::class,
+                                                'options' => [
+                                                    'route' => '/deleted',
+                                                    'defaults' => [
+                                                        'controller' => ImageController::class,
+                                                        'action' => 'deleteSuccess'
+                                                    ]
+                                                ]
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],

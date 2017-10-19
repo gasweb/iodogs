@@ -1,0 +1,10 @@
+<h1>FORM</h1>
+<?php var_dump($this->messages) ?>
+<?php var_dump($this->data) ?>
+<?php
+$this->form->setAttribute('action', $this->url("app/backoffice/image/upload"));
+$this->form->prepare();
+echo $this->form()->openTag($this->form);
+echo $this->formFile($this->form->get('image_file'));
+echo $this->formSubmit($this->form->get('submit'));
+echo $this->form()->closeTag();

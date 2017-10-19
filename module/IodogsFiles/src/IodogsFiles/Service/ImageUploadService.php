@@ -25,7 +25,7 @@ class ImageUploadService
 			getRepository("\IodogsDoctrine\Entity\FileStorage")->
 			findOneBy(
 				array(
-					'id' => $fileId
+					'id' => $photoId
 				)
 			);
 			$File->setIsDelete(1);
@@ -107,7 +107,7 @@ class ImageUploadService
 	     	 if($httpadapter->isValid($file['name'])) {
 				//print_r($file);
 				//Устанавливаем новое имя для файла
-	         	$newFilename = md5(uniqid(rand(), true)) .time(). '.' . "jpg";	
+	         	$newFilename = md5(uniqid(mt_rand(100,30000), true)) .time(). '.' . "jpg";
 	         	$smallFilename = "small_".$newFilename;	
 
 	         	//Конечный путь для файла
