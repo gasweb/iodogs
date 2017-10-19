@@ -4,7 +4,7 @@ return [
         'credentials' => [
             'key'    => 'aws_key',
             'secret' => 'aws_secret',
-        ]
+        ],
         'region' => 'eu-central-1',
         'version' => 'latest'
     ]
