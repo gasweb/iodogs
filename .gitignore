@@ -1,7 +1,13 @@
 /http/upload
 /http/node_modules
-/data/cache
-/data/log
+/data/cache/*
+/data/log/*
+/data/tmp/*
+/data/images/*
+!/data/images/.gitkeep
+!/data/cache/.gitkeep
+!/data/log/.gitkeep
+!/data/tmp/.gitkeep
 /data/DoctrineORMModule
 .idea/*
 .vagrant/
