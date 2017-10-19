@@ -24,7 +24,9 @@ $this->headTitle('Контакты');
             <p>Предлагаем оптовые поставки на выгодных условиях. Индивидуальный подход к каждому клиенту. Оптовые цены обсуждаемы в зависимости от размера покупки. В случае тесного сотрудничества готовы сделать особое предложение. Мы готовы сотрудничать с любой организацией, ведущей бизнес на территории Российской Федерации.</p>
         </div>
     </div>
-    <div class="col-md-6 contacts__form_container">
+    <div class="col-md-6 col-md-offset-3 contacts__form_container">
+        <h2 class="text-center">Свяжитесь с нами</h2>
+        <hr>
         <?php
         echo $this->partial('partial/forms/contacts', array('form' => $contactsForm));
         ?>
