@@ -110,4 +110,20 @@ class ImageService
         );
     }
 
+    /**
+     * @return S3Service
+     */
+    public function getS3Service()
+    {
+        return $this->s3Service;
+    }
+
+    /**
+     * @param S3Service $s3Service
+     */
+    public function setS3Service($s3Service)
+    {
+        $this->s3Service = $s3Service;
+    }
+
 }
