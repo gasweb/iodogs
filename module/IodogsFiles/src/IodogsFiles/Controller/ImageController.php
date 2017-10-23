@@ -1,6 +1,7 @@
 <?php
 namespace IodogsFiles\Controller;
 
+use IodogsDoctrine\Entity\ImageStorage;
 use IodogsFiles\Form\ImageEditForm;
 use IodogsFiles\Form\Upload\ImageUploadForm;
 use Zend\Mvc\Controller\AbstractActionController,
@@ -131,20 +132,30 @@ class ImageController extends AbstractActionController
                 {
                     foreach ($data['image_file'] as $file) {
                         $Imagick = new Imagick();
-                        $name = md5(microtime().mt_rand(0, 1000));
+                        $ImageStorage = new ImageStorage();
+
+                        $name = sha1(microtime().mt_rand(0, 1000).mt_rand(1000, 9000));
+                        $small_file_name = $name.'-small';
+                        $tmp_dir = './data/tmp/';
+
                         $Imagick->readImage($file['tmp_name']);
 
                         $Imagick->thumbnailImage(700, 700);
-                        $Imagick->writeImage("./data/tmp/$name-700.jpg");
+                        $Imagick->writeImage($tmp_dir.$name.".jpg");
 
                         $Imagick->thumbnailImage(300, 300);
-                        $Imagick->writeImage("./data/tmp/$name-300.jpg");
+                        $Imagick->writeImage($tmp_dir.$small_file_name.".jpg");
 
-                        $this->imageService->getS3Service()->putObject("public/dev/$name-300.jpg", "./data/tmp/$name-300.jpg");
-                        $this->imageService->getS3Service()->putObject("public/dev/$name-700.jpg", "./data/tmp/$name-700.jpg");
-                        echo $this->imageService->getS3Service()->getPublicBucketLink().DIRECTORY_SEPARATOR."public/dev/$name-700.jpg";
-                        unlink("./data/tmp/$name-300.jpg");
-                        unlink("./data/tmp/$name-700.jpg");
+                        $this->imageService->getS3Service()->putObject("public/dev/$name.jpg", $tmp_dir.$name.".jpg");
+                        $this->imageService->getS3Service()->putObject("public/dev/$small_file_name.jpg", $tmp_dir.$small_file_name.".jpg");
+
+                        $ImageStorage->setS3FilePath($this->imageService->getS3Service()->getPublicBucketLink()."public/dev/$name.jpg")->setS3SmallFilePath($this->imageService->getS3Service()->getPublicBucketLink()."public/dev/$small_file_name.jpg")->setDate(new \DateTime());
+
+                        $this->om->persist($ImageStorage);
+                        $this->om->flush();
+
+                        unlink($tmp_dir.$name.".jpg");
+                        unlink($tmp_dir.$small_file_name.".jpg");
                         unlink($file['tmp_name']);
                     }
 
