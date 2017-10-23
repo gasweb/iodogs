@@ -4,7 +4,11 @@ namespace IodogsFiles\Service;
 class ImageService
 {
 
+    /** @var \Doctrine\ORM\EntityManager */
     private $om;
+
+    /** @var \IodogsFiles\Service\S3Service $s3Service */
+    private $s3Service;
 
     public function __construct($om, $s3Service)
     {
