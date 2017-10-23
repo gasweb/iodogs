@@ -1,6 +1,8 @@
 <?php
 namespace IodogsFiles\Service;
 
+use IodogsDoctrine\Entity\ImageStorage;
+
 class ImageService
 {
 
@@ -14,6 +16,56 @@ class ImageService
     {
         $this->om = $om;
         $this->s3Service = $s3Service;
+    }
+
+    public function getImages()
+    {
+        return $this->om->getRepository(ImageStorage::class)->findBy([], ['date' => 'desc']);
+    }
+
+    public function uploadImages($data, $config = [])
+    {
+        $result = [];
+        $largeResizeWidth = (isset($config['large_width'])) ? $config['large_width'] : 1050;
+        $largeResizeHeight = (isset($config['large_height'])) ? $config['large_height'] : 1050;
+        $smallResizeWidth = (isset($config['small_width'])) ? $config['small_width'] : 300;
+        $smallResizeHeight = (isset($config['small_height'])) ? $config['small_height'] : 300;
+
+        if (isset($data) && is_array($data))
+        {
+            foreach ($data as $file) {
+                $Imagick = new \Imagick();
+                $ImageStorage = new ImageStorage();
+
+                $name = sha1(microtime().mt_rand(0, 1000).mt_rand(1000, 9000));
+                $small_file_name = $name.'-small';
+                $tmp_dir = './data/tmp/';
+
+                $Imagick->readImage($file['tmp_name']);
+
+                $Imagick->resizeImage ( $largeResizeWidth, $largeResizeHeight,  \Imagick::FILTER_LANCZOS, 1, TRUE);
+                $Imagick->writeImage($tmp_dir.$name.".jpg");
+
+                $Imagick->resizeImage ( $smallResizeWidth, $smallResizeHeight,  \Imagick::FILTER_LANCZOS, 1, TRUE);
+
+                $Imagick->writeImage($tmp_dir.$small_file_name.".jpg");
+
+                $this->s3Service->putObject("public/dev/$name.jpg", $tmp_dir.$name.".jpg");
+                $this->s3Service->putObject("public/dev/$small_file_name.jpg", $tmp_dir.$small_file_name.".jpg");
+
+                $ImageStorage->setS3FilePath($this->s3Service->getPublicBucketLink()."public/dev/$name.jpg")->setS3SmallFilePath($this->s3Service->getPublicBucketLink()."public/dev/$small_file_name.jpg")->setDate(new \DateTime());
+
+                $result[] = $ImageStorage;
+
+                $this->om->persist($ImageStorage);
+                $this->om->flush();
+
+                unlink($tmp_dir.$name.".jpg");
+                unlink($tmp_dir.$small_file_name.".jpg");
+                unlink($file['tmp_name']);
+            }
+            return $result;
+        }
     }
 
     public function deleteImageById($photoId)

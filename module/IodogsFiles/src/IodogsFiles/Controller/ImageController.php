@@ -112,9 +112,8 @@ class ImageController extends AbstractActionController
     {
         /** @var \IodogsFiles\Form\Upload\ImageUploadForm $ImageUploadForm */
         $ImageUploadForm = new ImageUploadForm();
-        $messages = '';
-        $data = '';
-
+        $messages = [];
+        $images = $this->imageService->getImages();
         /** @var \Zend\Http\PhpEnvironment\Request $request */
         $request = $this->getRequest();
         if ($request->isPost())
@@ -130,35 +129,8 @@ class ImageController extends AbstractActionController
                 $data = $ImageUploadForm->getData();
                 if (isset($data['image_file']) && is_array($data['image_file']))
                 {
-                    foreach ($data['image_file'] as $file) {
-                        $Imagick = new Imagick();
-                        $ImageStorage = new ImageStorage();
-
-                        $name = sha1(microtime().mt_rand(0, 1000).mt_rand(1000, 9000));
-                        $small_file_name = $name.'-small';
-                        $tmp_dir = './data/tmp/';
-
-                        $Imagick->readImage($file['tmp_name']);
-
-                        $Imagick->thumbnailImage(700, 700);
-                        $Imagick->writeImage($tmp_dir.$name.".jpg");
-
-                        $Imagick->thumbnailImage(300, 300);
-                        $Imagick->writeImage($tmp_dir.$small_file_name.".jpg");
-
-                        $this->imageService->getS3Service()->putObject("public/dev/$name.jpg", $tmp_dir.$name.".jpg");
-                        $this->imageService->getS3Service()->putObject("public/dev/$small_file_name.jpg", $tmp_dir.$small_file_name.".jpg");
-
-                        $ImageStorage->setS3FilePath($this->imageService->getS3Service()->getPublicBucketLink()."public/dev/$name.jpg")->setS3SmallFilePath($this->imageService->getS3Service()->getPublicBucketLink()."public/dev/$small_file_name.jpg")->setDate(new \DateTime());
-
-                        $this->om->persist($ImageStorage);
-                        $this->om->flush();
-
-                        unlink($tmp_dir.$name.".jpg");
-                        unlink($tmp_dir.$small_file_name.".jpg");
-                        unlink($file['tmp_name']);
-                    }
-
+                    $images = $this->imageService->uploadImages($data['image_file']);
+                    $this->redirect()->refresh();
                 }
 
             } else{
@@ -169,7 +141,7 @@ class ImageController extends AbstractActionController
             [
                 'form' => $ImageUploadForm,
                 'messages' => $messages,
-                'data' => $data,
+                'images' => $images,
             ]
         );
     }
