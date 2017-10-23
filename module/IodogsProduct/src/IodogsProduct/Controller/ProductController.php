@@ -8,7 +8,7 @@ use IodogsProduct\Form\ProductForm;
 class ProductController extends AbstractActionController
 {
     /**
-    * @var \Iodogs\Service\ProductService
+    * @var \IodogsProduct\Service\ProductService
     */
     private $productService;
 
@@ -37,7 +37,12 @@ class ProductController extends AbstractActionController
             $reviews = $Product->getReview();
             $reviewArray = $this->reviewService->getViewByArray($reviews);
             $productViewArray = $this->productService->getViewArray($Product);
-            return (array("product" => $productViewArray, "reviews" =>$reviewArray));
+            return (
+                [
+                    "product" => $productViewArray,
+                    "reviews" =>$reviewArray
+                ]
+            );
         }
         $this->getResponse()->setStatusCode(404);
         return;
