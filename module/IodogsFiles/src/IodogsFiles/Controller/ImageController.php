@@ -131,14 +131,18 @@ class ImageController extends AbstractActionController
                 {
                     foreach ($data['image_file'] as $file) {
                         $Imagick = new Imagick();
-                        $Imagick->readImage($file['tmp_name']);
-                        $Imagick->adaptiveResizeImage(700, 700);
                         $name = md5(microtime().mt_rand(0, 1000));
+                        $Imagick->readImage($file['tmp_name']);
+
+                        $Imagick->thumbnailImage(700, 700);
                         $Imagick->writeImage("./data/tmp/$name-700.jpg");
-                        $this->imageService->getS3Service()->putObject("public/dev/$name-700.jpg", "./data/tmp/$name-700.jpg");
-                        $Imagick->adaptiveResizeImage(300, 300);
+
+                        $Imagick->thumbnailImage(300, 300);
                         $Imagick->writeImage("./data/tmp/$name-300.jpg");
+
                         $this->imageService->getS3Service()->putObject("public/dev/$name-300.jpg", "./data/tmp/$name-300.jpg");
+                        $this->imageService->getS3Service()->putObject("public/dev/$name-700.jpg", "./data/tmp/$name-700.jpg");
+                        echo $this->imageService->getS3Service()->getPublicBucketLink().DIRECTORY_SEPARATOR."public/dev/$name-700.jpg";
                         unlink("./data/tmp/$name-300.jpg");
                         unlink("./data/tmp/$name-700.jpg");
                         unlink($file['tmp_name']);
