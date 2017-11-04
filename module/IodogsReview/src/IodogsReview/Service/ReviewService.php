@@ -88,7 +88,7 @@ class ReviewService implements IodogsServiceInterface
             $viewArray = Array(
                 "id" => $Review->getId(),
                 "name" => $Review->getName(),
-                "review" => $Review->getReview(),
+                "application" => $Review->getReview(),
                 "city" => $Review->getCityEntered(),
                 "products" => $this->productService->getViewArrayByCollection($Review->getProduct()),
                 "breed" => $breedViewArray

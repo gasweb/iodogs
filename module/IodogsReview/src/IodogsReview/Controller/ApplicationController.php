@@ -6,7 +6,7 @@ use IodogsReview\Service\ReviewService;
 use Zend\Mvc\Controller\AbstractActionController,
     IodogsReview\Form\ReviewForm;
 
-class ReviewController extends AbstractActionController
+class ApplicationController extends AbstractActionController
 {
     private $om;
     private $reviewService;
