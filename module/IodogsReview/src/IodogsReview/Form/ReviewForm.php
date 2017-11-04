@@ -15,38 +15,38 @@ class ReviewForm extends Form implements ObjectManagerAwareInterface
     public function __construct($objectManager)
     {
         $this->setObjectManager($objectManager);
-      parent::__construct('review-form');
-        $this->setAttribute('action', '/review/add');
+      parent::__construct('application-form');
+        $this->setAttribute('action', '/application/add');
         $this->setHydrator(new ClassMethods());
         $hydrator = $this->getHydrator();
         $hydrator->addStrategy('breed', new BreedReviewStrategy($this->om));
-        $this->add(array(
+        $this->add([
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'name' => 'breed',
-            'options' => array(
+            'options' => [
                 'object_manager' => $this->om,
                 'target_class'   => 'IodogsDoctrine\Entity\Breed',
                 'property'       => 'rusTitle',
                 'label'       => 'Порода',
                 'is_method'      => true,
                 'empty_option'   => 'Выберите породу',
-                'find_method'    => array(
+                'find_method'    => [
                     'name'   => 'findBy',
-                    'params' => array(
-                        'criteria' => array(),
-                        'orderBy'  => array('rusTitle' => 'ASC'),
-                    ),
-                ),
-            ),
-        ));
+                    'params' => [
+                        'criteria' => [],
+                        'orderBy'  => ['rusTitle' => 'ASC'],
+                    ],
+                ],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'type' => 'Zend\Form\Element\Collection',
             'name' => 'product',
-            'attributes' => array(
+            'attributes' => [
                 'class' => 'product-set',
-            ),
-            'options' => array(
+            ],
+            'options' => [
                 'label' => 'Использованные средства',
                 'count' => 1,
                 'multiple' => true,
@@ -54,82 +54,82 @@ class ReviewForm extends Form implements ObjectManagerAwareInterface
                 'allow_add' => true,
                 /*'template_placeholder' => '__product__',*/
                 'target_element' => new ProductReviewFieldset($objectManager)
-            ),
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'Text',
-            'options' => array(
+            'options' => [
                 'label' => 'Имя',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'placeholder' => 'Введите имя',
                 'autocomplete' => 'off'
-            ),
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'email',
             'type' => 'Email',
-            'options' => array(
+            'options' => [
                 'label' => 'Email',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'placeholder' => 'Введите email',
                 'autocomplete' => 'off'
-            ),
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'city_entered',
             'type' => 'Text',
-            'options' => array(
+            'options' => [
                 'label' => 'Город',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'placeholder' => 'Введите город',
                 'autocomplete' => 'off'
-            ),
-        ));
+            ],
+        ]);
 
 
 
-        $this->add(array(
+        $this->add([
             'name' => 'phone',
             'type' => 'Text',
-            'options' => array(
+            'options' => [
                 'label' => 'Телефон',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'placeholder' => 'Введите телефон',
                 'autocomplete' => 'off'
-            ),
-        ));
+            ],
+        ]);
 
-        $this->add(array(
-            'name' => 'review',
+        $this->add([
+            'name' => 'application',
             'type' => 'Textarea',
-            'options' => array(
+            'options' => [
                 'label' => 'Отзыв',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'placeholder' => 'Текст отзыва',
                 'autocomplete' => 'off'
-            ),
-        ));
+            ],
+        ]);
 
 
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'Submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Сохранить',
                 'id' => 'submitbutton',
                 'class' => 'btn-success'
-            ),
-        ));
+            ],
+        ]);
 
 
 

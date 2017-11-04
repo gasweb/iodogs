@@ -1,10 +1,11 @@
 <?php
 namespace IodogsReview;
 
+use IodogsReview\Controller\BackofficeController;
 use IodogsReview\Service\ReviewService,
     IodogsReview\Service\Factory\ReviewServiceFactory,
-    IodogsReview\Controller\ReviewController,
-    IodogsReview\Controller\Factory\ReviewControllerFactory;
+    IodogsReview\Controller\ApplicationController,
+    IodogsReview\Controller\Factory\ControllerFactory;
 use Zend\Router\Http\Literal;
 
 return [
@@ -15,20 +16,25 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            ReviewController::class => ReviewControllerFactory::class
+            ApplicationController::class => ControllerFactory::class,
+            BackofficeController::class => ControllerFactory::class,
         ],
     ],
     'router' => [
         'routes' => [
-            'review-add' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/review/add',
-                    'defaults' => [
-                        'controller' => ReviewController::class,
-                        'action' => 'add'
+            'app' => [
+                'child_routes' => [
+                    'application-add' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/review/add',
+                            'defaults' => [
+                                'controller' => ApplicationController::class,
+                                'action' => 'add'
+                            ],
+                        ],
                     ],
-                ],
+                ]
             ],
         ],
     ],

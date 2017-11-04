@@ -1,13 +1,13 @@
 <div class="container">
 <?php
-$reviewForm->prepare();
-echo $this->form()->openTag($reviewForm);
+$this->reviewForm->prepare();
+echo $this->form()->openTag($this->reviewForm);
 echo $this->formRow($reviewForm->get('breed'));
 echo $this->formRow($reviewForm->get('name'));
 echo $this->formRow($reviewForm->get('email'));
 echo $this->formRow($reviewForm->get('phone'));
 echo $this->formRow($reviewForm->get('city_entered'));
-echo $this->formRow($reviewForm->get('review'));
+echo $this->formRow($reviewForm->get('application'));
 echo $this->formRow($reviewForm->get('product'));
 echo $this->formRow($reviewForm->get('submit'));
 
