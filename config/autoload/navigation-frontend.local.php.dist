@@ -121,7 +121,7 @@ return [
                 'label' => 'Решения',
                 'route' => 'app/content',
                 'params' => [
-                    'slug' => 'solutions'
+                    'slug' => 'solution/'
                 ],
                 'pages' => [
                     [
