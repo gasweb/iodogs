@@ -32,6 +32,17 @@ class SolutionService
         }
     }
 
+    public function getSolutionArray()
+    {
+        $solutions = $this->om->
+        getRepository('IodogsDoctrine\Entity\Solution')->
+        findAll();
+        foreach ($solutions as $solution) {
+            $solutionArray[] = $this->getViewArray($solution);
+        }
+        return $solutionArray;
+    }
+
     public function getViewArray($Solution)
     {
         $solutionsArray = array();
@@ -39,6 +50,7 @@ class SolutionService
         {
             $solutionsArray = array(
                 "id" => $Solution->getId(),
+                "slug" => $Solution->getSlug(),
                 "title" => $Solution->getTitle(),
                 "img_path" => $Solution->getImgPath(),
                 'info_block' => $this->infoBlockService->getViewArray($Solution->getInfoBlock())

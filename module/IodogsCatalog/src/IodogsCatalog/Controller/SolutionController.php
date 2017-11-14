@@ -45,7 +45,7 @@ class SolutionController extends AbstractActionController
 
     public function listAction()
     {
-        $lines = $this->lineService->getLinesArray();
-        return (array("lines" => $lines));
+        $solutions = $this->solutionService->getSolutionArray();
+        return (array("solutions" => $solutions));
     }
 }

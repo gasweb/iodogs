@@ -1,0 +1,15 @@
+<?php
+$this->headTitle('Список серий Isle of Dogs');
+if (is_array($this->solutions))
+{
+    foreach ($this->solutions as $solution)
+    {
+        ?>
+        <div>
+            <a href="<?=$this->url('app/solution/slug', array('slug' => $solution['slug']))?>">
+                <?=$solution['title'] ?>
+            </a>
+        </div>
+        <?php
+    }
+}
