@@ -574,6 +574,16 @@ return [
                             ],
                         ],
                     ],
+                    'learn' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/learn',
+                            'defaults' => [
+                                'controller' => ContentController::class,
+                                'action' => 'learn'
+                            ],
+                        ],
+                    ],
                     'search' => [
                         'type' => Literal::class,
                         'options' => [

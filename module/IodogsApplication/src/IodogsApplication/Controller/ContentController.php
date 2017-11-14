@@ -80,6 +80,11 @@ class ContentController extends AbstractActionController
         return;
     }
 
+    public function learnAction()
+    {
+        return new ViewModel();
+    }
+
 
 
     public function videoAction(){

@@ -1,0 +1,35 @@
+<?php
+$this->headTitle('Обучение');
+echo $this->partial('partial/sidebar/left-sidebar');?>
+<ul class="list-unstyled">
+    <li>
+        <a href="<?=$this->url('app/content', ['slug' => 'bathe-basic']) ?>">
+            <span class=""></span>
+            Основы купания                                </a>
+    </li>
+    <li>
+        <a href="<?=$this->url('app/content', ['slug' => 'dry-basic']) ?>">
+            <span class=""></span>
+            Основы сушки                                </a>
+    </li>
+    <li>
+        <a href="<?=$this->url('app/content', ['slug' => 'myths']) ?>">
+            <span class=""></span>
+            Разрушаем мифы                                </a>
+    </li>
+    <li>
+        <a href="<?=$this->url('app/content', ['slug' => 'do-dont']) ?>">
+            <span class=""></span>
+            Правила ухода за собакой                                </a>
+    </li>
+    <li>
+        <a href="<?=$this->url('app/content', ['slug' => 'puppy']) ?>">
+            <span class=""></span>
+            Уход за щенками                                </a>
+    </li>
+    <li>
+        <a href="<?=$this->url('app/content', ['slug' => 'coat-types']) ?>">
+            <span class=""></span>
+            Типы шерсти                                </a>
+    </li>
+</ul>
