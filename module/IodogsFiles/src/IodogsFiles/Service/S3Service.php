@@ -4,6 +4,7 @@ namespace IodogsFiles\Service;
 class S3Service
 {
 
+    /** @var \Aws\S3\S3Client $s3Client */
     private $s3Client;
 
     public function __construct($s3Client)
@@ -31,7 +32,8 @@ class S3Service
 
     public function getPublicBucketLink()
     {
-        return "https://s3.eu-central-1.amazonaws.com/iodogs/";
+//        return "https://s3.eu-central-1.amazonaws.com/iodogs/";
+        return "https://hb.bizmrg.com/iodogs/";
     }
 
 }
