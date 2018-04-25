@@ -10,8 +10,6 @@ use IodogsFiles\Service\S3Service,
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 
-;
-
 class S3ServiceFactory implements FactoryInterface
 {
 
