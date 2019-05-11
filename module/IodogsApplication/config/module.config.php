@@ -620,7 +620,7 @@ return [
                             'route' => '/buy',
                             'defaults' => [
                                 'controller' => ContentController::class,
-                                'action' => 'buy'
+                                'action' => 'contacts'
                             ],
                         ],
                     ],
