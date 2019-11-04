@@ -18,6 +18,6 @@ namespace IodogsProduct\Service\Factory;
      {
          $objectManager = $container->get(EntityManager::class);
          $imageService = $container->get(ImageService::class);
-         return new ProductService($objectManager, $imageService);
+         return new ProductService($objectManager, $imageService, $container->get('Config')['partners']);
      }
  }

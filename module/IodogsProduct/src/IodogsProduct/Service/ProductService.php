@@ -14,15 +14,19 @@ class ProductService
      */
     private $imageService;
 
+    private $partnerConfig = [];
+
     /**
      * ProductService constructor.
      * @param $objectManager
      * @param $imageService
+     * @param array $partnerConfig
      */
-    public function __construct($objectManager, $imageService)
+    public function __construct($objectManager, $imageService, array $partnerConfig = [])
     {
         $this->om = $objectManager;
         $this->imageService = $imageService;
+        $this->partnerConfig = $partnerConfig;
     }
 
     public function getProductsByCategoryId($categoryId){
@@ -103,7 +107,7 @@ class ProductService
 
     public function getViewArray(\IodogsDoctrine\Entity\Product $Product)
     {
-        return array(
+        $result = [
             "id" => $Product->getId(),
             "slug" => $Product->getSlug(),
             "tag" => $Product->getTag(),
@@ -120,7 +124,14 @@ class ProductService
             "active" => $Product->getActive(),
             "in_stock" => $Product->getInStock(),
             "images" => $this->getImagesView($Product)
-        );
+        ];
+
+        if (!empty($this->partnerConfig['petgear']['tag_links_mapping']) && $Product->getTag() === $this->partnerConfig['petgear']['tag_links_mapping'])
+        {
+            $result['petgear_link'] = $this->partnerConfig['petgear']['tag_links_mapping'];
+        }
+
+        return $result;
     }
 
     public function getImagesView($Product, $default=true)
