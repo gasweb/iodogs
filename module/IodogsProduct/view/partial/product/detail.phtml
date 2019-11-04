@@ -52,8 +52,8 @@ $this->headMeta($product['preview'], "description");
       if($product['in_stock']==1): ?>
           <?php if(!empty($product['petgear_link'])): ?>
               <ul class="list-unstyled list-inline center">
-                  <li>
-                      <a class="btn btn-success" href="<?=$product['petgear_link'] ?>>" target="_blank"><span class="glyphicon glyphicon-shopping-cart"></span> Перейти в магазин</a></li>
+                  <li style="margin: 15px auto">
+                      <a class="btn btn-success" href="<?=$product['petgear_link'] ?>" target="_blank"><span class="glyphicon glyphicon-shopping-cart"></span> Перейти в магазин</a></li>
                   <li>
                       <a class="btn btn-default" href="http://petgear.ru/payment/" target="_blank"><span class="glyphicon glyphicon-info-sign"></span> Доставка и оплата</a></li>
               </ul>
