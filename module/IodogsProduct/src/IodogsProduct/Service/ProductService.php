@@ -105,30 +105,30 @@ class ProductService
         return $viewArray;
     }
 
-    public function getViewArray(\IodogsDoctrine\Entity\Product $Product)
+    public function getViewArray(\IodogsDoctrine\Entity\Product $product)
     {
         $result = [
-            "id" => $Product->getId(),
-            "slug" => $Product->getSlug(),
-            "tag" => $Product->getTag(),
-            "category" => $Product->getCategory()->getId(),
-            "line" => $Product->getLine(),
-            "eng_title" => $Product->getEngTitle(),
-            "rus_title" => $Product->getRusTitle(),
-            "preview" => $Product->getPreview(),
-            "vantage" => $Product->getVantage(),
-            "card_text" => $Product->getCardText(),
-            "application_text" => $Product->getApplication(),
-            "ingredients" => $Product->getIngredients(),
-            "sort" => $Product->getSortOrder(),
-            "active" => $Product->getActive(),
-            "in_stock" => $Product->getInStock(),
-            "images" => $this->getImagesView($Product)
+            "id" => $product->getId(),
+            "slug" => $product->getSlug(),
+            "tag" => $product->getTag(),
+            "category" => $product->getCategory()->getId(),
+            "line" => $product->getLine(),
+            "eng_title" => $product->getEngTitle(),
+            "rus_title" => $product->getRusTitle(),
+            "preview" => $product->getPreview(),
+            "vantage" => $product->getVantage(),
+            "card_text" => $product->getCardText(),
+            "application_text" => $product->getApplication(),
+            "ingredients" => $product->getIngredients(),
+            "sort" => $product->getSortOrder(),
+            "active" => $product->getActive(),
+            "in_stock" => $product->getInStock(),
+            "images" => $this->getImagesView($product)
         ];
 
-        if (!empty($this->partnerConfig['petgear']['tag_links_mapping']) && $Product->getTag() === $this->partnerConfig['petgear']['tag_links_mapping'])
+        if (!empty($this->partnerConfig['petgear']['tag_links_mapping']) && array_key_exists($product->getTag(), $this->partnerConfig['petgear']['tag_links_mapping']))
         {
-            $result['petgear_link'] = $this->partnerConfig['petgear']['tag_links_mapping'];
+            $result['petgear_link'] = $this->partnerConfig['petgear']['tag_links_mapping'][$product->getTag()];
         }
 
         return $result;
